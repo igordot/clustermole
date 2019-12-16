@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^data-raw$
+^\.travis\.yml$
+^codecov\.yml$
+^\.covrignore$
+^cran-comments\.md$
+^CRAN-RELEASE$
+^revdep$

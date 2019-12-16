@@ -1,0 +1,22 @@
+# R for travis: https://docs.travis-ci.com/user/languages/r
+
+language: r
+sudo: required
+cache: packages
+warnings_are_errors: false
+
+r:
+  - bioc-release
+  - release
+  - devel
+
+r_packages:
+  - covr
+
+r_binary_packages:
+  - magrittr
+  - devtools
+  - tidyverse
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'

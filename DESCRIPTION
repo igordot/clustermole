@@ -1,0 +1,29 @@
+Type: Package
+Package: ClusterMole
+Title: A Collection of Cell Type Markers
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Igor",
+           family = "Dolgalev",
+           role = c("aut", "cre"),
+           email = "igor.dolgalev@nyumc.org")
+Description: A collection of cell type markers.
+License: MIT + file LICENSE
+URL: https://github.com/igordot/clustermole
+Depends: 
+    R (>= 3.2)
+Imports: 
+    dplyr,
+    GSVA,
+    magrittr,
+    rlang (>= 0.1.2),
+    tibble,
+    tidyr
+Suggests: 
+    covr,
+    roxygen2,
+    testthat (>= 2.1.0)
+biocViews:
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
