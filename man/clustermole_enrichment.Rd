@@ -2,18 +2,18 @@
 % Please edit documentation in R/functions.R
 \name{clustermole_enrichment}
 \alias{clustermole_enrichment}
-\title{Retrieve the cell type markers data frame}
+\title{Perform cell type enrichment for a given gene expression matrix}
 \usage{
 clustermole_enrichment(expr_mat, species)
 }
 \arguments{
-\item{expr_mat}{normalized expression matrix (log-scale)}
+\item{expr_mat}{expression matrix (logCPMs, logFPKMs, or logTPMs)}
 
-\item{species}{species ("hs" or "mm")}
+\item{species}{species ("hs" for human or "mm" for mouse)}
 }
 \value{
 a data frame of enrichment results
 }
 \description{
-Retrieve the cell type markers data frame
+Perform cell type enrichment for a given gene expression matrix
 }

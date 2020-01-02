@@ -1,16 +1,19 @@
 
-#' Retrieve the cell type markers data frame
+#' Retrieve a table of all cell type markers
 #'
 #' @return a data frame of markers with one gene per row
 #' @export
+#'
+#' @examples
+#' markers_tbl <- clustermole_markers()
 clustermole_markers <- function() {
   markers
 }
 
-#' Retrieve the cell type markers data frame
+#' Perform cell type enrichment for a given gene expression matrix
 #'
-#' @param expr_mat normalized expression matrix (log-scale)
-#' @param species species ("hs" or "mm")
+#' @param expr_mat expression matrix (logCPMs, logFPKMs, or logTPMs)
+#' @param species species ("hs" for human or "mm" for mouse)
 #'
 #' @return a data frame of enrichment results
 #' @import dplyr
@@ -23,6 +26,9 @@ clustermole_enrichment <- function(expr_mat, species) {
   # check that the expression matrix seems reasonable
   if (class(expr_mat) != "matrix") {
     stop("expression matrix is not a matrix")
+  }
+  if (nrow(expr_mat) < 5000) {
+    stop("expression matrix does not appear to be complete (too few genes)")
   }
   if (max(expr_mat) > 100) {
     stop("expression values do not appear to be log-scaled")
@@ -37,16 +43,14 @@ clustermole_enrichment <- function(expr_mat, species) {
     markers_tbl %>%
     select(.data$db, .data$species, .data$organ, .data$celltype, .data$celltype_long, .data$n_genes) %>%
     distinct()
-  markers_tbl <- clustermole_markers() %>% select(.data$celltype_long, .data$gene_h, .data$gene_m)
+
+  # create a markers list for gene set enrichment
   if (species == "hs") {
-    markers_tbl$gene <- markers_tbl$gene_h
+    markers_list <- split(x = markers_tbl$gene_h, f = markers_tbl$celltype_long)
   }
   if (species == "mm") {
-    markers_tbl$gene <- markers_tbl$gene_m
+    markers_list <- split(x = markers_tbl$gene_m, f = markers_tbl$celltype_long)
   }
-
-  # convert markers to list format
-  markers_list <- split(x = markers_tbl$gene, f = markers_tbl$celltype_long)
 
   # run the actual enrichment analysis
   gsva_mat <- gsva(

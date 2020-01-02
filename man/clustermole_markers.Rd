@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{clustermole_markers}
 \alias{clustermole_markers}
-\title{Retrieve the cell type markers data frame}
+\title{Retrieve a table of all cell type markers}
 \usage{
 clustermole_markers()
 }
@@ -10,5 +10,8 @@ clustermole_markers()
 a data frame of markers with one gene per row
 }
 \description{
-Retrieve the cell type markers data frame
+Retrieve a table of all cell type markers
+}
+\examples{
+markers_tbl <- clustermole_markers()
 }

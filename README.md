@@ -14,3 +14,31 @@
 > Exactly how the world should be.  
 >
 > -- Oliver Herford
+
+Cell type annotation of single-cell RNA sequencing (scRNA-seq) data typically requires a reference dataset, but finding an appropriate one may be challenging.
+ClusterMole is an R package that provides a collection of cell type markers for thousands of human and mouse cell populations sourced from a variety of databases.
+
+Install ClusterMole:
+
+```r
+BiocManager::install("igordot/clustermole", update = FALSE)
+```
+
+Retrieve a table of all cell type markers:
+
+```r
+markers_tbl = clustermole_markers()
+head(markers_tbl)
+```
+
+See a summary of the available cell types:
+
+```r
+markers_tbl %>% distinct(celltype, organ, db)
+```
+
+Perform cell type enrichment for a given gene expression matrix:
+
+```r
+clustermole_enrichment(expr_mat, species)
+```
