@@ -1,8 +1,9 @@
 
-# markers table tests
 markers_tbl <- clustermole_markers()
-expect_s3_class(markers_tbl, "tbl_df")
-expect_gt(nrow(markers_tbl), 100000)
+test_that("clustermole_markers() returns expected output", {
+  expect_s3_class(markers_tbl, "tbl_df")
+  expect_gt(nrow(markers_tbl), 100000)
+})
 
 # expression matrix for enrichment tests
 n_genes <- 10000
@@ -19,14 +20,15 @@ rownames(expr_mat) <- gene_names
 rownames(cpm_mat) <- gene_names
 rownames(log_cpm_mat) <- gene_names
 
-# enrichment tests - human
-enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "hs")
-expect_s3_class(enrich_tbl, "tbl_df")
-expect_gt(nrow(enrich_tbl), 100)
-expect_equal(length(unique(enrich_tbl$cluster)), 5)
-expect_error(clustermole_enrichment(expr_mat = as.data.frame(log_cpm_mat), species = "hs"))
-expect_error(clustermole_enrichment(expr_mat = log_cpm_mat[1:100, ], species = "hs"))
-expect_error(clustermole_enrichment(expr_mat = cpm_mat, species = "hs"))
+test_that("clustermole_enrichment() returns expected output for human", {
+  enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "hs")
+  expect_s3_class(enrich_tbl, "tbl_df")
+  expect_gt(nrow(enrich_tbl), 100)
+  expect_equal(length(unique(enrich_tbl$cluster)), 5)
+  expect_error(clustermole_enrichment(as.data.frame(log_cpm_mat), species = "hs"))
+  expect_error(clustermole_enrichment(log_cpm_mat[1:100, ], species = "hs"))
+  expect_error(clustermole_enrichment(cpm_mat, species = "hs"))
+})
 
 # add mouse gene names to the expression matrix
 gene_names <- dplyr::filter(markers_tbl, species == "Mouse")
@@ -36,8 +38,9 @@ rownames(expr_mat) <- gene_names
 rownames(cpm_mat) <- gene_names
 rownames(log_cpm_mat) <- gene_names
 
-# enrichment tests - mouse
-enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "mm")
-expect_s3_class(enrich_tbl, "tbl_df")
-expect_gt(nrow(enrich_tbl), 100)
-expect_equal(length(unique(enrich_tbl$cluster)), 5)
+test_that("clustermole_enrichment() returns expected output for mouse", {
+  enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "mm")
+  expect_s3_class(enrich_tbl, "tbl_df")
+  expect_gt(nrow(enrich_tbl), 100)
+  expect_equal(length(unique(enrich_tbl$cluster)), 5)
+})

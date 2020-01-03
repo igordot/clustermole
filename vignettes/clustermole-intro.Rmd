@@ -1,0 +1,76 @@
+---
+title: "Introduction to ClusterMole"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to ClusterMole}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Overview
+
+ClusterMole is an R package that provides a comprehensive collection of cell type markers for thousands of human and mouse cell populations sourced from a variety of databases.
+
+## Installation
+
+The package can be installed from its GitHub repo. Since Bioconductor
+
+```{r install-package, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+if (!requireNamespace("remotes", quietly = TRUE))
+  install.packages("remotes")
+
+BiocManager::install("igordot/clustermole", update = FALSE)
+```
+
+## Usage
+
+Load package.
+
+```{r load-package, message=FALSE}
+library(ClusterMole)
+```
+
+Retrieve a data frame of all cell type markers in the database.
+
+```{r markers}
+markers = clustermole_markers()
+markers
+```
+
+Each row contains a gene (human and mouse versions) and a cell type associated with it.
+
+The `celltype_long` column contains the full cell type string, including the species and the original database.
+
+```{r celltypes-long-head}
+head(unique(markers$celltype_long), 20)
+```
+
+```{r celltypes-long-length}
+length(unique(markers$celltype_long))
+```
+
+You can use the `celltype_long` column as the grouping variable to convert the markers data frame to a list format for other applications such as gene set enrichment.
+
+```{r}
+markers_list = split(x = markers$gene_h, f = markers$celltype_long)
+head(markers_list)
+```
+
+If you have a table of expression values, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values).
+
+```{r enrichment, eval=FALSE}
+clustermole_enrichment(expr_mat, species)
+```
+
+
