@@ -11,10 +11,10 @@ Description: A collection of cell type markers.
 License: MIT + file LICENSE
 URL: https://github.com/igordot/clustermole
 Depends: 
-    R (>= 3.2)
+    R (>= 3.4)
 Imports: 
     dplyr,
-    GSVA,
+    GSVA (>= 1.26.0),
     magrittr,
     rlang (>= 0.1.2),
     tibble,
