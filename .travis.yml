@@ -5,17 +5,14 @@ cache: packages
 warnings_are_errors: false
 
 r:
-  - bioc-release
+  - 3.2
+  - 3.4
   - release
   - devel
+  - bioc-release
 
 r_packages:
   - covr
-
-r_binary_packages:
-  - magrittr
-  - devtools
-  - tidyverse
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
