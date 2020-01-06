@@ -24,7 +24,7 @@ clustermole_markers <- function() {
 clustermole_enrichment <- function(expr_mat, species) {
 
   # check that the expression matrix seems reasonable
-  if (class(expr_mat) != "matrix") {
+  if (!is(expr_mat, "matrix")) {
     stop("expression matrix is not a matrix")
   }
   if (nrow(expr_mat) < 5000) {

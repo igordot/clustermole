@@ -1,6 +1,6 @@
 
 markers_tbl <- clustermole_markers()
-test_that("clustermole_markers() returns expected output", {
+test_that("clustermole_markers() output", {
   expect_s3_class(markers_tbl, "tbl_df")
   expect_gt(nrow(markers_tbl), 100000)
 })
@@ -20,14 +20,17 @@ rownames(expr_mat) <- gene_names
 rownames(cpm_mat) <- gene_names
 rownames(log_cpm_mat) <- gene_names
 
-test_that("clustermole_enrichment() returns expected output for human", {
+test_that("clustermole_enrichment() wrong input", {
+  expect_error(clustermole_enrichment(as.data.frame(log_cpm_mat), species = "hs"))
+  expect_error(clustermole_enrichment(log_cpm_mat[1:100, ], species = "hs"))
+  expect_error(clustermole_enrichment(cpm_mat, species = "hs"))
+})
+
+test_that("clustermole_enrichment() human input", {
   enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "hs")
   expect_s3_class(enrich_tbl, "tbl_df")
   expect_gt(nrow(enrich_tbl), 100)
   expect_equal(length(unique(enrich_tbl$cluster)), 5)
-  expect_error(clustermole_enrichment(as.data.frame(log_cpm_mat), species = "hs"))
-  expect_error(clustermole_enrichment(log_cpm_mat[1:100, ], species = "hs"))
-  expect_error(clustermole_enrichment(cpm_mat, species = "hs"))
 })
 
 # add mouse gene names to the expression matrix
@@ -38,7 +41,7 @@ rownames(expr_mat) <- gene_names
 rownames(cpm_mat) <- gene_names
 rownames(log_cpm_mat) <- gene_names
 
-test_that("clustermole_enrichment() returns expected output for mouse", {
+test_that("clustermole_enrichment() mouse input", {
   enrich_tbl <- clustermole_enrichment(expr_mat = log_cpm_mat, species = "mm")
   expect_s3_class(enrich_tbl, "tbl_df")
   expect_gt(nrow(enrich_tbl), 100)
