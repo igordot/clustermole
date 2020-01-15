@@ -1,4 +1,4 @@
 library(testthat)
-library(ClusterMole)
+library(clustermole)
 
-test_check("ClusterMole")
+test_check("clustermole")

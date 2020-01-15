@@ -1,4 +1,7 @@
-# ClusterMole
+# clustermole: blindly digging for cell types in scRNA-seq clusters
+
+[![Travis Build Status](https://travis-ci.org/igordot/clustermole.svg?branch=master)](https://travis-ci.org/igordot/clustermole)
+[![codecov](https://codecov.io/gh/igordot/clustermole/branch/master/graph/badge.svg)](https://codecov.io/gh/igordot/clustermole)
 
 > See, children, the misguided Mole.  
 > He lives down in a deep, dark hole;  
@@ -15,29 +18,33 @@
 >
 > -- Oliver Herford
 
-Cell type annotation of single-cell RNA sequencing (scRNA-seq) data typically requires a reference dataset, but finding an appropriate one may be challenging.
-ClusterMole is an R package that provides a collection of cell type markers for thousands of human and mouse cell populations sourced from a variety of databases.
+A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data  involves clustering of cells. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging if you are not familiar with all the captured subpopulations or have unexpected contaminants. `clustermole` is an R package that provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
 
-Install ClusterMole:
+Install clustermole (development version):
 
 ```r
 BiocManager::install("igordot/clustermole", update = FALSE)
 ```
 
+Load clustermole:
+
+```r
+library(clustermole)
+```
+
 Retrieve a table of all cell type markers:
 
 ```r
-markers_tbl = clustermole_markers()
-head(markers_tbl)
+clustermole_markers(genes, species)
 ```
 
-See a summary of the available cell types:
+Perform cell type overrepresentation analysis for a given set of genes:
 
 ```r
-markers_tbl %>% distinct(celltype, organ, db)
+clustermole_overlaps(expr_mat, species)
 ```
 
-Perform cell type enrichment for a given gene expression matrix:
+Perform cell type enrichment for a given full gene expression matrix:
 
 ```r
 clustermole_enrichment(expr_mat, species)

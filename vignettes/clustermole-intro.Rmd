@@ -1,10 +1,10 @@
 ---
-title: "Introduction to ClusterMole"
+title: "Introduction to clustermole"
 output:
   rmarkdown::html_vignette:
     keep_md: true
 vignette: >
-  %\VignetteIndexEntry{Introduction to ClusterMole}
+  %\VignetteIndexEntry{Introduction to clustermole}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,61 +16,103 @@ knitr::opts_chunk$set(
 )
 ```
 
+*Alternative title: blindly digging for cell types in scRNA-seq clusters with clustermole*
+
 ## Overview
 
-ClusterMole is an R package that provides a comprehensive collection of cell type markers for thousands of human and mouse cell populations sourced from a variety of databases.
+A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data  involves clustering of cells. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging if you are not familiar with all the captured subpopulations or have unexpected contaminants. `clustermole` is an R package that provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
 
-## Installation
+The `clustermole` package includes three primary features:
 
-The package can be installed from its GitHub repo. Since Bioconductor
-
-```{r install-package, eval=FALSE}
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-if (!requireNamespace("remotes", quietly = TRUE))
-  install.packages("remotes")
-
-BiocManager::install("igordot/clustermole", update = FALSE)
-```
+* cell type identification based on a set of marker genes (`clustermole_overlaps`)
+* cell type identification based on a full expression matrix (`clustermole_enrichment`)
+* a meta collection of cell type markers (`clustermole_markers`)
 
 ## Usage
 
-Load package.
+Install `clustermole` if it is not yet available on your system.
+
+```{r install-package, eval=FALSE}
+install.packages("clustermole")
+```
+
+Load `clustermole`.
 
 ```{r load-package, message=FALSE}
-library(ClusterMole)
+library(clustermole)
+```
+
+### Overlap a set of genes with cell type markers
+
+If you have a set of genes (for example, cluster markers), you can perform overrepresentation analysis to see if they overlap any of the known cell type markers.
+
+```{r overlaps}
+my_genes = c("CD2", "CD3D", "CD3E", "IL7R", "IL32", "LTB", "LDHB", "CCR7")
+my_overlaps = clustermole_overlaps(genes = my_genes, species = "hs")
+my_overlaps
+```
+
+### Determine relative enrichment of cell type markers in the input expression data
+
+If you have a table of expression values (for example, average expression across clusters), you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values).
+
+```{r enrichment, eval=FALSE}
+clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+```
+
+### Retrieve cell type markers
+
+You can retrieve a data frame of all cell type markers in the database.
+
+```{r markers}
+markers = clustermole_markers(species = "hs")
+markers
+```
+
+Each row contains a gene and a cell type associated with it. The `gene` column is the gene symbol (human or mouse versions can be retrieved) and the `celltype_full` column contains the full cell type string, including the species and the original database.
+
+If you need to convert the markers from a data frame to a list format for other applications, you can use `gene` as the values and `celltype_full` as the grouping variable.
+
+```{r celltypes-list}
+markers_list = split(x = markers$gene, f = markers$celltype_full)
+```
+
+## Collection details
+
+We will use `dplyr` to help with summary statistics.
+
+```{r load-dplyr, message=FALSE}
+library(dplyr)
 ```
 
 Retrieve a data frame of all cell type markers in the database.
 
-```{r markers}
-markers = clustermole_markers()
+```{r get-markers}
+markers = clustermole_markers(species = "hs")
 markers
 ```
 
-Each row contains a gene (human and mouse versions) and a cell type associated with it.
+Check the number of available cell types.
 
-The `celltype_long` column contains the full cell type string, including the species and the original database.
-
-```{r celltypes-long-head}
-head(unique(markers$celltype_long), 20)
+```{r celltypes-length}
+markers %>% distinct(celltype_full) %>% nrow()
 ```
 
-```{r celltypes-long-length}
-length(unique(markers$celltype_long))
+Check the number of available cell types per species (not available for every cell type).
+
+```{r count-species}
+markers %>% distinct(celltype_full, species) %>% count(species, sort = TRUE)
 ```
 
-You can use the `celltype_long` column as the grouping variable to convert the markers data frame to a list format for other applications such as gene set enrichment.
+Check the number of available cell types per organ (not available for every cell type).
 
-```{r}
-markers_list = split(x = markers$gene_h, f = markers$celltype_long)
-head(markers_list)
+```{r count-organ}
+markers %>% distinct(celltype_full, organ) %>% count(organ, sort = TRUE)
 ```
 
-If you have a table of expression values, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values).
+Check package version.
 
-```{r enrichment, eval=FALSE}
-clustermole_enrichment(expr_mat, species)
+```{r package-version}
+packageVersion("clustermole")
 ```
-
 

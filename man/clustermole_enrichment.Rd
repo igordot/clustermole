@@ -7,12 +7,12 @@
 clustermole_enrichment(expr_mat, species)
 }
 \arguments{
-\item{expr_mat}{expression matrix (logCPMs, logFPKMs, or logTPMs)}
+\item{expr_mat}{Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes as rows.}
 
-\item{species}{species ("hs" for human or "mm" for mouse)}
+\item{species}{Species: "hs" for human or "mm" for mouse.}
 }
 \value{
-a data frame of enrichment results
+A data frame of enrichment results.
 }
 \description{
 Perform cell type enrichment for a given gene expression matrix

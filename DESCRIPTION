@@ -1,24 +1,27 @@
 Type: Package
-Package: ClusterMole
-Title: A Collection of Cell Type Markers
-Version: 0.0.0.9000
+Package: clustermole
+Title: Unbiased Cell Type Identification of Single-Cell Transcriptomic Data
+Version: 1.0.0
 Authors@R: 
     person(given = "Igor",
            family = "Dolgalev",
            role = c("aut", "cre"),
            email = "igor.dolgalev@nyumc.org")
-Description: A collection of cell type markers.
+Description: A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data  involves clustering of cells. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging if you are not familiar with all the captured subpopulations or have unexpected contaminants. 'clustermole' provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
 License: MIT + file LICENSE
 URL: https://github.com/igordot/clustermole
+BugReports: https://github.com/igordot/clustermole/issues
 Depends: 
     R (>= 3.4)
 Imports: 
     dplyr,
     GSVA (>= 1.26.0),
     magrittr,
+    methods,
     rlang (>= 0.1.2),
     tibble,
-    tidyr
+    tidyr,
+    utils
 Suggests: 
     covr,
     roxygen2,

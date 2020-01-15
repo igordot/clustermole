@@ -2,16 +2,20 @@
 % Please edit documentation in R/functions.R
 \name{clustermole_markers}
 \alias{clustermole_markers}
-\title{Retrieve a table of all cell type markers}
+\title{Retrieve the available cell type markers}
 \usage{
-clustermole_markers()
+clustermole_markers(species = "hs")
+}
+\arguments{
+\item{species}{Species for the appropriate gene symbol format: "hs" for human or "mm" for mouse.}
 }
 \value{
-a data frame of markers with one gene per row
+A data frame of markers with one gene per row.
 }
 \description{
-Retrieve a table of all cell type markers
+Retrieve the available cell type markers
 }
 \examples{
-markers_tbl <- clustermole_markers()
+markers <- clustermole_markers()
+head(markers)
 }
