@@ -1,7 +1,7 @@
 Type: Package
 Package: clustermole
-Title: Unbiased Cell Type Identification of Single-Cell Transcriptomic Data
-Version: 1.0.0
+Title: Unbiased Single-Cell Transcriptomic Data Cell Type Identification
+Version: 1.0.0.9000
 Authors@R: 
     person(given = "Igor",
            family = "Dolgalev",
@@ -24,10 +24,11 @@ Imports:
     utils
 Suggests: 
     covr,
-    roxygen2,
-    testthat (>= 2.1.0),
     knitr,
-    rmarkdown
+    prettydoc,
+    rmarkdown,
+    roxygen2,
+    testthat (>= 2.1.0)
 biocViews:
 Encoding: UTF-8
 LazyData: true
