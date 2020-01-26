@@ -7,7 +7,7 @@ Authors@R:
            family = "Dolgalev",
            role = c("aut", "cre"),
            email = "igor.dolgalev@nyumc.org")
-Description: A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data  involves clustering of cells. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging if you are not familiar with all the captured subpopulations or have unexpected contaminants. 'clustermole' provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
+Description: Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq) clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
 License: MIT + file LICENSE
 URL: https://github.com/igordot/clustermole
 BugReports: https://github.com/igordot/clustermole/issues

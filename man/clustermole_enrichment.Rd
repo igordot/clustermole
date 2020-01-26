@@ -17,3 +17,6 @@ A data frame of enrichment results.
 \description{
 Perform cell type enrichment for a given gene expression matrix
 }
+\examples{
+# my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+}

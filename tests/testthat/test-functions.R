@@ -42,7 +42,7 @@ test_that("clustermole_overlaps() wrong input", {
 test_that("clustermole_overlaps() human input", {
   overlap_tbl <- clustermole_overlaps(genes = gene_names[1:50], species = "hs")
   expect_s3_class(overlap_tbl, "tbl_df")
-  expect_gt(nrow(overlap_tbl), 100)
+  expect_gt(nrow(overlap_tbl), 1)
 })
 
 # gene list for mouse overrepresentation tests
@@ -52,7 +52,7 @@ gene_names <- sample(gene_names)
 test_that("clustermole_overlaps() mouse input", {
   overlap_tbl <- clustermole_overlaps(genes = gene_names[1:50], species = "mm")
   expect_s3_class(overlap_tbl, "tbl_df")
-  expect_gt(nrow(overlap_tbl), 100)
+  expect_gt(nrow(overlap_tbl), 1)
 })
 
 # clustermole_enrichment -----

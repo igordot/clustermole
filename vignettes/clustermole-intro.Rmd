@@ -1,27 +1,38 @@
 ---
 title: "Introduction to clustermole"
+subtitle: "blindly digging for cell types in scRNA-seq clusters"
 output:
   prettydoc::html_pretty:
     keep_md: true
     toc: true
     theme: hpstr
     highlight: github
+    mathjax: null
+    self_contained: true
 vignette: >
   %\VignetteIndexEntry{Introduction to clustermole}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
+```{css, echo=FALSE}
+.header-title h2 {
+  text-transform: none;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+```
+
 ## Overview
 
-A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging for those who are not familiar with all the captured subpopulations or have unexpected contaminants. The clustermole R package provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
+A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
 
 The clustermole package provides three primary features:
 
@@ -78,7 +89,7 @@ If you need to convert the markers from a data frame to a list format for other 
 markers_list = split(x = markers$gene, f = markers$celltype_full)
 ```
 
-## Collection details
+## Database details
 
 We will load dplyr to help with the summary statistics.
 
@@ -86,7 +97,7 @@ We will load dplyr to help with the summary statistics.
 library(dplyr)
 ```
 
-You can use `clustermole_markers()` to retrieve a data frame of all cell type markers in the database.
+You can use `clustermole_markers()` to retrieve a data frame of all cell type markers in the collection.
 
 ```{r get-markers}
 markers = clustermole_markers(species = "hs")

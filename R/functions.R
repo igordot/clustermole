@@ -4,6 +4,7 @@
 #' @param species Species for the appropriate gene symbol format: "hs" for human or "mm" for mouse.
 #'
 #' @return A data frame of markers with one gene per row.
+#'
 #' @import dplyr
 #' @export
 #'
@@ -31,6 +32,7 @@ clustermole_markers <- function(species = "hs") {
 #' @param species Species: "hs" for human or "mm" for mouse.
 #'
 #' @return A data frame of enrichment results with hypergeometric test p-values.
+#'
 #' @import methods
 #' @import dplyr
 #' @importFrom tibble as_tibble
@@ -87,6 +89,7 @@ clustermole_overlaps <- function(genes, species) {
 
   # clean up the enrichment table
   overlaps_tbl <- tibble::as_tibble(overlaps_mat, rownames = "celltype_full")
+  overlaps_tbl <- dplyr::filter(overlaps_tbl, .data$p_value < 0.05)
   overlaps_tbl <- dplyr::inner_join(celltypes_tbl, overlaps_tbl, by = "celltype_full")
   overlaps_tbl <- dplyr::arrange(overlaps_tbl, .data$fdr, .data$p_value, .data$celltype_full)
   overlaps_tbl
@@ -98,12 +101,16 @@ clustermole_overlaps <- function(genes, species) {
 #' @param species Species: "hs" for human or "mm" for mouse.
 #'
 #' @return A data frame of enrichment results.
+#'
 #' @import methods
 #' @import dplyr
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr gather
 #' @importFrom GSVA gsva
 #' @export
+#'
+#' @examples
+#' # my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
 clustermole_enrichment <- function(expr_mat, species) {
 
   # check that the expression matrix seems reasonable
@@ -156,6 +163,7 @@ clustermole_enrichment <- function(expr_mat, species) {
 #' @param gene_label Column name for genes (variable columns of the GMT file) in the output data frame.
 #'
 #' @return A data frame with gene sets as the first column and genes as the second column (one gene per row).
+#'
 #' @import utils
 #' @importFrom tibble enframe
 #' @importFrom tidyr unnest

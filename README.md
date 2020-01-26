@@ -6,7 +6,9 @@
 
 ![clustermole-book](https://user-images.githubusercontent.com/6363505/72761156-12414280-3ba9-11ea-87de-57ff6cd690bb.png)
 
-A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging for those who are not familiar with all the captured subpopulations or have unexpected contaminants. The clustermole R package provides a comprehensive meta collection of cell identity markers for thousands of human and mouse cell types sourced from a variety of databases as well as methods to query them.
+## About
+
+Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq) clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
 
 The clustermole package provides three primary features:
 
@@ -14,7 +16,9 @@ The clustermole package provides three primary features:
 * cell type prediction based on a full expression matrix
 * a database of cell type markers
 
----
+## Usage
+
+A [vignette](https://CRAN.R-project.org/package=clustermole/vignettes/clustermole-intro.html) is available with usage examples.
 
 Install clustermole from CRAN:
 
