@@ -1,10 +1,3 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* Fixed LICENSE based on the CRAN template.
-
-
 ## Test environments
 
 * local OS X install, R 3.6.1
@@ -14,6 +7,4 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
-
-* This is a new release.
+There were no ERRORs or WARNINGs. 
