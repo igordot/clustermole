@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://igordot.github.io/clustermole/index.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_enrichment.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_markers.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_overlaps.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/read_gmt.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/articles/clustermole-intro.html</loc>
+  </url>
+</urlset>
