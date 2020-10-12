@@ -1,7 +1,8 @@
 # clustermole: blindly digging for cell types in scRNA-seq clusters
 
 [![CRAN](https://www.r-pkg.org/badges/version/clustermole)](https://cran.r-project.org/package=clustermole)
-[![Travis Build Status](https://travis-ci.org/igordot/clustermole.svg?branch=master)](https://travis-ci.org/igordot/clustermole)
+[![R build status](https://github.com/igordot/clustermole/workflows/R-CMD-check/badge.svg)](https://github.com/igordot/clustermole/actions)
+[![Travis Build Status](https://travis-ci.com/igordot/clustermole.svg?branch=master)](https://travis-ci.com/igordot/clustermole)
 [![codecov](https://codecov.io/gh/igordot/clustermole/branch/master/graph/badge.svg)](https://codecov.io/gh/igordot/clustermole)
 
 ![clustermole-book](https://user-images.githubusercontent.com/6363505/72761156-12414280-3ba9-11ea-87de-57ff6cd690bb.png)
