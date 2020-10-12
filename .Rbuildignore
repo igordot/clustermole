@@ -8,3 +8,6 @@
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^revdep$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
