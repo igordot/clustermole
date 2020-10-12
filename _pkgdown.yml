@@ -1,0 +1,13 @@
+url: https://igordot.github.io/clustermole
+
+template:
+  params:
+    bootswatch: readable
+    ganalytics: UA-130263433-2
+
+navbar:
+  structure:
+    left: []
+    right: [home, articles, reference, news, github]
+  components:
+    home: ~
