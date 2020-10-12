@@ -19,7 +19,7 @@ library(dplyr)
 You can use `clustermole` as just a database to get a data frame of all cell type markers.
 
 ```{r markers}
-markers = clustermole_markers(species = "hs")
+markers = clustermole_markers()
 markers
 ```
 
@@ -32,9 +32,9 @@ Check the total number of the available cell types.
 markers %>% distinct(celltype_full) %>% nrow()
 ```
 
-Check the number of available cell types per source database.
+Check the source databases.
 
-```{r count-species}
+```{r count-db}
 markers %>% distinct(celltype_full, db) %>% count(db)
 ```
 
