@@ -1,14 +1,8 @@
 ---
 title: "Introduction to clustermole"
-subtitle: "blindly digging for cell types in scRNA-seq clusters"
 output:
-  prettydoc::html_pretty:
+  rmarkdown::html_vignette:
     keep_md: true
-    toc: true
-    theme: hpstr
-    highlight: github
-    mathjax: null
-    self_contained: true
 vignette: >
   %\VignetteIndexEntry{Introduction to clustermole}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,14 +14,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
-
-```{css, echo=FALSE}
-.header-title h2 {
-  text-transform: none;
-  font-style: italic;
-  font-size: 1.2rem;
-}
+# reduce the minimum number of characters for the tibble column titles (default: 15)
+options(pillar.min_title_chars = 10)
 ```
 
 ## Overview
@@ -36,13 +24,13 @@ A typical computational pipeline to process single-cell RNA sequencing (scRNA-se
 
 The clustermole package provides three primary features:
 
+* a database of markers for hundreds of cell types (`clustermole_markers`)
 * cell type prediction based on marker genes (`clustermole_overlaps`)
-* cell type prediction based on a full expression matrix (`clustermole_enrichment`)
-* a database of cell type markers (`clustermole_markers`)
+* cell type prediction based on the full expression matrix (`clustermole_enrichment`)
 
 ## Usage
 
-Install clustermole if it is not yet available on your system.
+You can install clustermole from [CRAN](https://cran.r-project.org/package=clustermole).
 
 ```{r install-package, eval=FALSE}
 install.packages("clustermole")
