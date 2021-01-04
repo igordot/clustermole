@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perform cell type enrichment for a given gene expression matrix — clustermole_enrichment • clustermole</title>
+<title>Cell types based on the expression of all genes — clustermole_enrichment • clustermole</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Perform cell type enrichment for a given gene expression matrix — clustermole_enrichment" />
-<meta property="og:description" content="Perform cell type enrichment for a given gene expression matrix" />
+<meta property="og:title" content="Cell types based on the expression of all genes — clustermole_enrichment" />
+<meta property="og:description" content="Perform enrichment of cell type signatures based on the full gene expression matrix." />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clustermole</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9000</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
 </li>
 <li>
   <a href="https://github.com/igordot/clustermole/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,33 +134,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Perform cell type enrichment for a given gene expression matrix</h1>
-    <small class="dont-index">Source: <a href='https://github.com/igordot/clustermole/blob/master/R/functions.R'><code>R/functions.R</code></a></small>
+    <h1>Cell types based on the expression of all genes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/igordot/clustermole/blob/master/R/enrichment.R'><code>R/enrichment.R</code></a></small>
     <div class="hidden name"><code>clustermole_enrichment.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Perform cell type enrichment for a given gene expression matrix</p>
+    <p>Perform enrichment of cell type signatures based on the full gene expression matrix.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clustermole_enrichment</span><span class='op'>(</span><span class='va'>expr_mat</span>, <span class='va'>species</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>clustermole_enrichment</span><span class='op'>(</span><span class='va'>expr_mat</span>, <span class='va'>species</span>, method <span class='op'>=</span> <span class='st'>"gsva"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>expr_mat</th>
-      <td><p>Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes as rows.</p></td>
+      <td><p>Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes as rows and clusters/populations/samples as columns.</p></td>
     </tr>
     <tr>
       <th>species</th>
-      <td><p>Species: "hs" for human or "mm" for mouse.</p></td>
+      <td><p>Species: <code>hs</code> for human or <code>mm</code> for mouse.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>Enrichment method: <code>ssgsea</code>, <code>gsva</code>, <code>singscore</code>, or <code>all</code>. The method to use for the estimation of gene set enrichment scores. The options are ssGSEA (Barbie et al, 2009), GSVA (Hänzelmann et al, 2013), singscore (Foroutan et al, 2018), or a combination of all three methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame of enrichment results.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Barbie, D., Tamayo, P., Boehm, J. et al. Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. <em>Nature</em> 462, 108–112 (2009). <a href='https://doi.org/10.1038/nature08460'>https://doi.org/10.1038/nature08460</a></p>
+<p>Hänzelmann, S., Castelo, R. &amp; Guinney, J. GSVA: Gene set variation analysis for microarray and RNA-Seq data. <em>BMC Bioinformatics</em> 14, 7 (2013). <a href='https://doi.org/10.1186/1471-2105-14-7'>https://doi.org/10.1186/1471-2105-14-7</a></p>
+<p>Foroutan, M., Bhuva, D.D., Lyu, R. et al. Single sample scoring of molecular phenotypes. <em>BMC Bioinformatics</em> 19, 404 (2018). <a href='https://doi.org/10.1186/s12859-018-2435-4'>https://doi.org/10.1186/s12859-018-2435-4</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># my_enrichment &lt;- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")</span>

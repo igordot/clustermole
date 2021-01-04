@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve the available cell type markers — clustermole_markers • clustermole</title>
+<title>Available cell type markers — clustermole_markers • clustermole</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Retrieve the available cell type markers — clustermole_markers" />
-<meta property="og:description" content="Retrieve the available cell type markers" />
+<meta property="og:title" content="Available cell type markers — clustermole_markers" />
+<meta property="og:description" content="Retrieve the full list of cell type markers in the clustermole database." />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clustermole</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9000</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
 </li>
 <li>
   <a href="https://github.com/igordot/clustermole/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,29 +134,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve the available cell type markers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/igordot/clustermole/blob/master/R/functions.R'><code>R/functions.R</code></a></small>
+    <h1>Available cell type markers</h1>
+    <small class="dont-index">Source: <a href='https://github.com/igordot/clustermole/blob/master/R/markers.R'><code>R/markers.R</code></a></small>
     <div class="hidden name"><code>clustermole_markers.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retrieve the available cell type markers</p>
+    <p>Retrieve the full list of cell type markers in the <code>clustermole</code> database.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clustermole_markers</span><span class='op'>(</span>species <span class='op'>=</span> <span class='st'>"hs"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>clustermole_markers</span><span class='op'>(</span>species <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"hs"</span>, <span class='st'>"mm"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>species</th>
-      <td><p>Species for the appropriate gene symbol format: "hs" for human or "mm" for mouse.</p></td>
+      <td><p>Species: <code>hs</code> for human or <code>mm</code> for mouse.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of markers with one gene per row.</p>
+    <p>A data frame of cell type markers (one gene per row).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>markers</span> <span class='op'>&lt;-</span> <span class='fu'>clustermole_markers</span><span class='op'>(</span><span class='op'>)</span>

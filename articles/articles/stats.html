@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">clustermole</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1.9000</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@
 </li>
 <li>
   <a href="https://github.com/igordot/clustermole/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,12 +98,12 @@
     
     
 <p>We will load <code>clustermole</code> along with <code>dplyr</code> to help with summarizing the data.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/igordot/clustermole">clustermole</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole">clustermole</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
 <p>You can use <code>clustermole</code> as just a database to get a data frame of all cell type markers.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">markers</span>
 <span class="co">#&gt; # A tibble: 163,509 x 8</span>
 <span class="co">#&gt;    db     species organ  celltype  celltype_full     n_genes gene_original gene </span>
@@ -118,15 +118,15 @@
 <span class="co">#&gt;  8 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 C1orf210      C1or…</span>
 <span class="co">#&gt;  9 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 C1orf226      C1or…</span>
 <span class="co">#&gt; 10 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 CASC3         CASC3</span>
-<span class="co">#&gt; # … with 163,499 more rows</span></pre></div>
+<span class="co">#&gt; # … with 163,499 more rows</span></code></pre></div>
 <p>Each row contains a gene and a cell type associated with it. The <code>gene</code> column is the gene symbol (human or mouse) and the <code>celltype_full</code> column contains the detailed cell type string including the species and the original database.</p>
 <p>Check the total number of the available cell types.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 2563</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 2563</span></code></pre></div>
 <p>Check the source databases.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">db</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">db</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;   db             n</span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt;</span>
@@ -134,19 +134,19 @@
 <span class="co">#&gt; 2 PanglaoDB    330</span>
 <span class="co">#&gt; 3 SaVanT       619</span>
 <span class="co">#&gt; 4 SCSig        256</span>
-<span class="co">#&gt; 5 xCell        489</span></pre></div>
+<span class="co">#&gt; 5 xCell        489</span></code></pre></div>
 <p>Check the number of available cell types per species (not available for every cell type).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   species     n</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span>
 <span class="co">#&gt; 1 ""        215</span>
 <span class="co">#&gt; 2 "Human"  1618</span>
-<span class="co">#&gt; 3 "Mouse"   730</span></pre></div>
+<span class="co">#&gt; 3 "Mouse"   730</span></code></pre></div>
 <p>Check the number of available cell types per organ (not available for every cell type).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">organ</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">organ</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">organ</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">organ</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 117 x 2</span>
 <span class="co">#&gt;    organ                        n</span>
 <span class="co">#&gt;    &lt;chr&gt;                    &lt;int&gt;</span>
@@ -160,11 +160,11 @@
 <span class="co">#&gt;  8 "Immune system"             50</span>
 <span class="co">#&gt;  9 "Peripheral blood"          46</span>
 <span class="co">#&gt; 10 "Hematopoietic system"      44</span>
-<span class="co">#&gt; # … with 107 more rows</span></pre></div>
+<span class="co">#&gt; # … with 107 more rows</span></code></pre></div>
 <p>Check the package version.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span>
-<span class="co">#&gt; [1] '1.0.1'</span></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span>
+<span class="co">#&gt; [1] '1.0.1.9000'</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
