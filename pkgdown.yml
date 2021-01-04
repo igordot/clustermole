@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   articles/stats: stats.html
   clustermole-intro: clustermole-intro.html
-last_built: 2021-01-04T19:42Z
+last_built: 2021-01-04T19:53Z
 urls:
   reference: https://igordot.github.io/clustermole/reference
   article: https://igordot.github.io/clustermole/articles
