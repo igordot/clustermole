@@ -23,7 +23,5 @@ clustermole_markers <- function(species = c("hs", "mm")) {
     m_tbl %>%
       dplyr::select(-.data$gene_hs) %>%
       dplyr::rename(gene = .data$gene_mm)
-  } else {
-    stop("unknown species")
   }
 }
