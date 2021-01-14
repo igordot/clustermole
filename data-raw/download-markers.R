@@ -6,7 +6,9 @@ library(readxl)
 library(tibble)
 library(stringr)
 library(glue)
+library(janitor)
 library(stringdist)
+library(xml2)
 library(usethis)
 
 
@@ -21,45 +23,45 @@ valid_genes <- c(hcop_all$human_symbol, hcop_all$mouse_symbol) %>%
   unique() %>%
   sort()
 
-# format orthologs table
+# add the number of sources and string distances between gene names
 hcop_clean <-
   hcop_all %>%
   select(gene_hs = human_symbol, gene_mm = mouse_symbol, sources = support) %>%
   mutate(num_sources = str_count(sources, ",") + 1) %>%
-  mutate(distance = stringdist(toupper(gene_hs), toupper(gene_mm), method = "jw")) %>%
+  mutate(distance = stringdist(toupper(gene_hs), toupper(gene_mm), method = "jw"))
+
+# check if the sources were properly stored and parsed
+nrow(hcop_clean)
+hcop_clean %>%
+  pull(num_sources) %>%
+  quantile()
+hcop_clean %>%
+  pull(distance) %>%
+  quantile()
+barplot(table(hcop_clean$num_sources))
+boxplot(distance ~ num_sources, data = hcop_clean, outline = FALSE)
+
+# keep only the best orthologs
+hcop_clean <-
+  hcop_clean %>%
   group_by(gene_hs) %>%
   top_n(1, num_sources) %>%
   top_n(-1, distance) %>%
-  ungroup() %>%
-  distinct() %>%
-  select(gene_hs, gene_mm)
+  ungroup()
 
+# check the filtered results
+nrow(hcop_clean)
+hcop_clean %>%
+  pull(num_sources) %>%
+  quantile()
+hcop_clean %>%
+  pull(distance) %>%
+  quantile()
+barplot(table(hcop_clean$num_sources))
+boxplot(distance ~ num_sources, data = hcop_clean, outline = FALSE)
 
-# SCSig signatures -----
-
-# link: http://www.gsea-msigdb.org/gsea/msigdb/supplementary_genesets.jsp
-
-# download gene signatures
-scsig_source <- "http://software.broadinstitute.org/gsea/msigdb/supplemental/scsig.all.v1.0.symbols.gmt"
-scsig_all <- clustermole::read_gmt(scsig_source)
-
-# download metadata (contains organism and organ)
-scsig_metadata_source <- "http://software.broadinstitute.org/gsea/msigdb/supplemental/scsig.v1.0.metadata.xls"
-scsig_tmp <- tempfile(fileext = ".xls")
-download.file(scsig_metadata_source, scsig_tmp, quiet = TRUE, mode = "wb")
-scsig_metadata <- read_xls(scsig_tmp, progress = FALSE)
-scsig_metadata <- scsig_metadata %>% rename(celltype = `Gene Set Standard Name`)
-unlink(scsig_tmp)
-
-# combine gene signatures with the metadata
-scsig_clean <-
-  full_join(scsig_all, scsig_metadata, by = "celltype") %>%
-  mutate(
-    db = "SCSig",
-    species = `Source Organism`,
-    organ = `Source Organ System`
-  ) %>%
-  select(db, species, organ, celltype, gene)
+# keep only the genes
+hcop_clean <- hcop_clean %>% distinct(gene_hs, gene_mm)
 
 
 # PanglaoDB signatures -----
@@ -67,14 +69,16 @@ scsig_clean <-
 # link: https://panglaodb.se/
 
 # download gene signatures
-panglao_all <- read_tsv("https://panglaodb.se/markers/PanglaoDB_markers_30_Oct_2019.tsv.gz", progress = FALSE)
+panglao_all <- read_tsv("https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz", progress = FALSE)
 
 panglao_clean <-
   panglao_all %>%
+  clean_names() %>%
+  drop_na(gene_type, sensitivity_human, sensitivity_mouse) %>%
   mutate(
     db = "PanglaoDB",
-    celltype = `cell type`,
-    gene = `official gene symbol`
+    celltype = cell_type,
+    gene = official_gene_symbol
   ) %>%
   separate_rows(species, sep = " ") %>%
   select(db, species, organ, celltype, gene)
@@ -82,21 +86,22 @@ panglao_clean <-
 
 # CellMarker signatures -----
 
-# link: http://biocc.hrbmu.edu.cn/CellMarker/
+# link: http://bio-bigdata.hrbmu.edu.cn/CellMarker/
 
 # download gene signatures
-cellmarker_source <- "http://biocc.hrbmu.edu.cn/CellMarker/download/all_cell_markers.txt"
+cellmarker_source <- "http://bio-bigdata.hrbmu.edu.cn/CellMarker/download/all_cell_markers.txt"
 cellmarker_all <- read_tsv(cellmarker_source, guess_max = 10000, progress = FALSE)
 
 cellmarker_clean <-
   cellmarker_all %>%
+  clean_names() %>%
   mutate(
     db = "CellMarker",
-    species = speciesType,
-    organ = str_remove(tissueType, "Undefined"),
-    celltype = str_c(cellName, " (", cancerType, ")"),
+    species = species_type,
+    organ = str_remove(tissue_type, "Undefined"),
+    celltype = str_c(cell_name, " (", cancer_type, ")"),
     celltype = str_remove_all(celltype, " \\(Normal\\)"),
-    gene = str_remove_all(geneSymbol, "\\[|\\]| ")
+    gene = str_remove_all(gene_symbol, "\\[|\\]| ")
   ) %>%
   drop_na(celltype, gene) %>%
   select(db, species, organ, celltype, gene) %>%
@@ -111,7 +116,7 @@ cellmarker_clean <-
 savant_source <- "http://newpathways.mcdb.ucla.edu/savant-dev/SaVanT_Signatures_Release01.zip"
 savant_txt <- "SaVanT_Signatures_Release01.tab.txt"
 savant_tmp <- tempfile(fileext = ".zip")
-download.file(savant_source, savant_tmp, quiet = TRUE, mode = "wb")
+download.file(url = savant_source, destfile = savant_tmp, quiet = TRUE, mode = "wb")
 savant_list <- strsplit(readLines(unz(savant_tmp, savant_txt)), "\t")
 unlink(savant_tmp)
 savant_all <- lapply(savant_list, tail, -1)
@@ -119,10 +124,11 @@ names(savant_all) <- sapply(savant_list, head, 1)
 savant_all <- savant_all %>%
   enframe(name = "celltype", value = "gene") %>%
   unnest(gene)
-savant_all <- savant_all %>% filter(gene %in% valid_genes)
 
 # select the top 50 genes (default in SaVanT)
-savant_all <- savant_all %>%
+savant_all <-
+  savant_all %>%
+  filter(gene %in% valid_genes) %>%
   group_by(celltype) %>%
   slice(1:50) %>%
   ungroup()
@@ -147,6 +153,50 @@ savant_clean <-
   select(db, species, organ, celltype, gene)
 
 
+# MSigDB C8 (formerly SCSig) signatures -----
+
+# link: http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=C8
+
+# download gene signatures
+msigbd_source <- "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/7.2/msigdb_v7.2.xml"
+msigbd_tmp <- tempfile(fileext = ".xml")
+download.file(url = msigbd_source, destfile = msigbd_tmp, quiet = TRUE, mode = "wb")
+msigdb_doc <- read_xml(msigbd_tmp)
+unlink(msigbd_tmp)
+
+# convert XML document to a data frame
+msigdb_records <- xml_find_all(msigdb_doc, xpath = ".//GENESET")
+msigdb_all <-
+  tibble(
+    cat = xml_attr(msigdb_records, attr = "CATEGORY_CODE"),
+    celltype = xml_attr(msigdb_records, attr = "STANDARD_NAME"),
+    species = xml_attr(msigdb_records, attr = "ORGANISM"),
+    members = xml_attr(msigdb_records, attr = "MEMBERS_MAPPING")
+  ) %>%
+  filter(cat == "C8")
+
+# convert to one gene per row
+msigdb_all <- mutate(msigdb_all, members_split = strsplit(members, "|", fixed = TRUE))
+msigdb_all <- unnest(msigdb_all, cols = members_split, names_repair = "minimal")
+msigdb_all <-
+  msigdb_all %>%
+  separate(
+    col = members_split,
+    into = c("source_gene", "gene", "entrez_gene"),
+    sep = ","
+  ) %>%
+  mutate(entrez_gene = as.integer(entrez_gene)) %>%
+  filter(entrez_gene > 0)
+
+msigdb_clean <-
+  msigdb_all %>%
+  mutate(
+    db = "MSigDB",
+    organ = ""
+  ) %>%
+  select(db, species, organ, celltype, gene)
+
+
 # xCell signatures -----
 
 # link: http://xcell.ucsf.edu/
@@ -154,22 +204,85 @@ savant_clean <-
 # download gene signatures
 xcell_source <- "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5688663/bin/13059_2017_1349_MOESM3_ESM.xlsx"
 xcell_tmp <- tempfile(fileext = ".xlsx")
-download.file(xcell_source, xcell_tmp, quiet = TRUE, mode = "wb")
+download.file(url = xcell_source, destfile = xcell_tmp, quiet = TRUE, mode = "wb")
 xcell_all <- read_xlsx(xcell_tmp, progress = FALSE)
 unlink(xcell_tmp)
 
 xcell_clean <-
   xcell_all %>%
-  select(-`# of genes`) %>%
-  gather(key = "k", value = "gene", -Celltype_Source_ID) %>%
-  mutate(celltype = Celltype_Source_ID) %>%
+  clean_names() %>%
+  select(-number_of_genes) %>%
+  gather(key = "k", value = "gene", -celltype_source_id) %>%
+  mutate(celltype = celltype_source_id) %>%
   mutate(
     db = "xCell",
     species = "Human",
     organ = "",
-    celltype = Celltype_Source_ID
+    celltype = celltype_source_id
   ) %>%
   drop_na(celltype, gene) %>%
+  select(db, species, organ, celltype, gene)
+
+
+# Enrichr ARCHS4 tissues signatures -----
+
+# link: http://amp.pharm.mssm.edu/archs4
+
+# download gene signatures
+archs_source <- "https://maayanlab.cloud/Enrichr/geneSetLibrary?mode=text&libraryName=ARCHS4_Tissues"
+archs_all <- clustermole::read_gmt(archs_source)
+
+archs_clean <-
+  archs_all %>%
+  mutate(
+    db = "ARCHS4",
+    species = "",
+    organ = ""
+  ) %>%
+  select(db, species, organ, celltype, gene)
+
+
+# TISSUES human signatures -----
+
+# link: https://tissues.jensenlab.org/
+
+# download gene signatures
+tissues_h_source <- "https://download.jensenlab.org/human_tissue_knowledge_full.tsv"
+tissues_h_all <- read_tsv(tissues_h_source, col_names = FALSE, progress = FALSE)
+
+tissues_h_clean <-
+  tissues_h_all %>%
+  filter(X3 != "BTO:0000000") %>%
+  filter(str_detect(X4, "BTO:", negate = TRUE)) %>%
+  mutate(
+    db = "TISSUES",
+    species = "Human",
+    organ = "",
+    celltype = X4,
+    gene = X2
+  ) %>%
+  select(db, species, organ, celltype, gene)
+
+
+# TISSUES mouse signatures -----
+
+# link: https://tissues.jensenlab.org/
+
+# download gene signatures
+tissues_m_source <- "https://download.jensenlab.org/mouse_tissue_knowledge_full.tsv"
+tissues_m_all <- read_tsv(tissues_m_source, col_names = FALSE, progress = FALSE)
+
+tissues_m_clean <-
+  tissues_m_all %>%
+  filter(X3 != "BTO:0000000") %>%
+  filter(str_detect(X4, "BTO:", negate = TRUE)) %>%
+  mutate(
+    db = "TISSUES",
+    species = "Mouse",
+    organ = "",
+    celltype = X4,
+    gene = X2
+  ) %>%
   select(db, species, organ, celltype, gene)
 
 
@@ -178,15 +291,23 @@ xcell_clean <-
 # combine
 markers <-
   bind_rows(
-    scsig_clean,
     panglao_clean,
     cellmarker_clean,
     savant_clean,
-    xcell_clean
+    msigdb_clean,
+    xcell_clean,
+    archs_clean,
+    tissues_h_clean,
+    tissues_m_clean
   ) %>%
   filter(gene %in% valid_genes) %>%
   drop_na() %>%
   distinct()
+
+# check the number of signatures per source
+markers %>%
+  distinct(db, species, celltype) %>%
+  count(db, species)
 
 # clean up
 markers <-
@@ -208,11 +329,34 @@ markers <-
   ) %>%
   add_count(celltype_full, name = "n_genes")
 
+# check the number of signatures per source
+markers %>%
+  distinct(db, species, celltype) %>%
+  count(db, species)
+
+# check the size of signatures
+markers %>%
+  distinct(celltype_full, n_genes) %>%
+  pull(n_genes) %>%
+  quantile()
+
+# remove very small and large signatures
 markers <-
   markers %>%
-  filter(n_genes >= 5, n_genes <= 2000) %>%
+  filter(n_genes >= 5, n_genes <= 2500) %>%
   select(-gene, gene) %>%
   arrange(celltype_full, gene)
+
+# check the number of signatures per source
+markers %>%
+  distinct(db, species, celltype) %>%
+  count(db, species)
+
+# check the size of signatures
+markers %>%
+  distinct(celltype_full, n_genes) %>%
+  pull(n_genes) %>%
+  quantile()
 
 # add human/mouse gene symbols (listed as either in the original table)
 markers <- left_join(markers, hcop_clean, by = c("gene" = "gene_mm"))
@@ -221,19 +365,28 @@ markers <- markers %>% mutate(gene_hs = if_else(is.na(gene_hs), gene, gene_hs))
 markers <- markers %>% mutate(gene_mm = if_else(is.na(gene_mm), gene, gene_mm))
 markers <- markers %>% rename(gene_original = gene)
 
-# markers %>% pull(species) %>% table()
-# hist(markers$n_genes, breaks = 50, col = "gray20")
-# markers %>% distinct(celltype_full, n_genes) %>% arrange(-n_genes)
-# n_distinct(markers$celltype_full)
+# check stats
+n_distinct(markers$celltype_full)
+markers %>%
+  pull(species) %>%
+  table()
+markers %>%
+  distinct(celltype_full, n_genes) %>%
+  pull(n_genes) %>%
+  hist(breaks = 50, col = "gray20")
+markers %>%
+  distinct(celltype_full, n_genes) %>%
+  arrange(-n_genes)
 
 
 # prepare package -----
 
 # create package data
-clustermole_markers_tbl = markers
+clustermole_markers_tbl <- markers
 use_data(
   clustermole_markers_tbl,
   internal = TRUE,
   overwrite = TRUE,
-  compress = "xz"
+  compress = "xz",
+  version = 3
 )

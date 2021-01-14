@@ -1,7 +1,7 @@
 Type: Package
 Package: clustermole
 Title: Unbiased Single-Cell Transcriptomic Data Cell Type Identification
-Version: 1.0.1.9000
+Version: 1.0.1.9001
 Authors@R: 
     person(given = "Igor",
            family = "Dolgalev",
