@@ -2,6 +2,7 @@
 test_that("clustermole_markers() default params", {
   markers_tbl <- clustermole_markers()
   expect_s3_class(markers_tbl, "tbl_df")
+  expect_equal(ncol(markers_tbl), 8)
   expect_gt(nrow(markers_tbl), 100000)
 })
 

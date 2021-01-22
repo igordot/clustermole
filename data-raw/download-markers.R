@@ -66,10 +66,11 @@ hcop_clean <- hcop_clean %>% distinct(gene_hs, gene_mm)
 
 # PanglaoDB signatures -----
 
-# link: https://panglaodb.se/
+# source: https://panglaodb.se/
 
 # download gene signatures
-panglao_all <- read_tsv("https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz", progress = FALSE)
+panglao_source <- "https://panglaodb.se/markers/PanglaoDB_markers_27_Mar_2020.tsv.gz"
+panglao_all <- read_tsv(panglao_source, guess_max = 10000, progress = FALSE)
 
 panglao_clean <-
   panglao_all %>%
@@ -86,7 +87,7 @@ panglao_clean <-
 
 # CellMarker signatures -----
 
-# link: http://bio-bigdata.hrbmu.edu.cn/CellMarker/
+# source: http://bio-bigdata.hrbmu.edu.cn/CellMarker/
 
 # download gene signatures
 cellmarker_source <- "http://bio-bigdata.hrbmu.edu.cn/CellMarker/download/all_cell_markers.txt"
@@ -110,7 +111,7 @@ cellmarker_clean <-
 
 # SaVanT signatures -----
 
-# link: http://newpathways.mcdb.ucla.edu/savant-dev/
+# source: http://newpathways.mcdb.ucla.edu/savant-dev/
 
 # download gene signatures
 savant_source <- "http://newpathways.mcdb.ucla.edu/savant-dev/SaVanT_Signatures_Release01.zip"
@@ -160,7 +161,7 @@ savant_clean <-
 # download gene signatures
 msigbd_source <- "https://data.broadinstitute.org/gsea-msigdb/msigdb/release/7.2/msigdb_v7.2.xml"
 msigbd_tmp <- tempfile(fileext = ".xml")
-download.file(url = msigbd_source, destfile = msigbd_tmp, quiet = TRUE, mode = "wb")
+download.file(url = msigbd_source, destfile = msigbd_tmp, mode = "wb")
 msigdb_doc <- read_xml(msigbd_tmp)
 unlink(msigbd_tmp)
 
@@ -199,7 +200,7 @@ msigdb_clean <-
 
 # xCell signatures -----
 
-# link: http://xcell.ucsf.edu/
+# source: http://xcell.ucsf.edu/
 
 # download gene signatures
 xcell_source <- "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5688663/bin/13059_2017_1349_MOESM3_ESM.xlsx"
@@ -226,7 +227,7 @@ xcell_clean <-
 
 # Enrichr ARCHS4 tissues signatures -----
 
-# link: http://amp.pharm.mssm.edu/archs4
+# source: http://amp.pharm.mssm.edu/archs4
 
 # download gene signatures
 archs_source <- "https://maayanlab.cloud/Enrichr/geneSetLibrary?mode=text&libraryName=ARCHS4_Tissues"
@@ -244,7 +245,7 @@ archs_clean <-
 
 # TISSUES human signatures -----
 
-# link: https://tissues.jensenlab.org/
+# source: https://tissues.jensenlab.org/
 
 # download gene signatures
 tissues_h_source <- "https://download.jensenlab.org/human_tissue_knowledge_full.tsv"
@@ -266,7 +267,7 @@ tissues_h_clean <-
 
 # TISSUES mouse signatures -----
 
-# link: https://tissues.jensenlab.org/
+# source: https://tissues.jensenlab.org/
 
 # download gene signatures
 tissues_m_source <- "https://download.jensenlab.org/mouse_tissue_knowledge_full.tsv"
@@ -327,7 +328,8 @@ markers <-
     celltype_full = str_replace_all(celltype_full, "\\|  \\|", "\\|"),
     celltype_full = str_replace_all(celltype_full, "\\|  \\|", "\\|")
   ) %>%
-  add_count(celltype_full, name = "n_genes")
+  add_count(celltype_full, name = "n_genes") %>%
+  relocate(celltype_full)
 
 # check the number of signatures per source
 markers %>%
@@ -338,13 +340,13 @@ markers %>%
 markers %>%
   distinct(celltype_full, n_genes) %>%
   pull(n_genes) %>%
-  quantile()
+  quantile(seq(0, 1, 0.1))
 
 # remove very small and large signatures
 markers <-
   markers %>%
   filter(n_genes >= 5, n_genes <= 2500) %>%
-  select(-gene, gene) %>%
+  relocate(gene, .after = last_col()) %>%
   arrange(celltype_full, gene)
 
 # check the number of signatures per source
@@ -356,7 +358,7 @@ markers %>%
 markers %>%
   distinct(celltype_full, n_genes) %>%
   pull(n_genes) %>%
-  quantile()
+  quantile(seq(0, 1, 0.1))
 
 # add human/mouse gene symbols (listed as either in the original table)
 markers <- left_join(markers, hcop_clean, by = c("gene" = "gene_mm"))
