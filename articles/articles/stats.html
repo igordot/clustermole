@@ -105,64 +105,64 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">markers</span>
-<span class="co">#&gt; # A tibble: 489,510 x 8</span>
-<span class="co">#&gt;    db     species organ  celltype  celltype_full     n_genes gene_original gene </span>
-<span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;</span>
-<span class="co">#&gt;  1 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 ACCSL         ACCSL</span>
-<span class="co">#&gt;  2 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 ACVR1B        ACVR…</span>
-<span class="co">#&gt;  3 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 ARHGEF16      ARHG…</span>
-<span class="co">#&gt;  4 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 ASF1B         ASF1B</span>
-<span class="co">#&gt;  5 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 BCL2L10       BCL2…</span>
-<span class="co">#&gt;  6 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 BLCAP         BLCAP</span>
-<span class="co">#&gt;  7 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 BNIP1         BNIP1</span>
-<span class="co">#&gt;  8 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 C1orf210      C1or…</span>
-<span class="co">#&gt;  9 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 C1orf226      C1or…</span>
-<span class="co">#&gt; 10 CellM… Human   Embryo 1-cell s… 1-cell stage cel…      45 CASC3         CASC3</span>
-<span class="co">#&gt; # … with 489,500 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 422,292 x 8</span>
+<span class="co">#&gt;    celltype_full      db    species organ celltype   n_genes gene_original gene </span>
+<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;</span>
+<span class="co">#&gt;  1 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 ACCSL         ACCSL</span>
+<span class="co">#&gt;  2 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 ACVR1B        ACVR…</span>
+<span class="co">#&gt;  3 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 ASF1B         ASF1B</span>
+<span class="co">#&gt;  4 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 BCL2L10       BCL2…</span>
+<span class="co">#&gt;  5 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 BLCAP         BLCAP</span>
+<span class="co">#&gt;  6 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 CASC3         CASC3</span>
+<span class="co">#&gt;  7 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 CLEC10A       CLEC…</span>
+<span class="co">#&gt;  8 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 CNOT11        CNOT…</span>
+<span class="co">#&gt;  9 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 DCLK2         DCLK2</span>
+<span class="co">#&gt; 10 1-cell stage cell… Cell… Human   Embr… 1-cell st…      32 DHCR7         DHCR7</span>
+<span class="co">#&gt; # … with 422,282 more rows</span></code></pre></div>
 <p>Each row contains a gene and a cell type associated with it. The <code>gene</code> column is the gene symbol (human or mouse) and the <code>celltype_full</code> column contains the detailed cell type string including the species and the original database.</p>
 <p>Check the total number of the available cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 3264</span></code></pre></div>
+<span class="co">#&gt; [1] 3039</span></code></pre></div>
 <p>Check the source databases.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">db</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 7 x 2</span>
 <span class="co">#&gt;   db             n</span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt;</span>
+<span class="co">#&gt; * &lt;chr&gt;      &lt;int&gt;</span>
 <span class="co">#&gt; 1 ARCHS4       108</span>
-<span class="co">#&gt; 2 CellMarker   869</span>
-<span class="co">#&gt; 3 MSigDB       302</span>
-<span class="co">#&gt; 4 PanglaoDB    330</span>
+<span class="co">#&gt; 2 CellMarker   692</span>
+<span class="co">#&gt; 3 MSigDB       295</span>
+<span class="co">#&gt; 4 PanglaoDB    322</span>
 <span class="co">#&gt; 5 SaVanT       619</span>
-<span class="co">#&gt; 6 TISSUES      547</span>
-<span class="co">#&gt; 7 xCell        489</span></code></pre></div>
+<span class="co">#&gt; 6 TISSUES      537</span>
+<span class="co">#&gt; 7 xCell        466</span></code></pre></div>
 <p>Check the number of available cell types per species (not available for every cell type).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   species     n</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; * &lt;chr&gt;   &lt;int&gt;</span>
 <span class="co">#&gt; 1 ""        323</span>
-<span class="co">#&gt; 2 "Human"  2041</span>
-<span class="co">#&gt; 3 "Mouse"   900</span></code></pre></div>
+<span class="co">#&gt; 2 "Human"  1866</span>
+<span class="co">#&gt; 3 "Mouse"   850</span></code></pre></div>
 <p>Check the number of available cell types per organ (not available for every cell type).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">organ</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">organ</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 111 x 2</span>
+<span class="co">#&gt; # A tibble: 93 x 2</span>
 <span class="co">#&gt;    organ                  n</span>
 <span class="co">#&gt;    &lt;chr&gt;              &lt;int&gt;</span>
-<span class="co">#&gt;  1 ""                  2239</span>
-<span class="co">#&gt;  2 "Brain"              127</span>
-<span class="co">#&gt;  3 "Kidney"              56</span>
-<span class="co">#&gt;  4 "Lung"                52</span>
-<span class="co">#&gt;  5 "Bone marrow"         51</span>
-<span class="co">#&gt;  6 "Immune system"       50</span>
-<span class="co">#&gt;  7 "Peripheral blood"    46</span>
-<span class="co">#&gt;  8 "Liver"               40</span>
-<span class="co">#&gt;  9 "Blood"               39</span>
-<span class="co">#&gt; 10 "Embryo"              32</span>
-<span class="co">#&gt; # … with 101 more rows</span></code></pre></div>
+<span class="co">#&gt;  1 ""                  2160</span>
+<span class="co">#&gt;  2 "Brain"              122</span>
+<span class="co">#&gt;  3 "Immune system"       50</span>
+<span class="co">#&gt;  4 "Lung"                47</span>
+<span class="co">#&gt;  5 "Kidney"              43</span>
+<span class="co">#&gt;  6 "Bone marrow"         42</span>
+<span class="co">#&gt;  7 "Liver"               38</span>
+<span class="co">#&gt;  8 "Blood"               33</span>
+<span class="co">#&gt;  9 "Embryo"              30</span>
+<span class="co">#&gt; 10 "Peripheral blood"    29</span>
+<span class="co">#&gt; # … with 83 more rows</span></code></pre></div>
 <p>Check the package version.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span>
