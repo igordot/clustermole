@@ -11,6 +11,7 @@ navbar:
     right: [home, intro, example, db, reference, news, github]
   components:
     home: ~
+    articles: ~
     intro:
       text: Get Started
       href: articles/clustermole-intro.html

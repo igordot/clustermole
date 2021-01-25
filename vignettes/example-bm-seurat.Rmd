@@ -7,6 +7,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# remove the minimum number of characters to display character columns (default: 0)
+options(pillar.min_chars = Inf)
 ```
 
 ## Introduction
@@ -95,7 +97,7 @@ overlaps_tbl <- clustermole_overlaps(genes = b_markers, species = "mm")
 Check the top scoring cell types corresponding to the B-cell cluster markers.
 
 ```{r clustermole-overlaps-b-result}
-head(overlaps_tbl, 10)
+head(overlaps_tbl, 15)
 ```
 
 As would be expected for a well-defined population, the top results are various B-cell populations.
@@ -119,7 +121,7 @@ overlaps_tbl <- clustermole_overlaps(genes = acar_markers, species = "mm")
 Check the top scoring cell types for the Adipo-CAR cluster.
 
 ```{r}
-head(overlaps_tbl, 10)
+head(overlaps_tbl, 15)
 ```
 
 The top results are more diverse than for B-cells, but related populations are among the top candidates.
@@ -141,19 +143,25 @@ overlaps_tbl <- clustermole_overlaps(genes = o_markers, species = "mm")
 Check the top scoring cell types for the Osteoblasts cluster.
 
 ```{r}
-head(overlaps_tbl, 10)
+head(overlaps_tbl, 15)
 ```
 
 The top results are again more diverse than for B-cells, but the appropriate populations are listed.
 
 ### Enrichment of markers
 
-Running enrichment of cell type signatures across all genes avoids the problem of selecting a specific number of cluster markers.
+Rather than comparing marker genes, it's also possible to run enrichment of cell type signatures across all genes.
+This avoids having to define an optimal set of markers.
 
-Calculate the average expression levels for each cell type, convert to a matrix, and log-transform.
+Calculate the average expression levels for each cell type.
 
 ```{r avg-exp}
 avg_exp_mat <- AverageExpression(so)
+```
+
+Convert to a regular matrix and log-transform.
+
+```{r avg-exp-transform}
 avg_exp_mat <- as.matrix(avg_exp_mat$RNA)
 avg_exp_mat <- log1p(avg_exp_mat)
 ```
@@ -173,17 +181,19 @@ enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
 Check the most enriched cell types for the B-cell cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "B-cell") %>% head(10)
+enrich_tbl %>% filter(cluster == "B-cell") %>% head(15)
 ```
+
+As with the previous analysis, the top results are various B-cell populations.
 
 Check the most enriched cell types for the Adipo-CAR cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "Adipo-CAR") %>% head(10)
+enrich_tbl %>% filter(cluster == "Adipo-CAR") %>% head(15)
 ```
 
 Check the most enriched cell types for the Osteoblasts cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "Osteoblasts") %>% head(10)
+enrich_tbl %>% filter(cluster == "Osteoblasts") %>% head(15)
 ```
