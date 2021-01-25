@@ -8,12 +8,18 @@ template:
 navbar:
   structure:
     left: []
-    right: [home, intro, articles, reference, news, github]
+    right: [home, intro, example, db, reference, news, github]
   components:
     home: ~
     intro:
-      text: Get started
+      text: Get Started
       href: articles/clustermole-intro.html
+    example:
+      text: Usage Example
+      href: articles/example-bm-seurat.html
+    db:
+      text: Database Stats
+      href: articles/db.html
 
 home:
   strip_header: true
