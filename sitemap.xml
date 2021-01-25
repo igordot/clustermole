@@ -19,9 +19,12 @@
     <loc>https://igordot.github.io/clustermole/reference/read_gmt.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole/articles/articles/stats.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/clustermole-intro.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole/articles/clustermole-intro.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/db.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/articles/example-bm-seurat.html</loc>
   </url>
 </urlset>

@@ -55,10 +55,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/articles/stats.html">Database statistics</a>
+      <a href="../articles/clustermole-intro.html">Introduction to clustermole</a>
     </li>
     <li>
-      <a href="../articles/clustermole-intro.html">Introduction to clustermole</a>
+      <a href="../articles/db.html">Database details</a>
+    </li>
+    <li>
+      <a href="../articles/example-bm-seurat.html">Cell type annotation example</a>
     </li>
   </ul>
 </li>
@@ -103,7 +106,7 @@
 <p>A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.</p>
 <p>The clustermole package provides three primary features:</p>
 <ul>
-<li>a database of markers for hundreds of cell types (<code>clustermole_markers</code>)</li>
+<li>a database of markers for thousands of cell types (<code>clustermole_markers</code>)</li>
 <li>cell type prediction based on marker genes (<code>clustermole_overlaps</code>)</li>
 <li>cell type prediction based on the full expression matrix (<code>clustermole_enrichment</code>)</li>
 </ul>
@@ -117,121 +120,55 @@
 <p>Load clustermole.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole">clustermole</a></span><span class="op">)</span></code></pre></div>
-<div id="clustermole_overlaps-cell-type-prediction-based-on-marker-genes" class="section level3">
+<div id="retrieve-cell-type-markers" class="section level3">
 <h3 class="hasAnchor">
-<a href="#clustermole_overlaps-cell-type-prediction-based-on-marker-genes" class="anchor"></a><code>clustermole_overlaps()</code>: cell type prediction based on marker genes</h3>
-<p>If you have a set of genes, such as cluster markers, you can compare them to known cell type markers to see if they overlap any of the known cell type markers (overrepresentation analysis).</p>
+<a href="#retrieve-cell-type-markers" class="anchor"></a>Retrieve cell type markers</h3>
+<p>You can use clustermole as a simple database and get a data frame of all cell type markers.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_genes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD2"</span>, <span class="st">"CD3D"</span>, <span class="st">"CD3E"</span>, <span class="st">"IL7R"</span>, <span class="st">"IL32"</span>, <span class="st">"LTB"</span>, <span class="st">"LDHB"</span>, <span class="st">"CCR7"</span><span class="op">)</span>
-<span class="va">my_overlaps</span> <span class="op">=</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
-<span class="va">my_overlaps</span>
-<span class="co">#&gt; # A tibble: 364 x 9</span>
-<span class="co">#&gt;    celltype_full db     species organ celltype  n_genes overlap  p_value     fdr</span>
-<span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 FAN_EMBRYONI… MSigDB Human   ""    FAN_EMBR…     113       5 3.07e-11 9.33e-8</span>
-<span class="co">#&gt;  2 T memory cel… Pangl… Human   "Imm… T memory…      38       4 1.66e-10 1.00e-7</span>
-<span class="co">#&gt;  3 Naive T cell… CellM… Human   "Blo… Naive T …       5       3 1.71e-10 1.00e-7</span>
-<span class="co">#&gt;  4 T memory cel… Pangl… Mouse   "Imm… T memory…      40       4 2.77e-10 1.00e-7</span>
-<span class="co">#&gt;  5 IMGN_T_4Nve_… SaVanT Mouse   ""    IMGN_T_4…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt;  6 IMGN_T_4SP24… SaVanT Mouse   ""    IMGN_T_4…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt;  7 IMGN_T_8Nve_… SaVanT Mouse   ""    IMGN_T_8…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt;  8 IMGN_T_8Nve_… SaVanT Mouse   ""    IMGN_T_8…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt;  9 MA_iTreg_IL-… SaVanT Human   ""    MA_iTreg…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt; 10 MA_Tresting … SaVanT Human   ""    MA_Trest…      50       4 5.17e-10 1.00e-7</span>
-<span class="co">#&gt; # … with 354 more rows</span></code></pre></div>
-</div>
-<div id="clustermole_enrichment-cell-type-enrichment-in-the-full-expression-matrix" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clustermole_enrichment-cell-type-enrichment-in-the-full-expression-matrix" class="anchor"></a><code>clustermole_enrichment()</code>: cell type enrichment in the full expression matrix</h3>
-<p>If you have a table of expression values, such as average expression across clusters, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values). Genes are rows and clusters/samples are columns.</p>
+<code class="sourceCode R"><span class="va">markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
+<span class="va">markers</span>
+<span class="co">#&gt; # A tibble: 422,292 x 8</span>
+<span class="co">#&gt;    celltype_full      db     species organ  celltype   n_genes gene_origi… gene </span>
+<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;</span>
+<span class="co">#&gt;  1 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACCSL       ACCSL</span>
+<span class="co">#&gt;  2 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACVR1B      ACVR…</span>
+<span class="co">#&gt;  3 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ASF1B       ASF1B</span>
+<span class="co">#&gt;  4 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BCL2L10     BCL2…</span>
+<span class="co">#&gt;  5 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BLCAP       BLCAP</span>
+<span class="co">#&gt;  6 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CASC3       CASC3</span>
+<span class="co">#&gt;  7 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CLEC10A     CLEC…</span>
+<span class="co">#&gt;  8 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CNOT11      CNOT…</span>
+<span class="co">#&gt;  9 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DCLK2       DCLK2</span>
+<span class="co">#&gt; 10 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DHCR7       DHCR7</span>
+<span class="co">#&gt; # … with 422,282 more rows</span></code></pre></div>
+<p>Each row contains a gene and a cell type associated with it. The <code>gene</code> column is the gene symbol and the <code>celltype_full</code> column contains the full cell type string, including the species and the original database. Human or mouse versions can be retrieved.</p>
+<p>Some tools require input as a list. To convert the markers from a data frame to a list format, you can use <code>gene</code> as the values and <code>celltype_full</code> as the grouping variable.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">my_expr_mat</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></code></pre></div>
-</div>
-<div id="clustermole_markers-retrieve-cell-type-markers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clustermole_markers-retrieve-cell-type-markers" class="anchor"></a><code>clustermole_markers()</code>: retrieve cell type markers</h3>
-<p>You can use <code>clustermole</code> as a simple database and get a data frame of all cell type markers.</p>
+<code class="sourceCode R"><span class="va">markers_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">gene</span>, f <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span></code></pre></div>
+<p>Check the number of cell types in the database.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
-<span class="va">markers</span>
-<span class="co">#&gt; # A tibble: 422,292 x 8</span>
-<span class="co">#&gt;    celltype_full      db     species organ  celltype   n_genes gene_origi… gene </span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;</span>
-<span class="co">#&gt;  1 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACCSL       ACCSL</span>
-<span class="co">#&gt;  2 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACVR1B      ACVR…</span>
-<span class="co">#&gt;  3 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ASF1B       ASF1B</span>
-<span class="co">#&gt;  4 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BCL2L10     BCL2…</span>
-<span class="co">#&gt;  5 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BLCAP       BLCAP</span>
-<span class="co">#&gt;  6 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CASC3       CASC3</span>
-<span class="co">#&gt;  7 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CLEC10A     CLEC…</span>
-<span class="co">#&gt;  8 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CNOT11      CNOT…</span>
-<span class="co">#&gt;  9 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DCLK2       DCLK2</span>
-<span class="co">#&gt; 10 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DHCR7       DHCR7</span>
-<span class="co">#&gt; # … with 422,282 more rows</span></code></pre></div>
-<p>Each row contains a gene and a cell type associated with it. The <code>gene</code> column is the gene symbol (human or mouse versions can be retrieved) and the <code>celltype_full</code> column contains the full cell type string, including the species and the original database.</p>
-<p>If you need to convert the markers from a data frame to a list format for other applications, you can use <code>gene</code> as the values and <code>celltype_full</code> as the grouping variable.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">gene</span>, f <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span></code></pre></div>
-</div>
-</div>
-<div id="database-details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#database-details" class="anchor"></a>Database details</h2>
-<p>We will load dplyr to help with the summary statistics.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
-<p>You can use <code><a href="../reference/clustermole_markers.html">clustermole_markers()</a></code> to retrieve a data frame of all cell type markers in the collection.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">=</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
-<span class="va">markers</span>
-<span class="co">#&gt; # A tibble: 422,292 x 8</span>
-<span class="co">#&gt;    celltype_full      db     species organ  celltype   n_genes gene_origi… gene </span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;</span>
-<span class="co">#&gt;  1 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACCSL       ACCSL</span>
-<span class="co">#&gt;  2 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACVR1B      ACVR…</span>
-<span class="co">#&gt;  3 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ASF1B       ASF1B</span>
-<span class="co">#&gt;  4 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BCL2L10     BCL2…</span>
-<span class="co">#&gt;  5 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BLCAP       BLCAP</span>
-<span class="co">#&gt;  6 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CASC3       CASC3</span>
-<span class="co">#&gt;  7 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CLEC10A     CLEC…</span>
-<span class="co">#&gt;  8 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CNOT11      CNOT…</span>
-<span class="co">#&gt;  9 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DCLK2       DCLK2</span>
-<span class="co">#&gt; 10 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DHCR7       DHCR7</span>
-<span class="co">#&gt; # … with 422,282 more rows</span></code></pre></div>
-<p>Check the number of available cell types.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 3039</span></code></pre></div>
-<p>Check the number of available cell types per species (not available for every cell type).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">species</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">species</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 2</span>
-<span class="co">#&gt;   species     n</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;int&gt;</span>
-<span class="co">#&gt; 1 "Human"  1866</span>
-<span class="co">#&gt; 2 "Mouse"   850</span>
-<span class="co">#&gt; 3 ""        323</span></code></pre></div>
-<p>Check the number of available cell types per organ (not available for every cell type).</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">celltype_full</span>, <span class="va">organ</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">organ</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 93 x 2</span>
-<span class="co">#&gt;    organ                  n</span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;int&gt;</span>
-<span class="co">#&gt;  1 ""                  2160</span>
-<span class="co">#&gt;  2 "Brain"              122</span>
-<span class="co">#&gt;  3 "Immune system"       50</span>
-<span class="co">#&gt;  4 "Lung"                47</span>
-<span class="co">#&gt;  5 "Kidney"              43</span>
-<span class="co">#&gt;  6 "Bone marrow"         42</span>
-<span class="co">#&gt;  7 "Liver"               38</span>
-<span class="co">#&gt;  8 "Blood"               33</span>
-<span class="co">#&gt;  9 "Embryo"              30</span>
-<span class="co">#&gt; 10 "Peripheral blood"    29</span>
-<span class="co">#&gt; # … with 83 more rows</span></code></pre></div>
-<p>Check package version.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span>
-<span class="co">#&gt; [1] '1.0.1.9001'</span></code></pre></div>
+<p>Check the cell type source databases.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">db</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "ARCHS4"     "CellMarker" "MSigDB"     "PanglaoDB"  "SaVanT"    </span>
+<span class="co">#&gt; [6] "TISSUES"    "xCell"</span></code></pre></div>
+</div>
+<div id="cell-types-based-on-marker-genes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cell-types-based-on-marker-genes" class="anchor"></a>Cell types based on marker genes</h3>
+<p>If you have a character vector of genes, such as cluster markers, you can compare them to known cell type markers to see if they overlap any of the known cell type markers (overrepresentation analysis).</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_overlaps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes_vec</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="cell-types-based-on-expression-matrix" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cell-types-based-on-expression-matrix" class="anchor"></a>Cell types based on expression matrix</h3>
+<p>If you have expression values, such as average expression across clusters, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values). The matrix should have genes as rows and clusters/samples as columns. The underlying enrichment method can be changed using the <code>method</code> parameter.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_enrichment</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">my_expr_mat</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
   </div>
 
