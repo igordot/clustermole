@@ -12,4 +12,5 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-^vignettes/articles$
+^vignettes/db\.Rmd$
+^vignettes/example-bm-seurat\.Rmd$

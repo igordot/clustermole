@@ -1,0 +1,189 @@
+---
+title: "Cell type annotation example"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+Assignment of cell type labels to scRNA-seq clusters is particularly difficult when unexpected or poorly described populations are present.
+You can often trust various fully automated algorithms for cell type annotation, but sometimes a more exploratory analysis is helpful in understanding the captured cells.
+This is an example of exploratory cell type analysis using clustermole, starting with a Seurat object.
+
+The dataset used here contains hematopoietic and stromal bone marrow populations ([Baccin et al.](https://doi.org/10.1038/s41556-019-0439-6)).
+This experiment was selected because it includes both well-known as well as rare cell types.
+
+## Load data
+
+Load relevant packages.
+
+```{r load-libraries, message=FALSE}
+library(Seurat)
+library(dplyr)
+library(ggsci)
+```
+
+Load the dataset, which is stored as a Seurat object.
+It was subset for this example to reduce the size and speed up processing.
+
+```{r load-seurat-object, message=FALSE, warning=FALSE}
+so <- readRDS(url("https://osf.io/cvnqb/download"))
+so
+```
+
+Check the experiment labels on a tSNE visualization, as shown in the original publication ([original figure](https://www.nature.com/articles/s41556-019-0439-6/figures/1)).
+
+```{r tsne-exp}
+DimPlot(so, reduction = "tsne", group.by = "experiment", cells = sample(colnames(so))) +
+  scale_color_nejm()
+```
+
+Check the cell type labels on a tSNE visualization.
+
+```{r tsne-celltype}
+DimPlot(so, reduction = "tsne", group.by = "celltype", cells = sample(colnames(so))) +
+  scale_color_igv()
+```
+
+## Cell type annotation
+
+Since this is a clustermole tutorial, load clustermole.
+
+```{r load-clustermole, message=FALSE, warning=FALSE}
+library(clustermole)
+```
+
+Set the Seurat object cell identities to the predefined cell type labels and check what they are.
+
+```{r set-idents}
+Idents(so) <- "celltype"
+levels(Idents(so))
+```
+
+### Marker gene overlaps
+
+One type of analysis facilitated by clustermole is based on comparison of marker genes.
+
+We can start with the B-cells, which is well-defined population used in many studies.
+
+Find markers for the B-cell cluster.
+
+```{r find-markers-b}
+b_markers_df <- FindMarkers(so, ident.1 = "B-cell", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
+nrow(b_markers_df)
+```
+
+This gives us a data frame with hundreds of genes.
+We can subset to just the best 25 markers.
+
+```{r markers-top-genes}
+b_markers <- head(rownames(b_markers_df), 25)
+b_markers
+```
+
+Check the overlap of B-cell markers with all clustermole cell type signatures.
+
+```{r clustermole-overlaps-b, message=FALSE, warning=FALSE}
+overlaps_tbl <- clustermole_overlaps(genes = b_markers, species = "mm")
+```
+
+Check the top scoring cell types corresponding to the B-cell cluster markers.
+
+```{r clustermole-overlaps-b-result}
+head(overlaps_tbl, 10)
+```
+
+As would be expected for a well-defined population, the top results are various B-cell populations.
+We can repeat this process for other populations that are more obscure.
+
+Find markers for the Adipo-CAR cluster.
+These are Cxcl12-abundant reticular (CAR) cells expressing adipocyte-lineage genes.
+
+```{r find-markers-acar}
+acar_markers_df <- FindMarkers(so, ident.1 = "Adipo-CAR", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
+acar_markers <- head(rownames(acar_markers_df), 25)
+acar_markers
+```
+
+Check the overlap of Adipo-CAR markers with all cell type signatures.
+
+```{r clustermole-overlaps-acar, message=FALSE, warning=FALSE}
+overlaps_tbl <- clustermole_overlaps(genes = acar_markers, species = "mm")
+```
+
+Check the top scoring cell types for the Adipo-CAR cluster.
+
+```{r}
+head(overlaps_tbl, 10)
+```
+
+The top results are more diverse than for B-cells, but related populations are among the top candidates.
+
+Find markers for the Osteoblasts cluster.
+
+```{r find-markers-o}
+o_markers_df <- FindMarkers(so, ident.1 = "Osteoblasts", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
+o_markers <- head(rownames(o_markers_df), 25)
+o_markers
+```
+
+Check overlap of Osteoblasts markers with all cell type signatures.
+
+```{r clustermole-overlaps-o, message=FALSE, warning=FALSE}
+overlaps_tbl <- clustermole_overlaps(genes = o_markers, species = "mm")
+```
+
+Check the top scoring cell types for the Osteoblasts cluster.
+
+```{r}
+head(overlaps_tbl, 10)
+```
+
+The top results are again more diverse than for B-cells, but the appropriate populations are listed.
+
+### Enrichment of markers
+
+Running enrichment of cell type signatures across all genes avoids the problem of selecting a specific number of cluster markers.
+
+Calculate the average expression levels for each cell type, convert to a matrix, and log-transform.
+
+```{r avg-exp}
+avg_exp_mat <- AverageExpression(so)
+avg_exp_mat <- as.matrix(avg_exp_mat$RNA)
+avg_exp_mat <- log1p(avg_exp_mat)
+```
+
+Preview the expression matrix.
+
+```{r avg-exp-head}
+avg_exp_mat[1:5, 1:5]
+```
+
+Run enrichment of all cell type signatures across all clusters.
+
+```{r}
+enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
+```
+
+Check the most enriched cell types for the B-cell cluster.
+
+```{r}
+enrich_tbl %>% filter(cluster == "B-cell") %>% head(10)
+```
+
+Check the most enriched cell types for the Adipo-CAR cluster.
+
+```{r}
+enrich_tbl %>% filter(cluster == "Adipo-CAR") %>% head(10)
+```
+
+Check the most enriched cell types for the Osteoblasts cluster.
+
+```{r}
+enrich_tbl %>% filter(cluster == "Osteoblasts") %>% head(10)
+```

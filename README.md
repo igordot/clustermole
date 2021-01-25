@@ -15,7 +15,7 @@ The clustermole R package provides methods to query thousands of human and mouse
 
 The clustermole package provides three primary features:
 
-* a database of markers for hundreds of cell types
+* a database of markers for thousands of cell types
 * cell type prediction based on marker genes
 * cell type prediction based on the full expression matrix
 

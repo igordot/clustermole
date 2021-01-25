@@ -20,11 +20,14 @@ options(pillar.min_title_chars = 10)
 
 ## Overview
 
-A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
+A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps.
+Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search.
+This is especially challenging when unexpected or poorly described populations are present.
+The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
 
 The clustermole package provides three primary features:
 
-* a database of markers for hundreds of cell types (`clustermole_markers`)
+* a database of markers for thousands of cell types (`clustermole_markers`)
 * cell type prediction based on marker genes (`clustermole_overlaps`)
 * cell type prediction based on the full expression matrix (`clustermole_enrichment`)
 
@@ -42,77 +45,51 @@ Load clustermole.
 library(clustermole)
 ```
 
-### `clustermole_overlaps()`: cell type prediction based on marker genes
+### Retrieve cell type markers
 
-If you have a set of genes, such as cluster markers, you can compare them to known cell type markers to see if they overlap any of the known cell type markers (overrepresentation analysis).
-
-```{r overlaps}
-my_genes = c("CD2", "CD3D", "CD3E", "IL7R", "IL32", "LTB", "LDHB", "CCR7")
-my_overlaps = clustermole_overlaps(genes = my_genes, species = "hs")
-my_overlaps
-```
-
-### `clustermole_enrichment()`: cell type enrichment in the full expression matrix
-
-If you have a table of expression values, such as average expression across clusters, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values). Genes are rows and clusters/samples are columns.
-
-```{r enrichment, eval=FALSE}
-clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
-```
-
-### `clustermole_markers()`: retrieve cell type markers
-
-You can use `clustermole` as a simple database and get a data frame of all cell type markers.
+You can use clustermole as a simple database and get a data frame of all cell type markers.
 
 ```{r markers}
-markers = clustermole_markers(species = "hs")
+markers <- clustermole_markers(species = "hs")
 markers
 ```
 
-Each row contains a gene and a cell type associated with it. The `gene` column is the gene symbol (human or mouse versions can be retrieved) and the `celltype_full` column contains the full cell type string, including the species and the original database.
+Each row contains a gene and a cell type associated with it.
+The `gene` column is the gene symbol and the `celltype_full` column contains the full cell type string, including the species and the original database. Human or mouse versions can be retrieved.
 
-If you need to convert the markers from a data frame to a list format for other applications, you can use `gene` as the values and `celltype_full` as the grouping variable.
+Some tools require input as a list.
+To convert the markers from a data frame to a list format, you can use `gene` as the values and `celltype_full` as the grouping variable.
 
 ```{r celltypes-list}
-markers_list = split(x = markers$gene, f = markers$celltype_full)
+markers_list <- split(x = markers$gene, f = markers$celltype_full)
 ```
 
-## Database details
+Check the number of cell types in the database.
 
-We will load dplyr to help with the summary statistics.
-
-```{r load-dplyr, message=FALSE}
-library(dplyr)
+```{r celltypes-count}
+length(unique(markers$celltype_full))
 ```
 
-You can use `clustermole_markers()` to retrieve a data frame of all cell type markers in the collection.
+Check the cell type source databases.
 
-```{r get-markers}
-markers = clustermole_markers(species = "hs")
-markers
+```{r celltypes-dbs}
+sort(unique(markers$db))
 ```
 
-Check the number of available cell types.
+### Cell types based on marker genes
 
-```{r celltypes-length}
-markers %>% distinct(celltype_full) %>% nrow()
+If you have a character vector of genes, such as cluster markers, you can compare them to known cell type markers to see if they overlap any of the known cell type markers (overrepresentation analysis).
+
+```{r overlaps, eval=FALSE}
+my_overlaps <- clustermole_overlaps(genes = my_genes_vec, species = "hs")
 ```
 
-Check the number of available cell types per species (not available for every cell type).
+### Cell types based on expression matrix
 
-```{r count-species}
-markers %>% distinct(celltype_full, species) %>% count(species, sort = TRUE)
+If you have expression values, such as average expression across clusters, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values).
+The matrix should have genes as rows and clusters/samples as columns.
+The underlying enrichment method can be changed using the `method` parameter.
+
+```{r enrichment, eval=FALSE}
+my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
 ```
-
-Check the number of available cell types per organ (not available for every cell type).
-
-```{r count-organ}
-markers %>% distinct(celltype_full, organ) %>% count(organ, sort = TRUE)
-```
-
-Check package version.
-
-```{r package-version}
-packageVersion("clustermole")
-```
-

@@ -1,5 +1,5 @@
 ---
-title: "Database statistics"
+title: "Database details"
 ---
 
 ```{r, include = FALSE}
@@ -9,17 +9,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-We will load `clustermole` along with `dplyr` to help with summarizing the data.
+We will load clustermole along with dplyr to help with summarizing the data.
 
 ```{r setup, message=FALSE}
 library(clustermole)
 library(dplyr)
 ```
 
-You can use `clustermole` as just a database to get a data frame of all cell type markers.
+You can use clustermole as a simple database and get a table of all cell type markers.
 
 ```{r markers}
-markers = clustermole_markers()
+markers = clustermole_markers(species = "hs")
 markers
 ```
 
@@ -32,27 +32,26 @@ Check the total number of the available cell types.
 markers %>% distinct(celltype_full) %>% nrow()
 ```
 
-Check the source databases.
+Check the source databases and the number of cell types from each.
 
 ```{r count-db}
 markers %>% distinct(celltype_full, db) %>% count(db)
 ```
 
-Check the number of available cell types per species (not available for every cell type).
+Check the number of cell types per species (not available for all cell types).
 
 ```{r count-species}
 markers %>% distinct(celltype_full, species) %>% count(species)
 ```
 
-Check the number of available cell types per organ (not available for every cell type).
+Check the number of available cell types per organ (not available for all cell types).
 
 ```{r count-organ}
 markers %>% distinct(celltype_full, organ) %>% count(organ, sort = TRUE)
 ```
 
-Check the package version.
+Check the package version since the database contents may change.
 
 ```{r package-version}
 packageVersion("clustermole")
 ```
-
