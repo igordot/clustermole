@@ -42,26 +42,7 @@
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/clustermole-intro.html">Introduction to clustermole</a>
-    </li>
-    <li>
-      <a href="../articles/db.html">Database details</a>
-    </li>
-    <li>
-      <a href="../articles/example-bm-seurat.html">Cell type annotation example</a>
-    </li>
-  </ul>
-</li>
-      </ul>
+      <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/clustermole-intro.html">Get Started</a>
@@ -184,23 +165,30 @@
 <code class="sourceCode R"><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">b_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></code></pre></div>
 <p>Check the top scoring cell types corresponding to the B-cell cluster markers.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">10</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span>
 <span class="co">#&gt; Registered S3 method overwritten by 'cli':</span>
 <span class="co">#&gt;   method     from    </span>
 <span class="co">#&gt;   print.boxx spatstat</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    celltype_full  db    species organ celltype n_genes overlap  p_value      fdr</span>
-<span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 follicular_B-… SaVa… ""      ""    follicu…      50      13 6.84e-29 1.39e-25</span>
-<span class="co">#&gt;  2 B cell (Renal… Cell… "Human" "Kid… B cell …     168      16 9.15e-29 1.39e-25</span>
-<span class="co">#&gt;  3 DURANTE_ADULT… MSig… "Human" ""    DURANTE…      27      11 1.48e-26 1.49e-23</span>
-<span class="co">#&gt;  4 IMGN_B_Fo_MLN… SaVa… "Mouse" ""    IMGN_B_…      50      12 4.70e-26 3.57e-23</span>
-<span class="co">#&gt;  5 AIZARANI_LIVE… MSig… "Human" ""    AIZARAN…      97      13 8.82e-25 5.20e-22</span>
-<span class="co">#&gt;  6 B cells | Imm… Pang… "Human" "Imm… B cells       63      12 1.03e-24 5.20e-22</span>
-<span class="co">#&gt;  7 B cells naive… Pang… "Human" "Imm… B cells…      47      11 1.18e-23 5.14e-21</span>
-<span class="co">#&gt;  8 IMGN_B_Fo_LN … SaVa… "Mouse" ""    IMGN_B_…      50      11 2.54e-23 7.01e-21</span>
-<span class="co">#&gt;  9 IMGN_B_FrE_BM… SaVa… "Mouse" ""    IMGN_B_…      50      11 2.54e-23 7.01e-21</span>
-<span class="co">#&gt; 10 IMGN_B_T3_Sp … SaVa… "Mouse" ""    IMGN_B_…      50      11 2.54e-23 7.01e-21</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    celltype_full                                                    db        </span>
+<span class="co">#&gt;    &lt;chr&gt;                                                            &lt;chr&gt;     </span>
+<span class="co">#&gt;  1 follicular_B-cells | SaVanT                                      SaVanT    </span>
+<span class="co">#&gt;  2 B cell (Renal Cell Carcinoma) | Kidney | Human | CellMarker      CellMarker</span>
+<span class="co">#&gt;  3 DURANTE_ADULT_OLFACTORY_NEUROEPITHELIUM_B_CELLS | Human | MSigDB MSigDB    </span>
+<span class="co">#&gt;  4 IMGN_B_Fo_MLN | Mouse | SaVanT                                   SaVanT    </span>
+<span class="co">#&gt;  5 AIZARANI_LIVER_C34_MHC_II_POS_B_CELLS | Human | MSigDB           MSigDB    </span>
+<span class="co">#&gt;  6 B cells | Immune system | Human | PanglaoDB                      PanglaoDB </span>
+<span class="co">#&gt;  7 B cells naive | Immune system | Human | PanglaoDB                PanglaoDB </span>
+<span class="co">#&gt;  8 IMGN_B_Fo_LN | Mouse | SaVanT                                    SaVanT    </span>
+<span class="co">#&gt;  9 IMGN_B_FrE_BM | Mouse | SaVanT                                   SaVanT    </span>
+<span class="co">#&gt; 10 IMGN_B_T3_Sp | Mouse | SaVanT                                    SaVanT    </span>
+<span class="co">#&gt; 11 spleen | SaVanT                                                  SaVanT    </span>
+<span class="co">#&gt; 12 B cell | Kidney | Human | CellMarker                             CellMarker</span>
+<span class="co">#&gt; 13 FAN_EMBRYONIC_CTX_BRAIN_B_CELL | Human | MSigDB                  MSigDB    </span>
+<span class="co">#&gt; 14 IMGN_B_Fo_PC | Mouse | SaVanT                                    SaVanT    </span>
+<span class="co">#&gt; 15 IMGN_B_Fo_Sp | Mouse | SaVanT                                    SaVanT    </span>
+<span class="co">#&gt; # … with 7 more variables: species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;,</span>
+<span class="co">#&gt; #   n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;, fdr &lt;dbl&gt;</span></code></pre></div>
 <p>As would be expected for a well-defined population, the top results are various B-cell populations. We can repeat this process for other populations that are more obscure.</p>
 <p>Find markers for the Adipo-CAR cluster. These are Cxcl12-abundant reticular (CAR) cells expressing adipocyte-lineage genes.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -219,20 +207,27 @@
 <code class="sourceCode R"><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">acar_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></code></pre></div>
 <p>Check the top scoring cell types for the Adipo-CAR cluster.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    celltype_full   db     species organ celltype n_genes overlap p_value     fdr</span>
-<span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 IMGN_FRC_MLN |… SaVanT "Mouse" ""    IMGN_FR…      50       4 6.79e-8 2.06e-4</span>
-<span class="co">#&gt;  2 OMENTUM | ARCH… ARCHS4 ""      ""    OMENTUM     1588       9 6.28e-7 9.55e-4</span>
-<span class="co">#&gt;  3 HAY_BONE_MARRO… MSigDB "Human" ""    HAY_BON…     520       6 1.94e-6 1.96e-3</span>
-<span class="co">#&gt;  4 Schwalie et al… CellM… "Mouse" "Adi… Schwali…     157       4 7.93e-6 3.31e-3</span>
-<span class="co">#&gt;  5 LUNG (BULK TIS… ARCHS4 ""      ""    LUNG (B…    1561       8 8.55e-6 3.31e-3</span>
-<span class="co">#&gt;  6 HPCA_Adipocyte… SaVanT "Human" ""    HPCA_Ad…      50       3 9.03e-6 3.31e-3</span>
-<span class="co">#&gt;  7 IMGN_FRC_SLN |… SaVanT "Mouse" ""    IMGN_FR…      50       3 9.03e-6 3.31e-3</span>
-<span class="co">#&gt;  8 HBA_Adipocyte … SaVanT "Human" ""    HBA_Adi…      50       3 9.59e-6 3.31e-3</span>
-<span class="co">#&gt;  9 Schwalie et al… CellM… "Mouse" "Adi… Schwali…     156       4 9.82e-6 3.31e-3</span>
-<span class="co">#&gt; 10 GASTRIC TISSUE… ARCHS4 ""      ""    GASTRIC…    1573       8 1.09e-5 3.33e-3</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    celltype_full                                                  db        </span>
+<span class="co">#&gt;    &lt;chr&gt;                                                          &lt;chr&gt;     </span>
+<span class="co">#&gt;  1 IMGN_FRC_MLN | Mouse | SaVanT                                  SaVanT    </span>
+<span class="co">#&gt;  2 OMENTUM | ARCHS4                                               ARCHS4    </span>
+<span class="co">#&gt;  3 HAY_BONE_MARROW_STROMAL | Human | MSigDB                       MSigDB    </span>
+<span class="co">#&gt;  4 Schwalie et al.Nature.P3 | Adipose tissue | Mouse | CellMarker CellMarker</span>
+<span class="co">#&gt;  5 LUNG (BULK TISSUE) | ARCHS4                                    ARCHS4    </span>
+<span class="co">#&gt;  6 HPCA_Adipocytes | Human | SaVanT                               SaVanT    </span>
+<span class="co">#&gt;  7 IMGN_FRC_SLN | Mouse | SaVanT                                  SaVanT    </span>
+<span class="co">#&gt;  8 HBA_Adipocyte | Human | SaVanT                                 SaVanT    </span>
+<span class="co">#&gt;  9 Schwalie et al.Nature.G3 | Adipose tissue | Mouse | CellMarker CellMarker</span>
+<span class="co">#&gt; 10 GASTRIC TISSUE (BULK) | ARCHS4                                 ARCHS4    </span>
+<span class="co">#&gt; 11 SUBCUTANEOUS ADIPOSE TISSUE | ARCHS4                           ARCHS4    </span>
+<span class="co">#&gt; 12 ADIPOSE (BULK TISSUE) | ARCHS4                                 ARCHS4    </span>
+<span class="co">#&gt; 13 ASTROCYTE | ARCHS4                                             ARCHS4    </span>
+<span class="co">#&gt; 14 BREAST (BULK TISSUE) | ARCHS4                                  ARCHS4    </span>
+<span class="co">#&gt; 15 Medullary cell | Kidney | Mouse | CellMarker                   CellMarker</span>
+<span class="co">#&gt; # … with 7 more variables: species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;,</span>
+<span class="co">#&gt; #   n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;, fdr &lt;dbl&gt;</span></code></pre></div>
 <p>The top results are more diverse than for B-cells, but related populations are among the top candidates.</p>
 <p>Find markers for the Osteoblasts cluster.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -251,27 +246,34 @@
 <code class="sourceCode R"><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">o_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></code></pre></div>
 <p>Check the top scoring cell types for the Osteoblasts cluster.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    celltype_full    db     species organ celltype  n_genes overlap p_value   fdr</span>
-<span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 DCLK1+ progenit… CellM… "Human" "Lar… DCLK1+ p…      73       3 8.60e-5 0.129</span>
-<span class="co">#&gt;  2 GAO_LARGE_INTES… MSigDB "Human" ""    GAO_LARG…      73       3 8.60e-5 0.129</span>
-<span class="co">#&gt;  3 VALVE | ARCHS4   ARCHS4 ""      ""    VALVE        1432       8 1.27e-4 0.129</span>
-<span class="co">#&gt;  4 OSTEOBLAST | AR… ARCHS4 ""      ""    OSTEOBLA…    1488       7 1.13e-3 0.730</span>
-<span class="co">#&gt;  5 Cartilage | Hum… TISSU… "Human" ""    Cartilage      43       2 1.20e-3 0.730</span>
-<span class="co">#&gt;  6 GASTRIC TISSUE … ARCHS4 ""      ""    GASTRIC …    1573       7 1.97e-3 0.998</span>
-<span class="co">#&gt;  7 HAY_BONE_MARROW… MSigDB "Human" ""    HAY_BONE…      90       2 5.96e-3 1    </span>
-<span class="co">#&gt;  8 Chondrogenic ce… CellM… "Mouse" "Adi… Chondrog…       6       1 7.22e-3 1    </span>
-<span class="co">#&gt;  9 MANNO_MIDBRAIN_… MSigDB "Human" ""    MANNO_MI…     343       3 7.54e-3 1    </span>
-<span class="co">#&gt; 10 Intestine | Mou… TISSU… "Mouse" ""    Intestine     109       2 7.87e-3 1</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    celltype_full                                                   db        </span>
+<span class="co">#&gt;    &lt;chr&gt;                                                           &lt;chr&gt;     </span>
+<span class="co">#&gt;  1 DCLK1+ progenitor cell | Large intestine | Human | CellMarker   CellMarker</span>
+<span class="co">#&gt;  2 GAO_LARGE_INTESTINE_24W_C1_DCLK1POS_PROGENITOR | Human | MSigDB MSigDB    </span>
+<span class="co">#&gt;  3 VALVE | ARCHS4                                                  ARCHS4    </span>
+<span class="co">#&gt;  4 OSTEOBLAST | ARCHS4                                             ARCHS4    </span>
+<span class="co">#&gt;  5 Cartilage | Human | TISSUES                                     TISSUES   </span>
+<span class="co">#&gt;  6 GASTRIC TISSUE (BULK) | ARCHS4                                  ARCHS4    </span>
+<span class="co">#&gt;  7 HAY_BONE_MARROW_PLASMA_CELL | Human | MSigDB                    MSigDB    </span>
+<span class="co">#&gt;  8 Chondrogenic cell | Adipose tissue | Mouse | CellMarker         CellMarker</span>
+<span class="co">#&gt;  9 MANNO_MIDBRAIN_NEUROTYPES_HSERT | Human | MSigDB                MSigDB    </span>
+<span class="co">#&gt; 10 Intestine | Mouse | TISSUES                                     TISSUES   </span>
+<span class="co">#&gt; 11 BREAST (BULK TISSUE) | ARCHS4                                   ARCHS4    </span>
+<span class="co">#&gt; 12 RENAL CORTEX | ARCHS4                                           ARCHS4    </span>
+<span class="co">#&gt; 13 Cancer stem cell (Glioblastoma) | Brain | Human | CellMarker    CellMarker</span>
+<span class="co">#&gt; 14 LUNG (BULK TISSUE) | ARCHS4                                     ARCHS4    </span>
+<span class="co">#&gt; 15 HAIR FOLLICLE | ARCHS4                                          ARCHS4    </span>
+<span class="co">#&gt; # … with 7 more variables: species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;,</span>
+<span class="co">#&gt; #   n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;, fdr &lt;dbl&gt;</span></code></pre></div>
 <p>The top results are again more diverse than for B-cells, but the appropriate populations are listed.</p>
 </div>
 <div id="enrichment-of-markers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#enrichment-of-markers" class="anchor"></a>Enrichment of markers</h3>
-<p>Running enrichment of cell type signatures across all genes avoids the problem of selecting a specific number of cluster markers.</p>
-<p>Calculate the average expression levels for each cell type, convert to a matrix, and log-transform.</p>
+<p>Rather than comparing marker genes, it’s also possible to run enrichment of cell type signatures across all genes. This avoids having to define an optimal set of markers.</p>
+<p>Calculate the average expression levels for each cell type.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/AverageExpression.html">AverageExpression</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span>
 <span class="co">#&gt; Finished averaging RNA for cluster Adipo-CAR</span>
@@ -305,11 +307,13 @@
 <span class="co">#&gt; Finished averaging RNA for cluster small-pre-B</span>
 <span class="co">#&gt; Finished averaging RNA for cluster Smooth-muscle</span>
 <span class="co">#&gt; Finished averaging RNA for cluster Stromal-fibro</span>
-<span class="co">#&gt; Finished averaging RNA for cluster T-cells</span>
-<span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">$</span><span class="va">RNA</span><span class="op">)</span>
+<span class="co">#&gt; Finished averaging RNA for cluster T-cells</span></code></pre></div>
+<p>Convert to a regular matrix and log-transform.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">$</span><span class="va">RNA</span><span class="op">)</span>
 <span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log1p</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">)</span></code></pre></div>
 <p>Preview the expression matrix.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">avg_exp_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt;         Adipo-CAR Arteriolar-ECs Arteriolar-fibro    B-cell Chondrocytes</span>
 <span class="co">#&gt; Sox17   0.0000000      2.5800606        0.0000000 0.0000000   0.00000000</span>
@@ -318,56 +322,78 @@
 <span class="co">#&gt; Gm37988 0.0000000      0.0000000        0.0000000 0.0000000   0.00000000</span>
 <span class="co">#&gt; Tcea1   0.5620502      0.7077588        0.6135480 0.7798060   0.52126901</span></code></pre></div>
 <p>Run enrichment of all cell type signatures across all clusters.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">avg_exp_mat</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></code></pre></div>
 <p>Check the most enriched cell types for the B-cell cluster.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"B-cell"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    cluster celltype_full  score score_rank db     species organ celltype n_genes</span>
-<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;int&gt;</span>
-<span class="co">#&gt;  1 B-cell  naive B-cells… 0.965          1 xCell  Human   ""    naive B…       5</span>
-<span class="co">#&gt;  2 B-cell  naive B-cells… 0.965          2 xCell  Human   ""    naive B…       5</span>
-<span class="co">#&gt;  3 B-cell  Follicular B … 0.921          3 CellM… Mouse   "Lym… Follicu…       5</span>
-<span class="co">#&gt;  4 B-cell  B-cells_HPCA_… 0.897          4 xCell  Human   ""    B-cells…       6</span>
-<span class="co">#&gt;  5 B-cell  Memory B cell… 0.887          5 CellM… Mouse   "Lym… Memory …       6</span>
-<span class="co">#&gt;  6 B-cell  Class-switche… 0.874          6 xCell  Human   ""    Class-s…      10</span>
-<span class="co">#&gt;  7 B-cell  Class-switche… 0.874          7 xCell  Human   ""    Class-s…      10</span>
-<span class="co">#&gt;  8 B-cell  Class-switche… 0.874          8 xCell  Human   ""    Class-s…      10</span>
-<span class="co">#&gt;  9 B-cell  DURANTE_ADULT… 0.870          9 MSigDB Human   ""    DURANTE…      24</span>
-<span class="co">#&gt; 10 B-cell  Memory B-cell… 0.858         10 xCell  Human   ""    Memory …      15</span></code></pre></div>
-<p>Check the most enriched cell types for the Adipo-CAR cluster.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Adipo-CAR"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    cluster  celltype_full  score score_rank db    species organ celltype n_genes</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;int&gt;</span>
-<span class="co">#&gt;  1 Adipo-C… Colorectal st… 0.677          1 Cell… Human   "Col… Colorec…       5</span>
-<span class="co">#&gt;  2 Adipo-C… Fibroblast | … 0.646          2 Cell… Mouse   ""    Fibrobl…       8</span>
-<span class="co">#&gt;  3 Adipo-C… Cardiac proge… 0.640          3 Cell… Human   "Hea… Cardiac…       7</span>
-<span class="co">#&gt;  4 Adipo-C… Rheaume et al… 0.640          4 Cell… Mouse   "Ret… Rheaume…       8</span>
-<span class="co">#&gt;  5 Adipo-C… Erythroid cel… 0.637          5 TISS… Human   ""    Erythro…       5</span>
-<span class="co">#&gt;  6 Adipo-C… IMGN_Fi_MTS15… 0.630          6 SaVa… Mouse   ""    IMGN_Fi…      50</span>
-<span class="co">#&gt;  7 Adipo-C… IMGN_FRC_MLN … 0.629          7 SaVa… Mouse   ""    IMGN_FR…      49</span>
-<span class="co">#&gt;  8 Adipo-C… Intestinal st… 0.623          8 Cell… Mouse   "Int… Intesti…       6</span>
-<span class="co">#&gt;  9 Adipo-C… IMGN_FRC_SLN … 0.622          9 SaVa… Mouse   ""    IMGN_FR…      49</span>
-<span class="co">#&gt; 10 Adipo-C… Interneuron-s… 0.614         10 Cell… Mouse   "Bra… Interne…      11</span></code></pre></div>
-<p>Check the most enriched cell types for the Osteoblasts cluster.</p>
+<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"B-cell"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    cluster celltype_full                                                   </span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                                                           </span>
+<span class="co">#&gt;  1 B-cell  naive B-cells_BLUEPRINT_1 | Human | xCell                       </span>
+<span class="co">#&gt;  2 B-cell  naive B-cells_BLUEPRINT_3 | Human | xCell                       </span>
+<span class="co">#&gt;  3 B-cell  Follicular B cell | Lymphoid tissue | Mouse | CellMarker        </span>
+<span class="co">#&gt;  4 B-cell  B-cells_HPCA_3 | Human | xCell                                  </span>
+<span class="co">#&gt;  5 B-cell  Memory B cell | Lymphoid tissue | Mouse | CellMarker            </span>
+<span class="co">#&gt;  6 B-cell  Class-switched memory B-cells_NOVERSHTERN_1 | Human | xCell     </span>
+<span class="co">#&gt;  7 B-cell  Class-switched memory B-cells_NOVERSHTERN_2 | Human | xCell     </span>
+<span class="co">#&gt;  8 B-cell  Class-switched memory B-cells_NOVERSHTERN_3 | Human | xCell     </span>
+<span class="co">#&gt;  9 B-cell  DURANTE_ADULT_OLFACTORY_NEUROEPITHELIUM_B_CELLS | Human | MSigDB</span>
+<span class="co">#&gt; 10 B-cell  Memory B-cells_HPCA_2 | Human | xCell                           </span>
+<span class="co">#&gt; 11 B-cell  M1 macrophage | Lung | Mouse | CellMarker                       </span>
+<span class="co">#&gt; 12 B-cell  Leukocyte | Blood | Human | CellMarker                          </span>
+<span class="co">#&gt; 13 B-cell  IMGN_B_T2_Sp | Mouse | SaVanT                                   </span>
+<span class="co">#&gt; 14 B-cell  follicular_B-cells | SaVanT                                     </span>
+<span class="co">#&gt; 15 B-cell  Leukocyte | Human | CellMarker                                  </span>
+<span class="co">#&gt; # … with 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;,</span>
+<span class="co">#&gt; #   species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></code></pre></div>
+<p>As with the previous analysis, the top results are various B-cell populations.</p>
+<p>Check the most enriched cell types for the Adipo-CAR cluster.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Osteoblasts"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 10 x 9</span>
-<span class="co">#&gt;    cluster  celltype_full  score score_rank db    species organ celltype n_genes</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;int&gt;</span>
-<span class="co">#&gt;  1 Osteobl… Ito cell (hep… 0.807          1 Cell… Human   "Liv… Ito cel…       5</span>
-<span class="co">#&gt;  2 Osteobl… Intestinal st… 0.748          2 Cell… Mouse   "Int… Intesti…       6</span>
-<span class="co">#&gt;  3 Osteobl… Rheaume et al… 0.744          3 Cell… Mouse   "Ret… Rheaume…       8</span>
-<span class="co">#&gt;  4 Osteobl… Osteocyte | B… 0.738          4 Cell… Human   "Bon… Osteocy…       7</span>
-<span class="co">#&gt;  5 Osteobl… Cornea | Huma… 0.732          5 TISS… Human   ""    Cornea         7</span>
-<span class="co">#&gt;  6 Osteobl… Keratinocytes… 0.723          6 xCell Human   ""    Keratin…       7</span>
-<span class="co">#&gt;  7 Osteobl… Radial glial … 0.713          7 Cell… Human   ""    Radial …       6</span>
-<span class="co">#&gt;  8 Osteobl… Rheaume et al… 0.709          8 Cell… Mouse   "Ret… Rheaume…       7</span>
-<span class="co">#&gt;  9 Osteobl… Sebocytes_FAN… 0.687          9 xCell Human   ""    Sebocyt…       5</span>
-<span class="co">#&gt; 10 Osteobl… Melanocytes_E… 0.668         10 xCell Human   ""    Melanoc…      12</span></code></pre></div>
+<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Adipo-CAR"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    cluster   celltype_full                                                  </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;                                                          </span>
+<span class="co">#&gt;  1 Adipo-CAR Colorectal stem cell | Colorectum | Human | CellMarker         </span>
+<span class="co">#&gt;  2 Adipo-CAR Fibroblast | Mouse | CellMarker                                </span>
+<span class="co">#&gt;  3 Adipo-CAR Cardiac progenitor cell | Heart | Human | CellMarker           </span>
+<span class="co">#&gt;  4 Adipo-CAR Rheaume et al.Nat Commun.16 | Retina | Mouse | CellMarker      </span>
+<span class="co">#&gt;  5 Adipo-CAR Erythroid cell | Human | TISSUES                               </span>
+<span class="co">#&gt;  6 Adipo-CAR IMGN_Fi_MTS15+_Th | Mouse | SaVanT                             </span>
+<span class="co">#&gt;  7 Adipo-CAR IMGN_FRC_MLN | Mouse | SaVanT                                  </span>
+<span class="co">#&gt;  8 Adipo-CAR Intestinal stem cell | Intestine | Mouse | CellMarker          </span>
+<span class="co">#&gt;  9 Adipo-CAR IMGN_FRC_SLN | Mouse | SaVanT                                  </span>
+<span class="co">#&gt; 10 Adipo-CAR Interneuron-selective cell | Brain | Mouse | CellMarker        </span>
+<span class="co">#&gt; 11 Adipo-CAR Smooth muscle cell | Brain | Mouse | CellMarker                </span>
+<span class="co">#&gt; 12 Adipo-CAR Glutaminergic neurons | Brain | Human | PanglaoDB              </span>
+<span class="co">#&gt; 13 Adipo-CAR Glutaminergic neurons | Brain | Mouse | PanglaoDB              </span>
+<span class="co">#&gt; 14 Adipo-CAR CUI_DEVELOPING_HEART_LEFT_ATRIAL_CARDIOMYOCYTE | Human | MSigDB</span>
+<span class="co">#&gt; 15 Adipo-CAR HPCA_Fibroblasts | Human | SaVanT                              </span>
+<span class="co">#&gt; # … with 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;,</span>
+<span class="co">#&gt; #   species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></code></pre></div>
+<p>Check the most enriched cell types for the Osteoblasts cluster.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">enrich_tbl</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Osteoblasts"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 15 x 9</span>
+<span class="co">#&gt;    cluster     celltype_full                                                </span>
+<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                                                        </span>
+<span class="co">#&gt;  1 Osteoblasts Ito cell (hepatic stellate cell) | Liver | Human | CellMarker</span>
+<span class="co">#&gt;  2 Osteoblasts Intestinal stem cell | Intestine | Mouse | CellMarker        </span>
+<span class="co">#&gt;  3 Osteoblasts Rheaume et al.Nat Commun.37 | Retina | Mouse | CellMarker    </span>
+<span class="co">#&gt;  4 Osteoblasts Osteocyte | Bone | Human | CellMarker                        </span>
+<span class="co">#&gt;  5 Osteoblasts Cornea | Human | TISSUES                                     </span>
+<span class="co">#&gt;  6 Osteoblasts Keratinocytes_ENCODE_1 | Human | xCell                       </span>
+<span class="co">#&gt;  7 Osteoblasts Radial glial cell | Human | CellMarker                       </span>
+<span class="co">#&gt;  8 Osteoblasts Rheaume et al.Nat Commun.34 | Retina | Mouse | CellMarker    </span>
+<span class="co">#&gt;  9 Osteoblasts Sebocytes_FANTOM_2 | Human | xCell                           </span>
+<span class="co">#&gt; 10 Osteoblasts Melanocytes_ENCODE_2 | Human | xCell                         </span>
+<span class="co">#&gt; 11 Osteoblasts Rheaume et al.Nat Commun.4 | Retina | Mouse | CellMarker     </span>
+<span class="co">#&gt; 12 Osteoblasts Follicular cells | Thyroid | Human | PanglaoDB               </span>
+<span class="co">#&gt; 13 Osteoblasts Follicular cells | Thyroid | Mouse | PanglaoDB               </span>
+<span class="co">#&gt; 14 Osteoblasts osteoblast_day14 | SaVanT                                    </span>
+<span class="co">#&gt; 15 Osteoblasts Lee et al.Cell.E | Lung | Mouse | CellMarker                 </span>
+<span class="co">#&gt; # … with 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;,</span>
+<span class="co">#&gt; #   species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></code></pre></div>
 </div>
 </div>
   </div>
