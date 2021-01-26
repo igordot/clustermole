@@ -23,9 +23,9 @@ Perform enrichment of cell type signatures based on the full gene expression mat
 # my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
 }
 \references{
-Barbie, D., Tamayo, P., Boehm, J. et al. Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. \emph{Nature} 462, 108–112 (2009). \url{https://doi.org/10.1038/nature08460}
+Barbie, D., Tamayo, P., Boehm, J. et al. Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. \emph{Nature} 462, 108–112 (2009). \doi{10.1038/nature08460}
 
-Hänzelmann, S., Castelo, R. & Guinney, J. GSVA: Gene set variation analysis for microarray and RNA-Seq data. \emph{BMC Bioinformatics} 14, 7 (2013). \url{https://doi.org/10.1186/1471-2105-14-7}
+Hänzelmann, S., Castelo, R. & Guinney, J. GSVA: Gene set variation analysis for microarray and RNA-Seq data. \emph{BMC Bioinformatics} 14, 7 (2013). \doi{10.1186/1471-2105-14-7}
 
-Foroutan, M., Bhuva, D.D., Lyu, R. et al. Single sample scoring of molecular phenotypes. \emph{BMC Bioinformatics} 19, 404 (2018). \url{https://doi.org/10.1186/s12859-018-2435-4}
+Foroutan, M., Bhuva, D.D., Lyu, R. et al. Single sample scoring of molecular phenotypes. \emph{BMC Bioinformatics} 19, 404 (2018). \doi{10.1186/s12859-018-2435-4}
 }

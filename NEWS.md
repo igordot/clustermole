@@ -1,4 +1,4 @@
-# clustermole (development version)
+# clustermole 1.1.0
 
 * Added singscore enrichment method.
 * Added combined enrichment method.

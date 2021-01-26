@@ -19,7 +19,7 @@ The clustermole package provides three primary features:
 * cell type prediction based on marker genes
 * cell type prediction based on the full expression matrix
 
-Check the [documentation website](https://igordot.github.io/clustermole) for more information.
+Check the [documentation website](https://igordot.github.io/clustermole/) for more information.
 
 ---
 
