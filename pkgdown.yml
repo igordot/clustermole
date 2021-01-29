@@ -5,8 +5,8 @@ articles:
   clustermole-intro: clustermole-intro.html
   db: db.html
   example-bm-seurat: example-bm-seurat.html
-last_built: 2021-01-27T04:06Z
+last_built: 2021-01-29T21:12Z
 urls:
-  reference: https://igordot.github.io/clustermole/reference
-  article: https://igordot.github.io/clustermole/articles
+  reference: https://igordot.github.io/clustermole//reference
+  article: https://igordot.github.io/clustermole//articles
 
