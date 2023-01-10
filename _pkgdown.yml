@@ -3,10 +3,6 @@ url: https://igordot.github.io/clustermole/
 template:
   bootstrap: 5
   bootswatch: zephyr
-  opengraph:
-    twitter:
-      creator: "@bioigor"
-      card: summary_large_image
   includes:
     before_body: |
        <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -18,8 +14,13 @@ template:
 
          gtag('config', 'G-WW0CJR3Z9Z');
        </script>
+  opengraph:
+    twitter:
+      creator: "@bioigor"
+      card: summary_large_image
 
 navbar:
+  bg: light
   structure:
     left: []
     right: [home, intro, example, db, reference, news, github]
