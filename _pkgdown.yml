@@ -20,16 +20,6 @@ template:
        </script>
 
 navbar:
-  bg: light
-  structure:
-    left: []
-    right: [intro, reference, news, github]
-  components:
-    intro:
-      text: Get started
-      href: articles/babelgene-intro.html
-
-navbar:
   structure:
     left: []
     right: [home, intro, example, db, reference, news, github]
