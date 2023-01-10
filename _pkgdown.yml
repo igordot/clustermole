@@ -1,13 +1,33 @@
 url: https://igordot.github.io/clustermole/
 
 template:
-  params:
-    bootswatch: readable
-    ganalytics: UA-130263433-2
+  bootstrap: 5
+  bootswatch: zephyr
   opengraph:
     twitter:
       creator: "@bioigor"
       card: summary_large_image
+  includes:
+    before_body: |
+       <!-- Global site tag (gtag.js) - Google Analytics -->
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-WW0CJR3Z9Z"></script>
+       <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-WW0CJR3Z9Z');
+       </script>
+
+navbar:
+  bg: light
+  structure:
+    left: []
+    right: [intro, reference, news, github]
+  components:
+    intro:
+      text: Get started
+      href: articles/babelgene-intro.html
 
 navbar:
   structure:
@@ -25,6 +45,3 @@ navbar:
     db:
       text: Database Stats
       href: articles/db.html
-
-home:
-  strip_header: true
