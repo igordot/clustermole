@@ -1,9 +1,10 @@
 # clustermole: exploratory scRNA-seq cell type analysis
 
+<!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/clustermole)](https://cran.r-project.org/package=clustermole)
-[![R build status](https://github.com/igordot/clustermole/workflows/R-CMD-check/badge.svg)](https://github.com/igordot/clustermole/actions)
-[![Travis Build Status](https://travis-ci.com/igordot/clustermole.svg?branch=master)](https://travis-ci.com/igordot/clustermole)
+[![R-CMD-check](https://github.com/igordot/clustermole/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/igordot/clustermole/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/igordot/clustermole/branch/master/graph/badge.svg)](https://codecov.io/gh/igordot/clustermole)
+<!-- badges: end -->
 
 ![clustermole-book](https://user-images.githubusercontent.com/6363505/72761156-12414280-3ba9-11ea-87de-57ff6cd690bb.png)
 
