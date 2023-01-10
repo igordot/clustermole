@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="clustermole">
 <title>Introduction to clustermole • clustermole</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/readable/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to clustermole">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to clustermole">
 <meta property="og:description" content="clustermole">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@bioigor">
@@ -19,173 +19,194 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-130263433-2"></script><script>
+<![endif]-->
+</head>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WW0CJR3Z9Z"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-130263433-2');
-</script>
-</head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">clustermole</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
-      </span>
-    </div>
+  gtag('config', 'G-WW0CJR3Z9Z');
+</script><nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">clustermole</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav"></ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../articles/clustermole-intro.html">Get Started</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto"></ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/clustermole-intro.html">Get Started</a>
 </li>
-<li>
-  <a href="../articles/example-bm-seurat.html">Usage Example</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/example-bm-seurat.html">Usage Example</a>
 </li>
-<li>
-  <a href="../articles/db.html">Database Stats</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/db.html">Database Stats</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<li>
-  <a href="https://github.com/igordot/clustermole/">
-    <span class="fab fa-github fa-lg"></span>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/igordot/clustermole/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><script src="clustermole-intro_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction to clustermole</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Introduction to clustermole</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/igordot/clustermole/blob/master/vignettes/clustermole-intro.Rmd"><code>vignettes/clustermole-intro.Rmd</code></a></small>
-      <div class="hidden name"><code>clustermole-intro.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/igordot/clustermole/blob/HEAD/vignettes/clustermole-intro.Rmd" class="external-link"><code>vignettes/clustermole-intro.Rmd</code></a></small>
+      <div class="d-none name"><code>clustermole-intro.Rmd</code></div>
     </div>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>A typical computational pipeline to process single-cell RNA sequencing (scRNA-seq) data includes clustering of cells as one of the steps. Assignment of cell type labels to those clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>A typical computational pipeline to process single-cell RNA
+sequencing (scRNA-seq) data includes clustering of cells as one of the
+steps. Assignment of cell type labels to those clusters is often a
+time-consuming process that involves manual inspection of the cluster
+marker genes complemented with a detailed literature search. This is
+especially challenging when unexpected or poorly described populations
+are present. The clustermole R package provides methods to query
+thousands of human and mouse cell identity markers sourced from a
+variety of databases.</p>
 <p>The clustermole package provides three primary features:</p>
 <ul>
-<li>a database of markers for thousands of cell types (<code>clustermole_markers</code>)</li>
-<li>cell type prediction based on marker genes (<code>clustermole_overlaps</code>)</li>
-<li>cell type prediction based on the full expression matrix (<code>clustermole_enrichment</code>)</li>
+<li>a database of markers for thousands of cell types
+(<code>clustermole_markers</code>)</li>
+<li>cell type prediction based on marker genes
+(<code>clustermole_overlaps</code>)</li>
+<li>cell type prediction based on the full expression matrix
+(<code>clustermole_enrichment</code>)</li>
 </ul>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>You can install clustermole from <a href="https://cran.r-project.org/package=clustermole">CRAN</a>.</p>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>You can install clustermole from <a href="https://cran.r-project.org/package=clustermole" class="external-link">CRAN</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span></span></code></pre></div>
 <p>Load clustermole.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></code></pre></div>
-<div id="retrieve-cell-type-markers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieve-cell-type-markers" class="anchor"></a>Retrieve cell type markers</h3>
-<p>You can use clustermole as a simple database and get a data frame of all cell type markers.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="retrieve-cell-type-markers">Retrieve cell type markers<a class="anchor" aria-label="anchor" href="#retrieve-cell-type-markers"></a>
+</h3>
+<p>You can use clustermole as a simple database and get a data frame of
+all cell type markers.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span>
-<span class="va">markers</span>
-<span class="co">#&gt; # A tibble: 422,292 x 8</span>
-<span class="co">#&gt;    celltype_full      db     species organ  celltype   n_genes gene_origi… gene </span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;</span>
-<span class="co">#&gt;  1 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACCSL       ACCSL</span>
-<span class="co">#&gt;  2 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ACVR1B      ACVR…</span>
-<span class="co">#&gt;  3 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 ASF1B       ASF1B</span>
-<span class="co">#&gt;  4 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BCL2L10     BCL2…</span>
-<span class="co">#&gt;  5 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 BLCAP       BLCAP</span>
-<span class="co">#&gt;  6 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CASC3       CASC3</span>
-<span class="co">#&gt;  7 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CLEC10A     CLEC…</span>
-<span class="co">#&gt;  8 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 CNOT11      CNOT…</span>
-<span class="co">#&gt;  9 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DCLK2       DCLK2</span>
-<span class="co">#&gt; 10 1-cell stage cell… CellM… Human   Embryo 1-cell st…      32 DHCR7       DHCR7</span>
-<span class="co">#&gt; # … with 422,282 more rows</span></code></pre></div>
-<p>Each row contains a gene and a cell type associated with it. The <code>gene</code> column is the gene symbol and the <code>celltype_full</code> column contains the full cell type string, including the species and the original database. Human or mouse versions can be retrieved.</p>
-<p>Some tools require input as a list. To convert the markers from a data frame to a list format, you can use <code>gene</code> as the values and <code>celltype_full</code> as the grouping variable.</p>
+<code class="sourceCode R"><span><span class="va">markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></span>
+<span><span class="va">markers</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 422,292 × 8</span></span></span>
+<span><span class="co">#&gt;    celltype_full         db    species organ celltype n_genes gene_origi…¹ gene </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ACCSL        ACCSL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ACVR1B       ACVR…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ASF1B        ASF1B</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 BCL2L10      BCL2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 BLCAP        BLCAP</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CASC3        CASC3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CLEC10A      CLEC…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CNOT11       CNOT…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 DCLK2        DCLK2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 DHCR7        DHCR7</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 422,282 more rows, and abbreviated variable name ¹​gene_original</span></span></span></code></pre></div>
+<p>Each row contains a gene and a cell type associated with it. The
+<code>gene</code> column is the gene symbol and the
+<code>celltype_full</code> column contains the full cell type string,
+including the species and the original database. Human or mouse versions
+can be retrieved.</p>
+<p>Some tools require input as a list. To convert the markers from a
+data frame to a list format, you can use <code>gene</code> as the values
+and <code>celltype_full</code> as the grouping variable.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">markers_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">gene</span>, f <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">markers_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">gene</span>, f <span class="op">=</span> <span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span></span></code></pre></div>
 <p>Check the number of cell types in the database.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 3039</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3039</span></span></code></pre></div>
 <p>Check the cell type source databases.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">db</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "ARCHS4"     "CellMarker" "MSigDB"     "PanglaoDB"  "SaVanT"    </span>
-<span class="co">#&gt; [6] "TISSUES"    "xCell"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">db</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "ARCHS4"     "CellMarker" "MSigDB"     "PanglaoDB"  "SaVanT"    </span></span>
+<span><span class="co">#&gt; [6] "TISSUES"    "xCell"</span></span></code></pre></div>
 </div>
-<div id="cell-types-based-on-marker-genes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cell-types-based-on-marker-genes" class="anchor"></a>Cell types based on marker genes</h3>
-<p>If you have a character vector of genes, such as cluster markers, you can compare them to known cell type markers to see if they overlap any of the known cell type markers (overrepresentation analysis).</p>
+<div class="section level3">
+<h3 id="cell-types-based-on-marker-genes">Cell types based on marker genes<a class="anchor" aria-label="anchor" href="#cell-types-based-on-marker-genes"></a>
+</h3>
+<p>If you have a character vector of genes, such as cluster markers, you
+can compare them to known cell type markers to see if they overlap any
+of the known cell type markers (overrepresentation analysis).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_overlaps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes_vec</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_overlaps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">my_genes_vec</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="cell-types-based-on-expression-matrix" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cell-types-based-on-expression-matrix" class="anchor"></a>Cell types based on expression matrix</h3>
-<p>If you have expression values, such as average expression across clusters, you can perform cell type enrichment based on a given gene expression matrix (log-transformed CPM/TPM/FPKM values). The matrix should have genes as rows and clusters/samples as columns. The underlying enrichment method can be changed using the <code>method</code> parameter.</p>
+<div class="section level3">
+<h3 id="cell-types-based-on-expression-matrix">Cell types based on expression matrix<a class="anchor" aria-label="anchor" href="#cell-types-based-on-expression-matrix"></a>
+</h3>
+<p>If you have expression values, such as average expression across
+clusters, you can perform cell type enrichment based on a given gene
+expression matrix (log-transformed CPM/TPM/FPKM values). The matrix
+should have genes as rows and clusters/samples as columns. The
+underlying enrichment method can be changed using the
+<code>method</code> parameter.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_enrichment</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">my_expr_mat</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_enrichment</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">my_expr_mat</span>, species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Igor Dolgalev.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Igor Dolgalev.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

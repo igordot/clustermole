@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://igordot.github.io/clustermole//index.html</loc>
+    <loc>https://igordot.github.io/clustermole/404.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//reference/clustermole_enrichment.html</loc>
+    <loc>https://igordot.github.io/clustermole/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//reference/clustermole_markers.html</loc>
+    <loc>https://igordot.github.io/clustermole/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//reference/clustermole_overlaps.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/clustermole-intro.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//reference/pipe.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/db.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//reference/read_gmt.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/example-bm-seurat.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//articles/clustermole-intro.html</loc>
+    <loc>https://igordot.github.io/clustermole/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//articles/db.html</loc>
+    <loc>https://igordot.github.io/clustermole/authors.html</loc>
   </url>
   <url>
-    <loc>https://igordot.github.io/clustermole//articles/example-bm-seurat.html</loc>
+    <loc>https://igordot.github.io/clustermole/index.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_enrichment.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_markers.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/clustermole_overlaps.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://igordot.github.io/clustermole/reference/read_gmt.html</loc>
   </url>
 </urlset>
