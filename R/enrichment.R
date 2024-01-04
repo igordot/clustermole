@@ -67,26 +67,22 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
 
 #' @import dplyr
 #' @importFrom stats median
-#' @importFrom GSVA gsva
+#' @importFrom GSVA gsva gsvaParam ssgseaParam
 #' @importFrom GSEABase GeneSet GeneSetCollection
 #' @importFrom singscore rankGenes multiScore
 get_scores <- function(expr_mat, markers_list, method = c("gsva", "ssgsea", "singscore", "all")) {
   method <- match.arg(method)
 
   if (method == "gsva" || method == "all") {
-    scores_mat <- GSVA::gsva(
-      expr = expr_mat, gset.idx.list = markers_list,
-      method = "gsva", kcdf = "Gaussian", parallel.sz = 1, verbose = FALSE
-    )
+    gsva_param <- GSVA::gsvaParam(exprData = expr_mat, geneSets = markers_list, kcdf = "Gaussian")
+    scores_mat <- GSVA::gsva(expr = gsva_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
     scores_gsva_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_gsva = "score_rank")
   }
 
   if (method == "ssgsea" || method == "all") {
-    scores_mat <- GSVA::gsva(
-      expr = expr_mat, gset.idx.list = markers_list,
-      method = "ssgsea", kcdf = "Gaussian", parallel.sz = 1, verbose = FALSE
-    )
+    ssgsea_param <- GSVA::ssgseaParam(exprData = expr_mat, geneSets = markers_list)
+    scores_mat <- GSVA::gsva(expr = ssgsea_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
     scores_ssgsea_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_ssgsea = "score_rank")
   }

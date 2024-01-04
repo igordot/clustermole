@@ -12,11 +12,11 @@ License: MIT + file LICENSE
 URL: https://igordot.github.io/clustermole/
 BugReports: https://github.com/igordot/clustermole/issues
 Depends: 
-    R (>= 4.1)
+    R (>= 4.3)
 Imports: 
     dplyr,
     GSEABase,
-    GSVA (>= 1.26.0),
+    GSVA (>= 1.50.0),
     magrittr,
     methods,
     rlang,
