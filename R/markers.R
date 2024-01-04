@@ -6,7 +6,6 @@
 #'
 #' @return A data frame of cell type markers (one gene per row).
 #'
-#' @import dplyr
 #' @export
 #'
 #' @examples
@@ -16,12 +15,10 @@ clustermole_markers <- function(species = c("hs", "mm")) {
   species <- match.arg(species)
   m_tbl <- clustermole_markers_tbl
   if (species == "hs") {
-    m_tbl %>%
-      dplyr::select(-.data$gene_mm) %>%
-      dplyr::rename(gene = .data$gene_hs)
+    names(m_tbl)[names(m_tbl) == "gene_hs"] <- "gene"
+    m_tbl[, !(names(m_tbl) %in% "gene_mm")]
   } else if (species == "mm") {
-    m_tbl %>%
-      dplyr::select(-.data$gene_hs) %>%
-      dplyr::rename(gene = .data$gene_mm)
+    names(m_tbl)[names(m_tbl) == "gene_mm"] <- "gene"
+    m_tbl[, !(names(m_tbl) %in% "gene_hs")]
   }
 }

@@ -20,6 +20,6 @@ read_gmt <- function(file, geneset_label = "celltype", gene_label = "gene") {
   gmt_list <- lapply(gmt_split, tail, -2)
   names(gmt_list) <- sapply(gmt_split, head, 1)
   gmt_df <- tibble::enframe(gmt_list, name = geneset_label, value = gene_label)
-  gmt_df <- tidyr::unnest(gmt_df, gene_label)
+  gmt_df <- tidyr::unnest(gmt_df, all_of(gene_label))
   gmt_df
 }
