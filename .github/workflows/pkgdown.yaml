@@ -19,6 +19,8 @@ jobs:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
 
@@ -30,7 +32,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          pak-version: devel
           extra-packages: any::Seurat, any::ggsci, any::pkgdown, local::.
           needs: website
 
