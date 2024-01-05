@@ -1,4 +1,3 @@
-
 test_that("clustermole_markers() default params", {
   markers_tbl <- clustermole_markers()
   expect_s3_class(markers_tbl, "tbl_df")

@@ -1,4 +1,3 @@
-
 # markers table
 markers_hs_tbl <- clustermole_markers(species = "hs")
 markers_mm_tbl <- clustermole_markers(species = "mm")
