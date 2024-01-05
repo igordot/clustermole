@@ -81,14 +81,14 @@
 </h2>
 <p>Assignment of cell type labels to scRNA-seq clusters is particularly
 difficult when unexpected or poorly described populations are present.
-You can often trust various fully automated algorithms for cell type
-annotation, but sometimes a more exploratory analysis is helpful in
-understanding the captured cells. This is an example of exploratory cell
-type analysis using clustermole, starting with a Seurat object.</p>
-<p>The dataset used here contains hematopoietic and stromal bone marrow
-populations (<a href="https://doi.org/10.1038/s41556-019-0439-6" class="external-link">Baccin
-et al.</a>). This experiment was selected because it includes both
-well-known as well as rare cell types.</p>
+There are fully automated algorithms for cell type annotation, but
+sometimes a more in-depth analysis is helpful in understanding the
+captured cells. This is an example of exploratory cell type analysis
+using clustermole, starting with a Seurat object.</p>
+<p>The dataset used in this example contains hematopoietic and stromal
+bone marrow populations (<a href="https://doi.org/10.1038/s41556-019-0439-6" class="external-link">Baccin et al.</a>).
+This experiment was selected because it includes both well-known as well
+as rare cell types.</p>
 </div>
 <div class="section level2">
 <h2 id="load-data">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a>
@@ -97,9 +97,11 @@ well-known as well as rare cell types.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nanx.me/ggsci/" class="external-link">ggsci</a></span><span class="op">)</span></span></code></pre></div>
-<p>Load the dataset, which is stored as a Seurat object. It was subset
-for this example to reduce the size and speed up processing.</p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nanx.me/ggsci/" class="external-link">ggsci</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></span></code></pre></div>
+<p>Download the dataset, which is stored as a Seurat object. It was
+subset for this tutorial to reduce the size and speed up processing.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">so</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="st">"https://osf.io/cvnqb/download"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">so</span></span>
@@ -112,24 +114,19 @@ for this example to reduce the size and speed up processing.</p>
 original publication (<a href="https://www.nature.com/articles/s41556-019-0439-6/figures/1" class="external-link">original
 figure</a>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">so</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"experiment"</span>, cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">so</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"experiment"</span>, shuffle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span>, legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">0.7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://nanx.me/ggsci/reference/scale_nejm.html" class="external-link">scale_color_nejm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example-bm-seurat_files/figure-html/tsne-exp-1.png" width="700"></p>
+<p><img src="example-bm-seurat_files/figure-html/tsne-experiment-1.png" width="700"></p>
 <p>Check the cell type labels on a tSNE visualization.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">so</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"celltype"</span>, cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">so</span>, reduction <span class="op">=</span> <span class="st">"tsne"</span>, group.by <span class="op">=</span> <span class="st">"celltype"</span>, shuffle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span>, legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">rel</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://nanx.me/ggsci/reference/scale_igv.html" class="external-link">scale_color_igv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="example-bm-seurat_files/figure-html/tsne-celltype-1.png" width="700"></p>
-</div>
-<div class="section level2">
-<h2 id="cell-type-annotation">Cell type annotation<a class="anchor" aria-label="anchor" href="#cell-type-annotation"></a>
-</h2>
-<p>Since this is a clustermole tutorial, load clustermole.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></span></code></pre></div>
 <p>Set the Seurat object cell identities to the predefined cell type
-labels and check what they are.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+labels for the next steps.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SeuratObject/man/Idents.html" class="external-link">Idents</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"celltype"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SeuratObject/man/Idents.html" class="external-link">Idents</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "Adipo-CAR"        "Arteriolar-ECs"   "Arteriolar-fibro" "B-cell"          </span></span>
@@ -140,15 +137,16 @@ labels and check what they are.</p>
 <span><span class="co">#&gt; [21] "Neutrophils"      "Ng2-MSCs"         "NK-cells"         "Osteo-CAR"       </span></span>
 <span><span class="co">#&gt; [25] "Osteoblasts"      "pro-B"            "Schwann-cells"    "Sinusoidal-ECs"  </span></span>
 <span><span class="co">#&gt; [29] "small-pre-B"      "Smooth-muscle"    "Stromal-fibro"    "T-cells"</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="marker-gene-overlaps">Marker gene overlaps<a class="anchor" aria-label="anchor" href="#marker-gene-overlaps"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="marker-gene-overlaps">Marker gene overlaps<a class="anchor" aria-label="anchor" href="#marker-gene-overlaps"></a>
+</h2>
 <p>One type of analysis facilitated by clustermole is based on
 comparison of marker genes.</p>
-<p>We can start with the B-cells, which is well-defined population used
-in many studies.</p>
+<p>We can start with the B-cells, which is a well-defined population
+used in many studies.</p>
 <p>Find markers for the B-cell cluster.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"B-cell"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; For a (much!) faster implementation of the Wilcoxon Rank Sum Test,</span></span>
 <span><span class="co">#&gt; (default method for FindMarkers) please install the presto package</span></span>
@@ -163,7 +161,7 @@ in many studies.</p>
 <span><span class="co">#&gt; [1] 1631</span></span></code></pre></div>
 <p>This gives us a data frame with hundreds of genes. We can subset to
 just the best 25 markers.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b_markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">b_markers_df</span><span class="op">)</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">b_markers</span></span>
 <span><span class="co">#&gt;  [1] "Ms4a1"         "Fcmr"          "Cd74"          "Ly6d"         </span></span>
@@ -175,11 +173,11 @@ just the best 25 markers.</p>
 <span><span class="co">#&gt; [25] "H2-Ab1"</span></span></code></pre></div>
 <p>Check the overlap of B-cell markers with all clustermole cell type
 signatures.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">b_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></span></code></pre></div>
 <p>Check the top scoring cell types corresponding to the B-cell cluster
 markers.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    celltype_full                                                    db        </span></span>
@@ -206,7 +204,7 @@ are various B-cell populations. We can repeat this process for other
 populations that are more obscure.</p>
 <p>Find markers for the Adipo-CAR cluster. These are Cxcl12-abundant
 reticular (CAR) cells expressing adipocyte-lineage genes.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acar_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"Adipo-CAR"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">acar_markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">acar_markers_df</span><span class="op">)</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">acar_markers</span></span>
@@ -219,10 +217,10 @@ reticular (CAR) cells expressing adipocyte-lineage genes.</p>
 <span><span class="co">#&gt; [25] "Wisp2"</span></span></code></pre></div>
 <p>Check the overlap of Adipo-CAR markers with all cell type
 signatures.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">acar_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></span></code></pre></div>
 <p>Check the top scoring cell types for the Adipo-CAR cluster.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    celltype_full                                                  db        </span></span>
@@ -247,7 +245,7 @@ signatures.</p>
 <p>The top results are more diverse than for B-cells, but related
 populations are among the top candidates.</p>
 <p>Find markers for the Osteoblasts cluster.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">o_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"Osteoblasts"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">o_markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">o_markers_df</span><span class="op">)</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">o_markers</span></span>
@@ -260,10 +258,10 @@ populations are among the top candidates.</p>
 <span><span class="co">#&gt; [25] "Satb2"</span></span></code></pre></div>
 <p>Check overlap of Osteoblasts markers with all cell type
 signatures.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlaps_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_overlaps.html">clustermole_overlaps</a></span><span class="op">(</span>genes <span class="op">=</span> <span class="va">o_markers</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></span></code></pre></div>
 <p>Check the top scoring cell types for the Osteoblasts cluster.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">overlaps_tbl</span>, <span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    celltype_full                                                   db        </span></span>
@@ -288,23 +286,23 @@ signatures.</p>
 <p>The top results are again more diverse than for B-cells, but the
 appropriate populations are listed.</p>
 </div>
-<div class="section level3">
-<h3 id="enrichment-of-markers">Enrichment of markers<a class="anchor" aria-label="anchor" href="#enrichment-of-markers"></a>
-</h3>
+<div class="section level2">
+<h2 id="enrichment-of-markers">Enrichment of markers<a class="anchor" aria-label="anchor" href="#enrichment-of-markers"></a>
+</h2>
 <p>Rather than comparing marker genes, it’s also possible to run
 enrichment of cell type signatures across all genes. This avoids having
 to define an optimal set of markers.</p>
 <p>Calculate the average expression levels for each cell type.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/AverageExpression.html" class="external-link">AverageExpression</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span></span>
 <span><span class="co">#&gt; As of Seurat v5, we recommend using AggregateExpression to perform pseudo-bulk analysis.</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">This message is displayed once per session.</span></span></span></code></pre></div>
 <p>Convert to a regular matrix and log-transform.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">$</span><span class="va">RNA</span><span class="op">)</span></span>
 <span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log1p</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">)</span></span></code></pre></div>
 <p>Preview the expression matrix.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
 <span><span class="co">#&gt;         Adipo-CAR Arteriolar-ECs Arteriolar-fibro    B-cell Chondrocytes</span></span>
 <span><span class="co">#&gt; Sox17   0.0000000      2.5800606        0.0000000 0.0000000   0.00000000</span></span>
@@ -313,11 +311,13 @@ to define an optimal set of markers.</p>
 <span><span class="co">#&gt; Gm37988 0.0000000      0.0000000        0.0000000 0.0000000   0.00000000</span></span>
 <span><span class="co">#&gt; Tcea1   0.5620502      0.7077588        0.6135480 0.7798060   0.52126901</span></span></code></pre></div>
 <p>Run enrichment of all cell type signatures across all clusters.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">avg_exp_mat</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></span></code></pre></div>
 <p>Check the most enriched cell types for the B-cell cluster.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"B-cell"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"B-cell"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    cluster celltype_full                                                   </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           </span></span>
@@ -341,8 +341,10 @@ to define an optimal set of markers.</p>
 <p>As with the previous analysis, the top results are various B-cell
 populations.</p>
 <p>Check the most enriched cell types for the Adipo-CAR cluster.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Adipo-CAR"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Adipo-CAR"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    cluster   celltype_full                                                  </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          </span></span>
@@ -364,8 +366,10 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;, species &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
 <p>Check the most enriched cell types for the Osteoblasts cluster.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Osteoblasts"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cluster</span> <span class="op">==</span> <span class="st">"Osteoblasts"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 9</span></span></span>
 <span><span class="co">#&gt;    cluster     celltype_full                                                </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                        </span></span>
@@ -386,7 +390,6 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Osteoblasts Lee et al.Cell.E | Lung | Mouse | CellMarker                 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;, species &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
