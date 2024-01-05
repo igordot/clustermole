@@ -9,8 +9,8 @@ Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq) cluster
 This can be especially challenging when unexpected or poorly described populations are present.
 The clustermole R package provides methods to query cell identity markers sourced from a variety of databases.
 
-To learn more about clustermole, check the [overview of the features](articles/clustermole-intro.html) and an
-[example workflow using a Seurat object](articles/example-bm-seurat.html).
+To learn more about clustermole, check an [overview of the features](articles/clustermole-intro.html) and an
+[example workflow starting with a Seurat object](articles/example-bm-seurat.html).
 
 ---
 
