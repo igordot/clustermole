@@ -75,14 +75,14 @@ get_scores <- function(expr_mat, markers_list, method = c("gsva", "ssgsea", "sin
 
   if (method == "gsva" || method == "all") {
     gsva_param <- GSVA::gsvaParam(exprData = expr_mat, geneSets = markers_list, kcdf = "Gaussian")
-    scores_mat <- GSVA::gsva(expr = gsva_param, verbose = FALSE)
+    scores_mat <- GSVA::gsva(gsva_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
     scores_gsva_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_gsva = "score_rank")
   }
 
   if (method == "ssgsea" || method == "all") {
     ssgsea_param <- GSVA::ssgseaParam(exprData = expr_mat, geneSets = markers_list)
-    scores_mat <- GSVA::gsva(expr = ssgsea_param, verbose = FALSE)
+    scores_mat <- GSVA::gsva(ssgsea_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
     scores_ssgsea_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_ssgsea = "score_rank")
   }
