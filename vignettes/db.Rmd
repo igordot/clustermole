@@ -19,36 +19,46 @@ library(dplyr)
 You can use clustermole as a simple database and get a table of all cell type markers.
 
 ```{r markers}
-markers = clustermole_markers(species = "hs")
+markers <- clustermole_markers(species = "hs")
 markers
 ```
 
 Each row contains a gene and a cell type associated with it.
 The `gene` column is the gene symbol (human or mouse) and the `celltype_full` column contains the detailed cell type string including the species and the original database.
 
+## Number of cell types
+
 Check the total number of the available cell types.
 
 ```{r celltypes-length}
-markers %>% distinct(celltype_full) %>% nrow()
+length(unique(markers$celltype_full))
 ```
+
+## Number of cell types by source database
 
 Check the source databases and the number of cell types from each.
 
 ```{r count-db}
-markers %>% distinct(celltype_full, db) %>% count(db)
+distinct(markers, celltype_full, db) |> count(db)
 ```
+
+## Number of cell types by species
 
 Check the number of cell types per species (not available for all cell types).
 
 ```{r count-species}
-markers %>% distinct(celltype_full, species) %>% count(species)
+distinct(markers, celltype_full, species) |> count(species)
 ```
+
+## Number of cell types by organ
 
 Check the number of available cell types per organ (not available for all cell types).
 
 ```{r count-organ}
-markers %>% distinct(celltype_full, organ) %>% count(organ, sort = TRUE)
+distinct(markers, celltype_full, organ) |> count(organ, sort = TRUE)
 ```
+
+## Package version
 
 Check the package version since the database contents may change.
 

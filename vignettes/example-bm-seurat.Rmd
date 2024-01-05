@@ -14,10 +14,10 @@ options(pillar.min_chars = Inf)
 ## Introduction
 
 Assignment of cell type labels to scRNA-seq clusters is particularly difficult when unexpected or poorly described populations are present.
-You can often trust various fully automated algorithms for cell type annotation, but sometimes a more exploratory analysis is helpful in understanding the captured cells.
+There are fully automated algorithms for cell type annotation, but sometimes a more in-depth analysis is helpful in understanding the captured cells.
 This is an example of exploratory cell type analysis using clustermole, starting with a Seurat object.
 
-The dataset used here contains hematopoietic and stromal bone marrow populations ([Baccin et al.](https://doi.org/10.1038/s41556-019-0439-6)).
+The dataset used in this example contains hematopoietic and stromal bone marrow populations ([Baccin et al.](https://doi.org/10.1038/s41556-019-0439-6)).
 This experiment was selected because it includes both well-known as well as rare cell types.
 
 ## Load data
@@ -27,11 +27,13 @@ Load relevant packages.
 ```{r load-libraries, message=FALSE}
 library(Seurat)
 library(dplyr)
+library(ggplot2)
 library(ggsci)
+library(clustermole)
 ```
 
-Load the dataset, which is stored as a Seurat object.
-It was subset for this example to reduce the size and speed up processing.
+Download the dataset, which is stored as a Seurat object.
+It was subset for this tutorial to reduce the size and speed up processing.
 
 ```{r load-seurat-object, message=FALSE, warning=FALSE}
 so <- readRDS(url("https://osf.io/cvnqb/download"))
@@ -40,38 +42,32 @@ so
 
 Check the experiment labels on a tSNE visualization, as shown in the original publication ([original figure](https://www.nature.com/articles/s41556-019-0439-6/figures/1)).
 
-```{r tsne-exp}
-DimPlot(so, reduction = "tsne", group.by = "experiment", cells = sample(colnames(so))) +
+```{r tsne-experiment}
+DimPlot(so, reduction = "tsne", group.by = "experiment", shuffle = TRUE) +
+  theme(aspect.ratio = 1, legend.text = element_text(size = rel(0.7))) +
   scale_color_nejm()
 ```
 
 Check the cell type labels on a tSNE visualization.
 
 ```{r tsne-celltype}
-DimPlot(so, reduction = "tsne", group.by = "celltype", cells = sample(colnames(so))) +
+DimPlot(so, reduction = "tsne", group.by = "celltype", shuffle = TRUE) +
+  theme(aspect.ratio = 1, legend.text = element_text(size = rel(0.8))) +
   scale_color_igv()
 ```
 
-## Cell type annotation
-
-Since this is a clustermole tutorial, load clustermole.
-
-```{r load-clustermole, message=FALSE, warning=FALSE}
-library(clustermole)
-```
-
-Set the Seurat object cell identities to the predefined cell type labels and check what they are.
+Set the Seurat object cell identities to the predefined cell type labels for the next steps.
 
 ```{r set-idents}
 Idents(so) <- "celltype"
 levels(Idents(so))
 ```
 
-### Marker gene overlaps
+## Marker gene overlaps
 
 One type of analysis facilitated by clustermole is based on comparison of marker genes.
 
-We can start with the B-cells, which is well-defined population used in many studies.
+We can start with the B-cells, which is a well-defined population used in many studies.
 
 Find markers for the B-cell cluster.
 
@@ -148,7 +144,7 @@ head(overlaps_tbl, 15)
 
 The top results are again more diverse than for B-cells, but the appropriate populations are listed.
 
-### Enrichment of markers
+## Enrichment of markers
 
 Rather than comparing marker genes, it's also possible to run enrichment of cell type signatures across all genes.
 This avoids having to define an optimal set of markers.
@@ -181,7 +177,9 @@ enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
 Check the most enriched cell types for the B-cell cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "B-cell") %>% head(15)
+enrich_tbl %>%
+  filter(cluster == "B-cell") %>%
+  head(15)
 ```
 
 As with the previous analysis, the top results are various B-cell populations.
@@ -189,11 +187,15 @@ As with the previous analysis, the top results are various B-cell populations.
 Check the most enriched cell types for the Adipo-CAR cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "Adipo-CAR") %>% head(15)
+enrich_tbl %>%
+  filter(cluster == "Adipo-CAR") %>%
+  head(15)
 ```
 
 Check the most enriched cell types for the Osteoblasts cluster.
 
 ```{r}
-enrich_tbl %>% filter(cluster == "Osteoblasts") %>% head(15)
+enrich_tbl %>%
+  filter(cluster == "Osteoblasts") %>%
+  head(15)
 ```
