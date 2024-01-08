@@ -20,13 +20,13 @@ options(pillar.min_title_chars = 10)
 
 ## Overview
 
-The clustermole R package is designed to simplify the assignment of cell type labels to scRNA-seq clusters.
+The clustermole R package is designed to simplify the assignment of cell type labels to unknown cell populations, such as scRNA-seq clusters.
 It provides methods to query cell identity markers sourced from a variety of databases.
 The package includes three primary features:
 
 * a meta-database of human and mouse markers for thousands of cell types (`clustermole_markers()`)
-* cell type prediction based on marker genes (`clustermole_overlaps()`)
-* cell type prediction based on the full expression matrix (`clustermole_enrichment()`)
+* cell type prediction based on a set of marker genes (`clustermole_overlaps()`)
+* cell type prediction based on a table of expression values (`clustermole_enrichment()`)
 
 ## Setup
 
