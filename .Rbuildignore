@@ -2,8 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
-^\.travis\.yml$
-^codecov\.yml$
+^\.github$
 ^\.covrignore$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
@@ -11,6 +10,7 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^\.github$
+^index\.md$
 ^vignettes/db\.Rmd$
 ^vignettes/example-bm-seurat\.Rmd$
+^CRAN-SUBMISSION$

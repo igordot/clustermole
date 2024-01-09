@@ -1,3 +1,7 @@
+# clustermole 1.1.1
+
+* Updated internal GSVA and tidyselect function calls.
+
 # clustermole 1.1.0
 
 * Added singscore enrichment method.

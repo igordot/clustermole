@@ -1,12 +1,9 @@
 Type: Package
 Package: clustermole
 Title: Unbiased Single-Cell Transcriptomic Data Cell Type Identification
-Version: 1.1.0.9001
+Version: 1.1.1
 Authors@R: 
-    person(given = "Igor",
-           family = "Dolgalev",
-           role = c("aut", "cre"),
-           email = "igor.dolgalev@nyumc.org")
+    person("Igor", "Dolgalev", , "igor.dolgalev@nyumc.org", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-4451-126X"))
 Description: Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq) clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search. This is especially challenging when unexpected or poorly described populations are present. The clustermole R package provides methods to query thousands of human and mouse cell identity markers sourced from a variety of databases.
 License: MIT + file LICENSE
 URL: https://igordot.github.io/clustermole/
@@ -30,7 +27,8 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat
+VignetteBuilder: 
+    knitr
 biocViews:
 Encoding: UTF-8
 RoxygenNote: 7.2.3
-VignetteBuilder: knitr
