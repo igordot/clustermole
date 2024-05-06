@@ -24,7 +24,7 @@ This experiment was selected because it includes both well-known as well as rare
 
 Load relevant packages.
 
-```{r load-libraries, message=FALSE}
+```{r load-libraries, message=FALSE, warning=FALSE}
 library(Seurat)
 library(dplyr)
 library(ggplot2)

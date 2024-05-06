@@ -38,7 +38,7 @@ install.packages("clustermole")
 
 Load clustermole.
 
-```{r load-package, message=FALSE}
+```{r load-package, message=FALSE, warning=FALSE}
 library(clustermole)
 ```
 
