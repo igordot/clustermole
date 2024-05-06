@@ -18,17 +18,16 @@
 #' my_overlaps <- clustermole_overlaps(genes = my_genes, species = "hs")
 #' head(my_overlaps)
 clustermole_overlaps <- function(genes, species) {
-
   # check that the genes vector seems reasonable
   if (!is(genes, "character")) {
-    stop("genes is not a character vector")
+    stop("`genes` is not a character vector")
   }
-  genes <- unique(genes)
+  genes <- unique(sort(genes))
   if (length(genes) < 5) {
-    stop("too few genes")
+    stop("input should be at least 5 genes")
   }
   if (length(genes) > 5000) {
-    stop("too many genes")
+    stop("input should be less than 5,000 genes")
   }
 
   # retrieve markers
@@ -39,11 +38,13 @@ clustermole_overlaps <- function(genes, species) {
     dplyr::select(-dplyr::starts_with("gene")) %>%
     dplyr::distinct()
 
-  # check that input genes overlap species genes
+  # check that input genes overlap marker genes for a given species
   all_genes <- unique(markers_tbl$gene)
+  input_genes <- genes
   genes <- intersect(genes, all_genes)
-  if (length(genes) < 5) {
-    stop("the genes do not appear to correspond to the given species")
+  if (length(genes) < max(3, length(input_genes) * 0.2)) {
+    problematic_genes <- setdiff(input_genes, genes)
+    stop("large fraction of input genes are not known (possibly wrong species): ", toString(problematic_genes))
   }
 
   # run the enrichment analysis
