@@ -6,6 +6,8 @@
 ^\.covrignore$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^CRAN-SUBMISSION$
+^CITATION\.cff$
 ^revdep$
 ^_pkgdown\.yml$
 ^docs$
@@ -13,4 +15,3 @@
 ^index\.md$
 ^vignettes/db\.Rmd$
 ^vignettes/example-bm-seurat\.Rmd$
-^CRAN-SUBMISSION$

@@ -1,0 +1,31 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "clustermole" in publications use:'
+type: software
+license: MIT
+title: 'clustermole: Unbiased Single-Cell Transcriptomic Data Cell Type Identification'
+version: 1.1.1
+abstract: Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq)
+  clusters is often a time-consuming process that involves manual inspection of the
+  cluster marker genes complemented with a detailed literature search. This is especially
+  challenging when unexpected or poorly described populations are present. The clustermole
+  R package provides methods to query thousands of human and mouse cell identity markers
+  sourced from a variety of databases.
+authors:
+- family-names: Dolgalev
+  given-names: Igor
+  email: igor.dolgalev@nyumc.org
+  orcid: https://orcid.org/0000-0003-4451-126X
+repository: https://CRAN.R-project.org/package=clustermole
+repository-code: https://github.com/igordot/clustermole
+url: https://igordot.github.io/clustermole/
+contact:
+- family-names: Dolgalev
+  given-names: Igor
+  email: igor.dolgalev@nyumc.org
+  orcid: https://orcid.org/0000-0003-4451-126X
+
