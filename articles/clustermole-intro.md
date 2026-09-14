@@ -58,11 +58,12 @@ markers
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`
-column is the gene symbol and the `celltype_full` column contains the
-full cell type string, including the species and the original database.
-Human or mouse versions can be retrieved.
+column is the gene symbol (human or mouse), the `gene_original` column
+is the gene symbol from the source database, and the `celltype_full`
+column contains the full cell type string, including the species and the
+original database.
 
-Many tools that works with gene sets require input as a list. To convert
+Many tools that work with gene sets require input as a list. To convert
 the markers from a data frame to a list, you can use `gene` as the
 values and `celltype_full` as the grouping variable.
 

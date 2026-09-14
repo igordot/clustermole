@@ -107,11 +107,11 @@ all cell type markers.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 422,282 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ abbreviated name: ¹​gene_original</span></span></span></code></pre></div>
 <p>Each row contains a gene and a cell type associated with it. The
-<code>gene</code> column is the gene symbol and the
-<code>celltype_full</code> column contains the full cell type string,
-including the species and the original database. Human or mouse versions
-can be retrieved.</p>
-<p>Many tools that works with gene sets require input as a list. To
+<code>gene</code> column is the gene symbol (human or mouse), the
+<code>gene_original</code> column is the gene symbol from the source
+database, and the <code>celltype_full</code> column contains the full
+cell type string, including the species and the original database.</p>
+<p>Many tools that work with gene sets require input as a list. To
 convert the markers from a data frame to a list, you can use
 <code>gene</code> as the values and <code>celltype_full</code> as the
 grouping variable.</p>

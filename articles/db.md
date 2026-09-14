@@ -33,13 +33,14 @@ markers
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`
-column is the gene symbol (human or mouse) and the `celltype_full`
+column is the gene symbol (human or mouse), the `gene_original` column
+is the gene symbol from the source database, and the `celltype_full`
 column contains the detailed cell type string including the species and
 the original database.
 
-## Number of cell types
+## Cell types
 
-Check the total number of the available cell types.
+Check the total number of available cell types.
 
 ``` r
 
@@ -47,7 +48,7 @@ length(unique(markers$celltype_full))
 #> [1] 3039
 ```
 
-## Number of cell types by source database
+## Cell types by source database
 
 Check the source databases and the number of cell types from each.
 
@@ -66,7 +67,7 @@ distinct(markers, celltype_full, db) |> count(db)
 #> 7 xCell        466
 ```
 
-## Number of cell types by species
+## Cell types by species
 
 Check the number of cell types per species (not available for all cell
 types).
@@ -82,7 +83,7 @@ distinct(markers, celltype_full, species) |> count(species)
 #> 3 "Mouse"   850
 ```
 
-## Number of cell types by organ
+## Cell types by organ
 
 Check the number of available cell types per organ (not available for
 all cell types).

@@ -125,22 +125,15 @@ labels for the next steps.</p>
 comparison of marker genes.</p>
 <p>We can start with the B-cells, which is a well-defined population
 used in many studies.</p>
+<div class="section level3">
+<h3 id="b-cells">B-cells<a class="anchor" aria-label="anchor" href="#b-cells"></a>
+</h3>
 <p>Find markers for the B-cell cluster.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"B-cell"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; For a (much!) faster implementation of the Wilcoxon Rank Sum Test,</span></span>
-<span><span class="co">#&gt; (default method for FindMarkers) please install the presto package</span></span>
-<span><span class="co">#&gt; --------------------------------------------</span></span>
-<span><span class="co">#&gt; install.packages('devtools')</span></span>
-<span><span class="co">#&gt; devtools::install_github('immunogenomics/presto')</span></span>
-<span><span class="co">#&gt; --------------------------------------------</span></span>
-<span><span class="co">#&gt; After installation of presto, Seurat will automatically use the more </span></span>
-<span><span class="co">#&gt; efficient implementation (no further action necessary).</span></span>
-<span><span class="co">#&gt; This message will be shown once per session</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">b_markers_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1631</span></span></code></pre></div>
-<p>This gives us a data frame with hundreds of genes. We can subset to
-just the best 25 markers.</p>
+<p>We can subset to just the best 25 markers.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b_markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">b_markers_df</span><span class="op">)</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">b_markers</span></span>
@@ -182,6 +175,10 @@ markers.</p>
 <p>As would be expected for a well-defined population, the top results
 are various B-cell populations. We can repeat this process for other
 populations that are more obscure.</p>
+</div>
+<div class="section level3">
+<h3 id="adipo-car">Adipo-CAR<a class="anchor" aria-label="anchor" href="#adipo-car"></a>
+</h3>
 <p>Find markers for the Adipo-CAR cluster. These are Cxcl12-abundant
 reticular (CAR) cells expressing adipocyte-lineage genes.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -224,6 +221,10 @@ signatures.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;, fdr &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>The top results are more diverse than for B-cells, but related
 populations are among the top candidates.</p>
+</div>
+<div class="section level3">
+<h3 id="osteoblasts">Osteoblasts<a class="anchor" aria-label="anchor" href="#osteoblasts"></a>
+</h3>
 <p>Find markers for the Osteoblasts cluster.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">o_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"Osteoblasts"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -263,8 +264,9 @@ signatures.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> HAIR FOLLICLE | ARCHS4                                          ARCHS4    </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;, fdr &lt;dbl&gt;</span></span></span></code></pre></div>
-<p>The top results are again more diverse than for B-cells, but the
-appropriate populations are listed.</p>
+<p>The top results are noisier than for B-cells, but the appropriate
+populations are listed.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="enrichment-of-markers">Enrichment of markers<a class="anchor" aria-label="anchor" href="#enrichment-of-markers"></a>
@@ -274,9 +276,7 @@ enrichment of cell type signatures across all genes. This avoids having
 to define an optimal set of markers.</p>
 <p>Calculate the average expression levels for each cell type.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/AverageExpression.html" class="external-link">AverageExpression</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span></span>
-<span><span class="co">#&gt; As of Seurat v5, we recommend using AggregateExpression to perform pseudo-bulk analysis.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This message is displayed once per session.</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/AverageExpression.html" class="external-link">AverageExpression</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span></span></code></pre></div>
 <p>Convert to a regular matrix and log-transform.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">$</span><span class="va">RNA</span><span class="op">)</span></span>
@@ -293,6 +293,9 @@ to define an optimal set of markers.</p>
 <p>Run enrichment of all cell type signatures across all clusters.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_enrichment.html">clustermole_enrichment</a></span><span class="op">(</span>expr_mat <span class="op">=</span> <span class="va">avg_exp_mat</span>, species <span class="op">=</span> <span class="st">"mm"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="b-cells-1">B-cells<a class="anchor" aria-label="anchor" href="#b-cells-1"></a>
+</h3>
 <p>Check the most enriched cell types for the B-cell cluster.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -320,6 +323,10 @@ to define an optimal set of markers.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
 <p>As with the previous analysis, the top results are various B-cell
 populations.</p>
+</div>
+<div class="section level3">
+<h3 id="adipo-car-1">Adipo-CAR<a class="anchor" aria-label="anchor" href="#adipo-car-1"></a>
+</h3>
 <p>Check the most enriched cell types for the Adipo-CAR cluster.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -345,6 +352,10 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Adipo-CAR HPCA_Fibroblasts | Human | SaVanT                              </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;, species &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="osteoblasts-1">Osteoblasts<a class="anchor" aria-label="anchor" href="#osteoblasts-1"></a>
+</h3>
 <p>Check the most enriched cell types for the Osteoblasts cluster.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enrich_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -370,6 +381,7 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Osteoblasts Lee et al.Cell.E | Lung | Mouse | CellMarker                 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: score &lt;dbl&gt;, score_rank &lt;int&gt;, db &lt;chr&gt;, species &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -90,26 +90,18 @@ of marker genes.
 We can start with the B-cells, which is a well-defined population used
 in many studies.
 
+### B-cells
+
 Find markers for the B-cell cluster.
 
 ``` r
 
 b_markers_df <- FindMarkers(so, ident.1 = "B-cell", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
-#> For a (much!) faster implementation of the Wilcoxon Rank Sum Test,
-#> (default method for FindMarkers) please install the presto package
-#> --------------------------------------------
-#> install.packages('devtools')
-#> devtools::install_github('immunogenomics/presto')
-#> --------------------------------------------
-#> After installation of presto, Seurat will automatically use the more 
-#> efficient implementation (no further action necessary).
-#> This message will be shown once per session
 nrow(b_markers_df)
 #> [1] 1631
 ```
 
-This gives us a data frame with hundreds of genes. We can subset to just
-the best 25 markers.
+We can subset to just the best 25 markers.
 
 ``` r
 
@@ -163,6 +155,8 @@ head(overlaps_tbl, 15)
 As would be expected for a well-defined population, the top results are
 various B-cell populations. We can repeat this process for other
 populations that are more obscure.
+
+### Adipo-CAR
 
 Find markers for the Adipo-CAR cluster. These are Cxcl12-abundant
 reticular (CAR) cells expressing adipocyte-lineage genes.
@@ -218,6 +212,8 @@ head(overlaps_tbl, 15)
 The top results are more diverse than for B-cells, but related
 populations are among the top candidates.
 
+### Osteoblasts
+
 Find markers for the Osteoblasts cluster.
 
 ``` r
@@ -268,8 +264,8 @@ head(overlaps_tbl, 15)
 #> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
 ```
 
-The top results are again more diverse than for B-cells, but the
-appropriate populations are listed.
+The top results are noisier than for B-cells, but the appropriate
+populations are listed.
 
 ## Enrichment of markers
 
@@ -282,8 +278,6 @@ Calculate the average expression levels for each cell type.
 ``` r
 
 avg_exp_mat <- AverageExpression(so)
-#> As of Seurat v5, we recommend using AggregateExpression to perform pseudo-bulk analysis.
-#> This message is displayed once per session.
 ```
 
 Convert to a regular matrix and log-transform.
@@ -313,6 +307,8 @@ Run enrichment of all cell type signatures across all clusters.
 
 enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
 ```
+
+### B-cells
 
 Check the most enriched cell types for the B-cell cluster.
 
@@ -346,6 +342,8 @@ enrich_tbl %>%
 As with the previous analysis, the top results are various B-cell
 populations.
 
+### Adipo-CAR
+
 Check the most enriched cell types for the Adipo-CAR cluster.
 
 ``` r
@@ -374,6 +372,8 @@ enrich_tbl %>%
 #> # ℹ 7 more variables: score <dbl>, score_rank <int>, db <chr>, species <chr>,
 #> #   organ <chr>, celltype <chr>, n_genes <int>
 ```
+
+### Osteoblasts
 
 Check the most enriched cell types for the Osteoblasts cluster.
 

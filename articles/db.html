@@ -81,19 +81,21 @@ cell type markers.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1-cell stage cell (… Cell… Human   Embr… 1-cell …      32 DHCR7         DHCR7</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 422,282 more rows</span></span></span></code></pre></div>
 <p>Each row contains a gene and a cell type associated with it. The
-<code>gene</code> column is the gene symbol (human or mouse) and the
-<code>celltype_full</code> column contains the detailed cell type string
-including the species and the original database.</p>
+<code>gene</code> column is the gene symbol (human or mouse), the
+<code>gene_original</code> column is the gene symbol from the source
+database, and the <code>celltype_full</code> column contains the
+detailed cell type string including the species and the original
+database.</p>
 <div class="section level2">
-<h2 id="number-of-cell-types">Number of cell types<a class="anchor" aria-label="anchor" href="#number-of-cell-types"></a>
+<h2 id="cell-types">Cell types<a class="anchor" aria-label="anchor" href="#cell-types"></a>
 </h2>
-<p>Check the total number of the available cell types.</p>
+<p>Check the total number of available cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3039</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="number-of-cell-types-by-source-database">Number of cell types by source database<a class="anchor" aria-label="anchor" href="#number-of-cell-types-by-source-database"></a>
+<h2 id="cell-types-by-source-database">Cell types by source database<a class="anchor" aria-label="anchor" href="#cell-types-by-source-database"></a>
 </h2>
 <p>Check the source databases and the number of cell types from
 each.</p>
@@ -111,7 +113,7 @@ each.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> xCell        466</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="number-of-cell-types-by-species">Number of cell types by species<a class="anchor" aria-label="anchor" href="#number-of-cell-types-by-species"></a>
+<h2 id="cell-types-by-species">Cell types by species<a class="anchor" aria-label="anchor" href="#cell-types-by-species"></a>
 </h2>
 <p>Check the number of cell types per species (not available for all
 cell types).</p>
@@ -125,7 +127,7 @@ cell types).</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>Mouse<span style="color: #949494;">"</span>   850</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="number-of-cell-types-by-organ">Number of cell types by organ<a class="anchor" aria-label="anchor" href="#number-of-cell-types-by-organ"></a>
+<h2 id="cell-types-by-organ">Cell types by organ<a class="anchor" aria-label="anchor" href="#cell-types-by-organ"></a>
 </h2>
 <p>Check the number of available cell types per organ (not available for
 all cell types).</p>
