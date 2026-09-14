@@ -23,7 +23,8 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: '4.3'}
+          # oldest version known to work with Bioconductor deps
+          - {os: ubuntu-latest,   r: '4.4'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
