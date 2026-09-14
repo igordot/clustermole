@@ -8,15 +8,16 @@ gene_names <- sample(gene_names)
 
 # generate strings that look like real genes
 fake_gene_names <- paste0(
-  sample(LETTERS),
-  sample(LETTERS),
-  sample(LETTERS),
+  sample(LETTERS, 1000, replace = TRUE),
+  sample(LETTERS, 1000, replace = TRUE),
+  sample(LETTERS, 1000, replace = TRUE),
   sample(1:9, 1000, replace = TRUE)
 )
 fake_gene_names <- setdiff(fake_gene_names, markers_hs_tbl$gene)
 fake_gene_names <- sample(fake_gene_names)
 
 test_that("clustermole_overlaps() wrong input", {
+  expect_gt(length(fake_gene_names), 970)
   expect_error(clustermole_overlaps(gene_names[1:3], species = "hs"))
   expect_error(clustermole_overlaps(gene_names[1:10000], species = "hs"))
   expect_error(clustermole_overlaps(fake_gene_names[1:100], species = "hs"))
