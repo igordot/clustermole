@@ -1,4 +1,3 @@
-
 library(dplyr)
 library(tidyr)
 library(readr)
@@ -28,7 +27,9 @@ hcop_clean <-
   hcop_all %>%
   select(gene_hs = human_symbol, gene_mm = mouse_symbol, sources = support) %>%
   mutate(num_sources = str_count(sources, ",") + 1) %>%
-  mutate(distance = stringdist(toupper(gene_hs), toupper(gene_mm), method = "jw"))
+  mutate(
+    distance = stringdist(toupper(gene_hs), toupper(gene_mm), method = "jw")
+  )
 
 # check if the sources were properly stored and parsed
 nrow(hcop_clean)
@@ -91,7 +92,11 @@ panglao_clean <-
 
 # download gene signatures
 cellmarker_source <- "http://bio-bigdata.hrbmu.edu.cn/CellMarker/download/all_cell_markers.txt"
-cellmarker_all <- read_tsv(cellmarker_source, guess_max = 10000, progress = FALSE)
+cellmarker_all <- read_tsv(
+  cellmarker_source,
+  guess_max = 10000,
+  progress = FALSE
+)
 
 cellmarker_clean <-
   cellmarker_all %>%
@@ -117,7 +122,12 @@ cellmarker_clean <-
 savant_source <- "http://newpathways.mcdb.ucla.edu/savant-dev/SaVanT_Signatures_Release01.zip"
 savant_txt <- "SaVanT_Signatures_Release01.tab.txt"
 savant_tmp <- tempfile(fileext = ".zip")
-download.file(url = savant_source, destfile = savant_tmp, quiet = TRUE, mode = "wb")
+download.file(
+  url = savant_source,
+  destfile = savant_tmp,
+  quiet = TRUE,
+  mode = "wb"
+)
 savant_list <- strsplit(readLines(unz(savant_tmp, savant_txt)), "\t")
 unlink(savant_tmp)
 savant_all <- lapply(savant_list, tail, -1)
@@ -139,15 +149,14 @@ savant_clean <-
   mutate(
     db = "SaVanT",
     species = "",
-    species =
-      case_when(
-        str_detect(celltype, "^MBA_") ~ "Mouse",
-        str_detect(celltype, "^IMGN_") ~ "Mouse",
-        str_detect(celltype, "^HBA_") ~ "Human",
-        str_detect(celltype, "^HPCA_") ~ "Human",
-        str_detect(celltype, "^MA_") ~ "Human",
-        TRUE ~ species
-      ),
+    species = case_when(
+      str_detect(celltype, "^MBA_") ~ "Mouse",
+      str_detect(celltype, "^IMGN_") ~ "Mouse",
+      str_detect(celltype, "^HBA_") ~ "Human",
+      str_detect(celltype, "^HPCA_") ~ "Human",
+      str_detect(celltype, "^MA_") ~ "Human",
+      TRUE ~ species
+    ),
     organ = ""
   ) %>%
   drop_na(celltype, gene) %>%
@@ -177,7 +186,10 @@ msigdb_all <-
   filter(cat == "C8")
 
 # convert to one gene per row
-msigdb_all <- mutate(msigdb_all, members_split = strsplit(members, "|", fixed = TRUE))
+msigdb_all <- mutate(
+  msigdb_all,
+  members_split = strsplit(members, "|", fixed = TRUE)
+)
 msigdb_all <- unnest(msigdb_all, cols = members_split, names_repair = "minimal")
 msigdb_all <-
   msigdb_all %>%
@@ -205,7 +217,12 @@ msigdb_clean <-
 # download gene signatures
 xcell_source <- "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5688663/bin/13059_2017_1349_MOESM3_ESM.xlsx"
 xcell_tmp <- tempfile(fileext = ".xlsx")
-download.file(url = xcell_source, destfile = xcell_tmp, quiet = TRUE, mode = "wb")
+download.file(
+  url = xcell_source,
+  destfile = xcell_tmp,
+  quiet = TRUE,
+  mode = "wb"
+)
 xcell_all <- read_xlsx(xcell_tmp, progress = FALSE)
 unlink(xcell_tmp)
 
@@ -314,16 +331,15 @@ markers %>%
 markers <-
   markers %>%
   mutate(
-    species =
-      case_when(
-        species == "Human" ~ "Human",
-        species == "Homo sapiens" ~ "Human",
-        species == "Hs" ~ "Human",
-        species == "Mouse" ~ "Mouse",
-        species == "Mm" ~ "Mouse",
-        species == "None" ~ "",
-        TRUE ~ ""
-      ),
+    species = case_when(
+      species == "Human" ~ "Human",
+      species == "Homo sapiens" ~ "Human",
+      species == "Hs" ~ "Human",
+      species == "Mouse" ~ "Mouse",
+      species == "Mm" ~ "Mouse",
+      species == "None" ~ "",
+      TRUE ~ ""
+    ),
     celltype_full = str_c(celltype, organ, species, db, sep = " | "),
     celltype_full = str_replace_all(celltype_full, "\\|  \\|", "\\|"),
     celltype_full = str_replace_all(celltype_full, "\\|  \\|", "\\|")

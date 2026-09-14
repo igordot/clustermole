@@ -44,7 +44,10 @@ clustermole_overlaps <- function(genes, species) {
   genes <- intersect(genes, all_genes)
   if (length(genes) < max(3, length(input_genes) * 0.2)) {
     problematic_genes <- setdiff(input_genes, genes)
-    stop("large fraction of input genes are not known (possibly wrong species): ", toString(problematic_genes))
+    stop(
+      "large fraction of input genes are not known (possibly wrong species): ",
+      toString(problematic_genes)
+    )
   }
 
   # run the enrichment analysis
@@ -55,7 +58,13 @@ clustermole_overlaps <- function(genes, species) {
       n_celltype <- length(celltype_genes)
       n_all <- length(all_genes)
       # phyper(success-in-sample, success-in-bg, fail-in-bg, sample-size)
-      p_val <- phyper(n_overlap - 1, n_celltype, n_all - n_celltype, n_query, lower.tail = FALSE)
+      p_val <- phyper(
+        n_overlap - 1,
+        n_celltype,
+        n_all - n_celltype,
+        n_query,
+        lower.tail = FALSE
+      )
       c("overlap" = n_overlap, "p_value" = p_val, "fdr" = 1)
     })
   overlaps_mat <- t(overlaps_mat)
@@ -64,7 +73,16 @@ clustermole_overlaps <- function(genes, species) {
   # clean up the enrichment table
   overlaps_tbl <- tibble::as_tibble(overlaps_mat, rownames = "celltype_full")
   overlaps_tbl <- dplyr::filter(overlaps_tbl, .data$p_value < 0.05)
-  overlaps_tbl <- dplyr::inner_join(celltypes_tbl, overlaps_tbl, by = "celltype_full")
-  overlaps_tbl <- dplyr::arrange(overlaps_tbl, .data$fdr, .data$p_value, .data$celltype_full)
+  overlaps_tbl <- dplyr::inner_join(
+    celltypes_tbl,
+    overlaps_tbl,
+    by = "celltype_full"
+  )
+  overlaps_tbl <- dplyr::arrange(
+    overlaps_tbl,
+    .data$fdr,
+    .data$p_value,
+    .data$celltype_full
+  )
   overlaps_tbl
 }

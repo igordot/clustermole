@@ -42,7 +42,11 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
   # retrieve markers and filter for genes present in the expression table
   markers_tbl <- clustermole_markers(species = species)
   markers_tbl <- dplyr::filter(markers_tbl, .data$gene %in% rownames(expr_mat))
-  markers_tbl <- dplyr::add_count(markers_tbl, .data$celltype_full, name = "n_genes")
+  markers_tbl <- dplyr::add_count(
+    markers_tbl,
+    .data$celltype_full,
+    name = "n_genes"
+  )
   markers_tbl <- dplyr::filter(markers_tbl, .data$n_genes >= 5)
 
   # convert markers to a list
@@ -56,7 +60,11 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
     dplyr::distinct()
 
   # run the actual enrichment analysis
-  scores_tbl <- get_scores(expr_mat = expr_mat, markers_list = markers_list, method = method)
+  scores_tbl <- get_scores(
+    expr_mat = expr_mat,
+    markers_list = markers_list,
+    method = method
+  )
 
   scores_tbl <- scores_tbl %>%
     dplyr::filter(.data$score_rank <= 100) %>%
@@ -70,37 +78,78 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
 #' @importFrom GSVA gsva gsvaParam ssgseaParam
 #' @importFrom GSEABase GeneSet GeneSetCollection
 #' @importFrom singscore rankGenes multiScore
-get_scores <- function(expr_mat, markers_list, method = c("gsva", "ssgsea", "singscore", "all")) {
+get_scores <- function(
+  expr_mat,
+  markers_list,
+  method = c("gsva", "ssgsea", "singscore", "all")
+) {
   method <- match.arg(method)
 
   if (method == "gsva" || method == "all") {
-    gsva_param <- GSVA::gsvaParam(exprData = expr_mat, geneSets = markers_list, kcdf = "Gaussian")
+    gsva_param <- GSVA::gsvaParam(
+      exprData = expr_mat,
+      geneSets = markers_list,
+      kcdf = "Gaussian"
+    )
     scores_mat <- GSVA::gsva(gsva_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
-    scores_gsva_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_gsva = "score_rank")
+    scores_gsva_tbl <- dplyr::select(
+      scores_tbl,
+      "cluster",
+      "celltype_full",
+      score_rank_gsva = "score_rank"
+    )
   }
 
   if (method == "ssgsea" || method == "all") {
-    ssgsea_param <- GSVA::ssgseaParam(exprData = expr_mat, geneSets = markers_list)
+    ssgsea_param <- GSVA::ssgseaParam(
+      exprData = expr_mat,
+      geneSets = markers_list
+    )
     scores_mat <- GSVA::gsva(ssgsea_param, verbose = FALSE)
     scores_tbl <- lengthen_scores(scores_mat)
-    scores_ssgsea_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_ssgsea = "score_rank")
+    scores_ssgsea_tbl <- dplyr::select(
+      scores_tbl,
+      "cluster",
+      "celltype_full",
+      score_rank_ssgsea = "score_rank"
+    )
   }
 
   if (method == "singscore" || method == "all") {
-    markers_gsc <- Map(function(x, y) GSEABase::GeneSet(x, setName = y), markers_list, names(markers_list))
+    markers_gsc <- Map(
+      function(x, y) GSEABase::GeneSet(x, setName = y),
+      markers_list,
+      names(markers_list)
+    )
     markers_gsc <- GSEABase::GeneSetCollection(markers_gsc)
-    scores_mat <- singscore::multiScore(rankData = rankGenes(expr_mat), upSetColc = markers_gsc)
+    scores_mat <- singscore::multiScore(
+      rankData = rankGenes(expr_mat),
+      upSetColc = markers_gsc
+    )
     scores_mat <- scores_mat$Scores
     scores_tbl <- lengthen_scores(scores_mat)
-    scores_singscore_tbl <- dplyr::select(scores_tbl, "cluster", "celltype_full", score_rank_singscore = "score_rank")
+    scores_singscore_tbl <- dplyr::select(
+      scores_tbl,
+      "cluster",
+      "celltype_full",
+      score_rank_singscore = "score_rank"
+    )
   }
 
   if (method == "all") {
     # combine all scores into a single table
     scores_tbl <- scores_gsva_tbl
-    scores_tbl <- dplyr::full_join(scores_tbl, scores_ssgsea_tbl, by = c("cluster", "celltype_full"))
-    scores_tbl <- dplyr::full_join(scores_tbl, scores_singscore_tbl, by = c("cluster", "celltype_full"))
+    scores_tbl <- dplyr::full_join(
+      scores_tbl,
+      scores_ssgsea_tbl,
+      by = c("cluster", "celltype_full")
+    )
+    scores_tbl <- dplyr::full_join(
+      scores_tbl,
+      scores_singscore_tbl,
+      by = c("cluster", "celltype_full")
+    )
     # create a score matrix for easier stats
     scores_mat <- dplyr::select(scores_tbl, dplyr::starts_with("score_rank_"))
     scores_mat <- as.matrix(scores_mat)
@@ -126,6 +175,8 @@ lengthen_scores <- function(scores_mat) {
     tidyr::gather(key = "cluster", value = "score", -"celltype_full") %>%
     dplyr::select("cluster", "celltype_full", "score") %>%
     dplyr::group_by(.data$cluster) %>%
-    dplyr::mutate(score_rank = rank(desc(.data$score), ties.method = "first")) %>%
+    dplyr::mutate(
+      score_rank = rank(desc(.data$score), ties.method = "first")
+    ) %>%
     dplyr::ungroup()
 }
