@@ -3,7 +3,7 @@
 #' Perform overrepresentation analysis for a set of genes compared to all cell type signatures.
 #'
 #' @param genes A vector of genes.
-#' @param species Species: \code{hs} for human or \code{mm} for mouse.
+#' @param species Species: `hs` for human or `mm` for mouse.
 #'
 #' @return A data frame of enrichment results with hypergeometric test p-values.
 #'

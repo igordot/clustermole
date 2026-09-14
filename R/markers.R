@@ -1,8 +1,8 @@
 #' Available cell type markers
 #'
-#' Retrieve the full list of cell type markers in the \code{clustermole} database.
+#' Retrieve the full list of cell type markers in the `clustermole` database.
 #'
-#' @param species Species: \code{hs} for human or \code{mm} for mouse.
+#' @param species Species: `hs` for human or `mm` for mouse.
 #'
 #' @return A data frame of cell type markers (one gene per row).
 #'

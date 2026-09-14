@@ -5,10 +5,10 @@ Version: 1.1.1.9000
 Authors@R: 
     person("Igor", "Dolgalev", , "igor.dolgalev@nyumc.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4451-126X"))
-Description: Provides a meta-database of thousands of human and mouse
-    cell identity markers curated from multiple sources, along with
-    methods for cell type prediction based on marker gene overlaps or
-    gene set enrichment.
+Description: Provides a meta-database of thousands of human and mouse cell
+    identity markers curated from multiple sources, along with methods for
+    cell type prediction based on marker gene overlaps or gene set
+    enrichment.
 License: MIT + file LICENSE
 URL: https://igordot.github.io/clustermole/
 BugReports: https://github.com/igordot/clustermole/issues
@@ -36,3 +36,4 @@ VignetteBuilder:
 biocViews:
 Config/roxygen2/version: 8.1.0
 Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
