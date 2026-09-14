@@ -15,3 +15,5 @@
 ^index\.md$
 ^vignettes/db\.Rmd$
 ^vignettes/example-bm-seurat\.Rmd$
+^[.]?air[.]toml$
+^\.vscode$
