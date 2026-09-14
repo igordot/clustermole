@@ -20,7 +20,9 @@ A data frame with gene sets as the first column and genes as the second column (
 Read a GMT file into a data frame
 }
 \examples{
+\dontrun{
 gmt <- "http://software.broadinstitute.org/gsea/msigdb/supplemental/scsig.all.v1.0.symbols.gmt"
 gmt_tbl <- read_gmt(gmt)
 head(gmt_tbl)
+}
 }

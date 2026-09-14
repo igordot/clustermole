@@ -12,9 +12,11 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' gmt <- "http://software.broadinstitute.org/gsea/msigdb/supplemental/scsig.all.v1.0.symbols.gmt"
 #' gmt_tbl <- read_gmt(gmt)
 #' head(gmt_tbl)
+#' }
 read_gmt <- function(file, geneset_label = "celltype", gene_label = "gene") {
   gmt_split <- strsplit(readLines(file), "\t")
   gmt_list <- lapply(gmt_split, tail, -2)
