@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/igordot/clustermole/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/igordot/clustermole/blob/main/DESCRIPTION)
 
 Dolgalev I (2026). *clustermole: Unbiased Single-Cell Transcriptomic
 Data Cell Type Identification*. R package version 1.1.1.9000,
