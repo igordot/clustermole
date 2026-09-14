@@ -69,14 +69,15 @@ One type of analysis facilitated by clustermole is based on comparison of marker
 
 We can start with the B-cells, which is a well-defined population used in many studies.
 
+### B-cells
+
 Find markers for the B-cell cluster.
 
-```{r find-markers-b}
+```{r find-markers-b, message=FALSE}
 b_markers_df <- FindMarkers(so, ident.1 = "B-cell", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
 nrow(b_markers_df)
 ```
 
-This gives us a data frame with hundreds of genes.
 We can subset to just the best 25 markers.
 
 ```{r markers-top-genes}
@@ -99,10 +100,12 @@ head(overlaps_tbl, 15)
 As would be expected for a well-defined population, the top results are various B-cell populations.
 We can repeat this process for other populations that are more obscure.
 
+### Adipo-CAR
+
 Find markers for the Adipo-CAR cluster.
 These are Cxcl12-abundant reticular (CAR) cells expressing adipocyte-lineage genes.
 
-```{r find-markers-acar}
+```{r find-markers-acar, message=FALSE}
 acar_markers_df <- FindMarkers(so, ident.1 = "Adipo-CAR", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
 acar_markers <- head(rownames(acar_markers_df), 25)
 acar_markers
@@ -122,9 +125,11 @@ head(overlaps_tbl, 15)
 
 The top results are more diverse than for B-cells, but related populations are among the top candidates.
 
+### Osteoblasts
+
 Find markers for the Osteoblasts cluster.
 
-```{r find-markers-o}
+```{r find-markers-o, message=FALSE}
 o_markers_df <- FindMarkers(so, ident.1 = "Osteoblasts", min.pct = 0.2, only.pos = TRUE, verbose = FALSE)
 o_markers <- head(rownames(o_markers_df), 25)
 o_markers
@@ -142,7 +147,7 @@ Check the top scoring cell types for the Osteoblasts cluster.
 head(overlaps_tbl, 15)
 ```
 
-The top results are again more diverse than for B-cells, but the appropriate populations are listed.
+The top results are noisier than for B-cells, but the appropriate populations are listed.
 
 ## Enrichment of markers
 
@@ -151,7 +156,7 @@ This avoids having to define an optimal set of markers.
 
 Calculate the average expression levels for each cell type.
 
-```{r avg-exp}
+```{r avg-exp, message=FALSE}
 avg_exp_mat <- AverageExpression(so)
 ```
 
@@ -174,6 +179,8 @@ Run enrichment of all cell type signatures across all clusters.
 enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
 ```
 
+### B-cells
+
 Check the most enriched cell types for the B-cell cluster.
 
 ```{r}
@@ -184,6 +191,8 @@ enrich_tbl %>%
 
 As with the previous analysis, the top results are various B-cell populations.
 
+### Adipo-CAR
+
 Check the most enriched cell types for the Adipo-CAR cluster.
 
 ```{r}
@@ -191,6 +200,8 @@ enrich_tbl %>%
   filter(cluster == "Adipo-CAR") %>%
   head(15)
 ```
+
+### Osteoblasts
 
 Check the most enriched cell types for the Osteoblasts cluster.
 
