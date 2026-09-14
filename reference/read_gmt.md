@@ -32,16 +32,9 @@ column (one gene per row).
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 gmt <- "http://software.broadinstitute.org/gsea/msigdb/supplemental/scsig.all.v1.0.symbols.gmt"
 gmt_tbl <- read_gmt(gmt)
 head(gmt_tbl)
-#> # A tibble: 6 × 2
-#>   celltype                                              gene    
-#>   <chr>                                                 <chr>   
-#> 1 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor ABCC3   
-#> 2 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor ABCC4   
-#> 3 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor ACTN1   
-#> 4 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor ARHGAP18
-#> 5 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor ARHGAP6 
-#> 6 Zheng_Cord_Blood_C1_Putative_Megakaryocyte_Progenitor BANK1   
+} # }
 ```
