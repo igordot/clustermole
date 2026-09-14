@@ -1,12 +1,8 @@
-# clustermole: Unbiased Single-Cell Transcriptomic Data Cell Type Identification
+# clustermole: Cell Type Marker Database for Single-Cell RNA-Seq Data
 
-Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq)
-clusters is often a time-consuming process that involves manual
-inspection of the cluster marker genes complemented with a detailed
-literature search. This is especially challenging when unexpected or
-poorly described populations are present. The clustermole R package
-provides methods to query thousands of human and mouse cell identity
-markers sourced from a variety of databases.
+Provides a meta-database of thousands of human and mouse cell identity
+markers curated from multiple sources, along with methods for cell type
+prediction based on marker gene overlaps or gene set enrichment.
 
 ## See also
 

@@ -10,12 +10,12 @@
 Source:
 [`DESCRIPTION`](https://github.com/igordot/clustermole/blob/main/DESCRIPTION)
 
-Dolgalev I (2026). *clustermole: Unbiased Single-Cell Transcriptomic
-Data Cell Type Identification*. R package version 1.1.1.9000,
+Dolgalev I (2026). *clustermole: Cell Type Marker Database for
+Single-Cell RNA-Seq Data*. R package version 1.1.1.9000,
 <https://igordot.github.io/clustermole/>.
 
     @Manual{,
-      title = {clustermole: Unbiased Single-Cell Transcriptomic Data Cell Type Identification},
+      title = {clustermole: Cell Type Marker Database for Single-Cell RNA-Seq Data},
       author = {Igor Dolgalev},
       year = {2026},
       note = {R package version 1.1.1.9000},
