@@ -2,9 +2,7 @@ url: https://igordot.github.io/clustermole/
 
 template:
   bootstrap: 5
-  bootswatch: simplex
-  bslib:
-    pkgdown-nav-height: 80px
+  bootswatch: zephyr
   includes:
     after_body: >
       <script data-goatcounter="https://igordot.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -14,6 +12,8 @@ template:
       card: summary_large_image
 
 navbar:
+  # zephyr navbar is blue by default
+  bg: light
   structure:
     left: [home, intro, example, db, reference]
     right: []
@@ -29,6 +29,3 @@ navbar:
     db:
       text: Database Stats
       href: articles/db.html
-
-home:
-  strip_header: false
