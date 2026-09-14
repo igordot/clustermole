@@ -314,8 +314,8 @@ Check the most enriched cell types for the B-cell cluster.
 
 ``` r
 
-enrich_tbl %>%
-  filter(cluster == "B-cell") %>%
+enrich_tbl |>
+  filter(cluster == "B-cell") |>
   head(15)
 #> # A tibble: 15 × 9
 #>    cluster celltype_full                                                   
@@ -348,8 +348,8 @@ Check the most enriched cell types for the Adipo-CAR cluster.
 
 ``` r
 
-enrich_tbl %>%
-  filter(cluster == "Adipo-CAR") %>%
+enrich_tbl |>
+  filter(cluster == "Adipo-CAR") |>
   head(15)
 #> # A tibble: 15 × 9
 #>    cluster   celltype_full                                                  
@@ -379,8 +379,8 @@ Check the most enriched cell types for the Osteoblasts cluster.
 
 ``` r
 
-enrich_tbl %>%
-  filter(cluster == "Osteoblasts") %>%
+enrich_tbl |>
+  filter(cluster == "Osteoblasts") |>
   head(15)
 #> # A tibble: 15 × 9
 #>    cluster     celltype_full                                                
