@@ -55,8 +55,8 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
 
   # create a table of cell types (without genes)
   celltypes_tbl <-
-    markers_tbl %>%
-    dplyr::select(!dplyr::starts_with("gene")) %>%
+    markers_tbl |>
+    dplyr::select(!dplyr::starts_with("gene")) |>
     dplyr::distinct()
 
   # run the actual enrichment analysis
@@ -66,18 +66,16 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
     method = method
   )
 
-  scores_tbl <- scores_tbl %>%
-    dplyr::filter(.data$score_rank <= 100) %>%
-    dplyr::inner_join(celltypes_tbl, by = "celltype_full") %>%
+  scores_tbl <- scores_tbl |>
+    dplyr::filter(.data$score_rank <= 100) |>
+    dplyr::inner_join(celltypes_tbl, by = "celltype_full") |>
     dplyr::arrange(.data$cluster, .data$score_rank)
   scores_tbl
 }
 
-#' @import dplyr
-#' @importFrom stats median
-#' @importFrom GSVA gsva gsvaParam ssgseaParam
 #' @importFrom GSEABase GeneSet GeneSetCollection
-#' @importFrom singscore rankGenes multiScore
+#' @importFrom GSVA gsva gsvaParam ssgseaParam
+#' @importFrom singscore multiScore rankGenes
 get_scores <- function(
   expr_mat,
   markers_list,
@@ -165,18 +163,15 @@ get_scores <- function(
   scores_tbl
 }
 
-#' @import dplyr
-#' @importFrom tibble as_tibble
-#' @importFrom tidyr gather
 lengthen_scores <- function(scores_mat) {
-  scores_mat %>%
-    round(10) %>%
-    tibble::as_tibble(rownames = "celltype_full") %>%
-    tidyr::gather(key = "cluster", value = "score", -"celltype_full") %>%
-    dplyr::select("cluster", "celltype_full", "score") %>%
-    dplyr::group_by(.data$cluster) %>%
+  scores_mat |>
+    round(10) |>
+    tibble::as_tibble(rownames = "celltype_full") |>
+    tidyr::gather(key = "cluster", value = "score", -"celltype_full") |>
+    dplyr::select("cluster", "celltype_full", "score") |>
+    dplyr::group_by(.data$cluster) |>
     dplyr::mutate(
       score_rank = rank(desc(.data$score), ties.method = "first")
-    ) %>%
+    ) |>
     dplyr::ungroup()
 }

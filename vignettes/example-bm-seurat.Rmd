@@ -184,8 +184,8 @@ enrich_tbl <- clustermole_enrichment(expr_mat = avg_exp_mat, species = "mm")
 Check the most enriched cell types for the B-cell cluster.
 
 ```{r}
-enrich_tbl %>%
-  filter(cluster == "B-cell") %>%
+enrich_tbl |>
+  filter(cluster == "B-cell") |>
   head(15)
 ```
 
@@ -196,8 +196,8 @@ As with the previous analysis, the top results are various B-cell populations.
 Check the most enriched cell types for the Adipo-CAR cluster.
 
 ```{r}
-enrich_tbl %>%
-  filter(cluster == "Adipo-CAR") %>%
+enrich_tbl |>
+  filter(cluster == "Adipo-CAR") |>
   head(15)
 ```
 
@@ -206,7 +206,7 @@ enrich_tbl %>%
 Check the most enriched cell types for the Osteoblasts cluster.
 
 ```{r}
-enrich_tbl %>%
-  filter(cluster == "Osteoblasts") %>%
+enrich_tbl |>
+  filter(cluster == "Osteoblasts") |>
   head(15)
 ```

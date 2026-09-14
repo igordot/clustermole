@@ -18,10 +18,10 @@ Imports:
     dplyr,
     GSEABase,
     GSVA (>= 1.50.0),
-    magrittr,
     methods,
     rlang,
     singscore,
+    stats,
     tibble,
     tidyr,
     utils

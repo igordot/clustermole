@@ -7,10 +7,6 @@
 #'
 #' @return A data frame of enrichment results with hypergeometric test p-values.
 #'
-#' @import methods
-#' @import dplyr
-#' @importFrom tibble as_tibble
-#' @importFrom stats phyper p.adjust
 #' @export
 #'
 #' @examples
@@ -34,8 +30,8 @@ clustermole_overlaps <- function(genes, species) {
   markers_tbl <- clustermole_markers(species = species)
   markers_list <- split(x = markers_tbl$gene, f = markers_tbl$celltype_full)
   celltypes_tbl <-
-    markers_tbl %>%
-    dplyr::select(-dplyr::starts_with("gene")) %>%
+    markers_tbl |>
+    dplyr::select(-dplyr::starts_with("gene")) |>
     dplyr::distinct()
 
   # check that input genes overlap marker genes for a given species

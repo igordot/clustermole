@@ -6,9 +6,6 @@
 #'
 #' @return A data frame with gene sets as the first column and genes as the second column (one gene per row).
 #'
-#' @import utils
-#' @importFrom tibble enframe
-#' @importFrom tidyr unnest
 #' @export
 #'
 #' @examples
