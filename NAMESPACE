@@ -8,19 +8,31 @@ export(read_gmt)
 import(dplyr)
 import(methods)
 import(utils)
-importFrom(GSEABase,GeneSet)
-importFrom(GSEABase,GeneSetCollection)
-importFrom(GSVA,gsva)
-importFrom(GSVA,gsvaParam)
-importFrom(GSVA,ssgseaParam)
+importFrom(GSEABase,
+  GeneSet,
+  GeneSetCollection
+)
+importFrom(GSVA,
+  gsva,
+  gsvaParam,
+  ssgseaParam
+)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
-importFrom(singscore,multiScore)
-importFrom(singscore,rankGenes)
-importFrom(stats,median)
-importFrom(stats,p.adjust)
-importFrom(stats,phyper)
-importFrom(tibble,as_tibble)
-importFrom(tibble,enframe)
-importFrom(tidyr,gather)
-importFrom(tidyr,unnest)
+importFrom(singscore,
+  multiScore,
+  rankGenes
+)
+importFrom(stats,
+  median,
+  p.adjust,
+  phyper
+)
+importFrom(tibble,
+  as_tibble,
+  enframe
+)
+importFrom(tidyr,
+  gather,
+  unnest
+)
