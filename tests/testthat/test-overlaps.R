@@ -7,15 +7,27 @@ gene_names <- unique(markers_hs_tbl$gene)
 gene_names <- sample(gene_names)
 
 # generate strings that look like real genes
-fake_gene_names <- paste0(sample(LETTERS), sample(LETTERS), sample(LETTERS), sample(1:9, 1000, replace = TRUE))
+fake_gene_names <- paste0(
+  sample(LETTERS),
+  sample(LETTERS),
+  sample(LETTERS),
+  sample(1:9, 1000, replace = TRUE)
+)
+fake_gene_names <- setdiff(fake_gene_names, markers_hs_tbl$gene)
 fake_gene_names <- sample(fake_gene_names)
 
 test_that("clustermole_overlaps() wrong input", {
   expect_error(clustermole_overlaps(gene_names[1:3], species = "hs"))
   expect_error(clustermole_overlaps(gene_names[1:10000], species = "hs"))
   expect_error(clustermole_overlaps(fake_gene_names[1:100], species = "hs"))
-  expect_error(clustermole_overlaps(c(gene_names[1:2], fake_gene_names[1:5]), species = "hs"))
-  expect_error(clustermole_overlaps(c(gene_names[1:5], fake_gene_names[1:25]), species = "hs"))
+  expect_error(clustermole_overlaps(
+    c(gene_names[1:2], fake_gene_names[1:5]),
+    species = "hs"
+  ))
+  expect_error(clustermole_overlaps(
+    c(gene_names[1:5], fake_gene_names[1:25]),
+    species = "hs"
+  ))
   expect_error(clustermole_overlaps(as.list(gene_names[1:10]), species = "hs"))
 })
 
@@ -26,7 +38,10 @@ test_that("clustermole_overlaps() human input", {
 })
 
 test_that("clustermole_overlaps() human input with fake genes", {
-  overlap_tbl <- clustermole_overlaps(genes = c(gene_names[1:10], fake_gene_names[1:20]), species = "hs")
+  overlap_tbl <- clustermole_overlaps(
+    genes = c(gene_names[1:10], fake_gene_names[1:20]),
+    species = "hs"
+  )
   expect_s3_class(overlap_tbl, "tbl_df")
   expect_gt(nrow(overlap_tbl), 1)
 })
