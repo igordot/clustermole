@@ -28,11 +28,11 @@ clustermole_overlaps <- function(genes, species) {
 
   # retrieve markers
   markers_tbl <- clustermole_markers(species = species)
+  markers_tbl <- dplyr::select(markers_tbl, !"gene_original")
+  markers_tbl <- dplyr::distinct(markers_tbl)
   markers_list <- split(x = markers_tbl$gene, f = markers_tbl$celltype_full)
-  celltypes_tbl <-
-    markers_tbl |>
-    dplyr::select(-dplyr::starts_with("gene")) |>
-    dplyr::distinct()
+  celltypes_tbl <- dplyr::select(markers_tbl, !dplyr::starts_with("gene"))
+  celltypes_tbl <- dplyr::distinct(celltypes_tbl)
 
   # check that input genes overlap marker genes for a given species
   all_genes <- unique(markers_tbl$gene)

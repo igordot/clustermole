@@ -40,6 +40,8 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
   # retrieve markers and filter for genes present in the expression table
   markers_tbl <- clustermole_markers(species = species)
   markers_tbl <- dplyr::filter(markers_tbl, .data$gene %in% rownames(expr_mat))
+  markers_tbl <- dplyr::select(markers_tbl, !"gene_original")
+  markers_tbl <- dplyr::distinct(markers_tbl)
   markers_tbl <- dplyr::add_count(
     markers_tbl,
     .data$celltype_full,
@@ -48,14 +50,11 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
   markers_tbl <- dplyr::filter(markers_tbl, .data$n_genes >= 5)
 
   # convert markers to a list
-  markers_list <- dplyr::distinct(markers_tbl, .data$celltype_full, .data$gene)
-  markers_list <- split(x = markers_list$gene, f = markers_list$celltype_full)
+  markers_list <- split(x = markers_tbl$gene, f = markers_tbl$celltype_full)
 
   # create a table of cell types (without genes)
-  celltypes_tbl <-
-    markers_tbl |>
-    dplyr::select(!dplyr::starts_with("gene")) |>
-    dplyr::distinct()
+  celltypes_tbl <- dplyr::select(markers_tbl, !dplyr::starts_with("gene"))
+  celltypes_tbl <- dplyr::distinct(celltypes_tbl)
 
   # run the actual enrichment analysis
   scores_tbl <- get_scores(
@@ -64,10 +63,13 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
     method = method
   )
 
-  scores_tbl <- scores_tbl |>
-    dplyr::filter(.data$score_rank <= 100) |>
-    dplyr::inner_join(celltypes_tbl, by = "celltype_full") |>
-    dplyr::arrange(.data$cluster, .data$score_rank)
+  scores_tbl <- dplyr::filter(scores_tbl, .data$score_rank <= 100)
+  scores_tbl <- dplyr::inner_join(
+    scores_tbl,
+    celltypes_tbl,
+    by = "celltype_full"
+  )
+  scores_tbl <- dplyr::arrange(scores_tbl, .data$cluster, .data$score_rank)
   scores_tbl
 }
 
