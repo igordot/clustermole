@@ -16,7 +16,7 @@ type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 422,292 × 8
+#> # A tibble: 417,251 × 8
 #>    celltype_full        db    species organ celltype n_genes gene_original gene 
 #>    <chr>                <chr> <chr>   <chr> <chr>      <int> <chr>         <chr>
 #>  1 1-cell stage cell (… Cell… Human   Embr… 1-cell …      32 ACCSL         ACCSL
@@ -29,7 +29,7 @@ markers
 #>  8 1-cell stage cell (… Cell… Human   Embr… 1-cell …      32 CNOT11        CNOT…
 #>  9 1-cell stage cell (… Cell… Human   Embr… 1-cell …      32 DCLK2         DCLK2
 #> 10 1-cell stage cell (… Cell… Human   Embr… 1-cell …      32 DHCR7         DHCR7
-#> # ℹ 422,282 more rows
+#> # ℹ 417,241 more rows
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`

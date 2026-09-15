@@ -137,8 +137,8 @@ head(overlaps_tbl, 15)
 #>  2 B cell (Renal Cell Carcinoma) | Kidney | Human | CellMarker      CellMarker
 #>  3 DURANTE_ADULT_OLFACTORY_NEUROEPITHELIUM_B_CELLS | Human | MSigDB MSigDB    
 #>  4 IMGN_B_Fo_MLN | Mouse | SaVanT                                   SaVanT    
-#>  5 AIZARANI_LIVER_C34_MHC_II_POS_B_CELLS | Human | MSigDB           MSigDB    
-#>  6 B cells | Immune system | Human | PanglaoDB                      PanglaoDB 
+#>  5 B cells | Immune system | Human | PanglaoDB                      PanglaoDB 
+#>  6 AIZARANI_LIVER_C34_MHC_II_POS_B_CELLS | Human | MSigDB           MSigDB    
 #>  7 B cells naive | Immune system | Human | PanglaoDB                PanglaoDB 
 #>  8 IMGN_B_Fo_LN | Mouse | SaVanT                                    SaVanT    
 #>  9 IMGN_B_FrE_BM | Mouse | SaVanT                                   SaVanT    
@@ -146,8 +146,8 @@ head(overlaps_tbl, 15)
 #> 11 spleen | SaVanT                                                  SaVanT    
 #> 12 B cell | Kidney | Human | CellMarker                             CellMarker
 #> 13 FAN_EMBRYONIC_CTX_BRAIN_B_CELL | Human | MSigDB                  MSigDB    
-#> 14 IMGN_B1a_Sp | Mouse | SaVanT                                     SaVanT    
-#> 15 IMGN_B_Fo_PC | Mouse | SaVanT                                    SaVanT    
+#> 14 B cell | Kidney | Mouse | CellMarker                             CellMarker
+#> 15 IMGN_B1a_Sp | Mouse | SaVanT                                     SaVanT    
 #> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
 #> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
 ```
@@ -193,17 +193,17 @@ head(overlaps_tbl, 15)
 #>  1 IMGN_FRC_MLN | Mouse | SaVanT                                  SaVanT    
 #>  2 OMENTUM | ARCHS4                                               ARCHS4    
 #>  3 HAY_BONE_MARROW_STROMAL | Human | MSigDB                       MSigDB    
-#>  4 Schwalie et al.Nature.P3 | Adipose tissue | Mouse | CellMarker CellMarker
-#>  5 LUNG (BULK TISSUE) | ARCHS4                                    ARCHS4    
-#>  6 HPCA_Adipocytes | Human | SaVanT                               SaVanT    
-#>  7 IMGN_FRC_SLN | Mouse | SaVanT                                  SaVanT    
+#>  4 GASTRIC TISSUE (BULK) | ARCHS4                                 ARCHS4    
+#>  5 Schwalie et al.Nature.G3 | Adipose tissue | Mouse | CellMarker CellMarker
+#>  6 LUNG (BULK TISSUE) | ARCHS4                                    ARCHS4    
+#>  7 Schwalie et al.Nature.P3 | Adipose tissue | Mouse | CellMarker CellMarker
 #>  8 HBA_Adipocyte | Human | SaVanT                                 SaVanT    
-#>  9 Schwalie et al.Nature.G3 | Adipose tissue | Mouse | CellMarker CellMarker
-#> 10 GASTRIC TISSUE (BULK) | ARCHS4                                 ARCHS4    
+#>  9 HPCA_Adipocytes | Human | SaVanT                               SaVanT    
+#> 10 IMGN_FRC_SLN | Mouse | SaVanT                                  SaVanT    
 #> 11 SUBCUTANEOUS ADIPOSE TISSUE | ARCHS4                           ARCHS4    
 #> 12 ADIPOSE (BULK TISSUE) | ARCHS4                                 ARCHS4    
-#> 13 ASTROCYTE | ARCHS4                                             ARCHS4    
-#> 14 BREAST (BULK TISSUE) | ARCHS4                                  ARCHS4    
+#> 13 BREAST (BULK TISSUE) | ARCHS4                                  ARCHS4    
+#> 14 ASTROCYTE | ARCHS4                                             ARCHS4    
 #> 15 Medullary cell | Kidney | Mouse | CellMarker                   CellMarker
 #> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
 #> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
@@ -253,13 +253,13 @@ head(overlaps_tbl, 15)
 #>  6 GASTRIC TISSUE (BULK) | ARCHS4                                  ARCHS4    
 #>  7 HAY_BONE_MARROW_PLASMA_CELL | Human | MSigDB                    MSigDB    
 #>  8 Chondrogenic cell | Adipose tissue | Mouse | CellMarker         CellMarker
-#>  9 MANNO_MIDBRAIN_NEUROTYPES_HSERT | Human | MSigDB                MSigDB    
-#> 10 Intestine | Mouse | TISSUES                                     TISSUES   
-#> 11 BREAST (BULK TISSUE) | ARCHS4                                   ARCHS4    
-#> 12 RENAL CORTEX | ARCHS4                                           ARCHS4    
-#> 13 Cancer stem cell (Glioblastoma) | Brain | Human | CellMarker    CellMarker
-#> 14 LUNG (BULK TISSUE) | ARCHS4                                     ARCHS4    
-#> 15 HAIR FOLLICLE | ARCHS4                                          ARCHS4    
+#>  9 BREAST (BULK TISSUE) | ARCHS4                                   ARCHS4    
+#> 10 LUNG (BULK TISSUE) | ARCHS4                                     ARCHS4    
+#> 11 Intestine | Mouse | TISSUES                                     TISSUES   
+#> 12 MANNO_MIDBRAIN_NEUROTYPES_HSERT | Human | MSigDB                MSigDB    
+#> 13 RENAL CORTEX | ARCHS4                                           ARCHS4    
+#> 14 HAIR FOLLICLE | ARCHS4                                          ARCHS4    
+#> 15 Cancer stem cell (Glioblastoma) | Brain | Human | CellMarker    CellMarker
 #> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
 #> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
 ```
