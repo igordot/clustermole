@@ -1,11 +1,13 @@
-test_that("clustermole_markers() default params", {
+test_that("default call returns expected table shape", {
   markers_tbl <- clustermole_markers()
   expect_s3_class(markers_tbl, "tbl_df")
-  expect_equal(ncol(markers_tbl), 8)
+  expect_equal(ncol(markers_tbl), 9)
   expect_gt(nrow(markers_tbl), 100000)
+  expect_equal(sum(is.na(markers_tbl$species)), 0)
+  expect_equal(sum(is.na(markers_tbl$species_original)), 0)
 })
 
-test_that("clustermole_markers() wrong input", {
+test_that("invalid species input errors", {
   expect_error(clustermole_markers(species = ""))
   expect_error(clustermole_markers(species = "x"))
   expect_error(clustermole_markers(species = "?"))
@@ -16,7 +18,7 @@ test_that("clustermole_markers() wrong input", {
   expect_error(clustermole_markers(species = TRUE))
 })
 
-test_that("clustermole_markers() species edge cases fall back to hs", {
+test_that("multiple or missing species default to human", {
   expect_equal(
     clustermole_markers(species = c("hs", "mm")),
     clustermole_markers(species = "hs")
@@ -27,13 +29,13 @@ test_that("clustermole_markers() species edge cases fall back to hs", {
   )
 })
 
-test_that("clustermole_markers() human input", {
+test_that("requesting human species returns human markers", {
   markers_hs_tbl <- clustermole_markers(species = "hs")
   expect_s3_class(markers_hs_tbl, "tbl_df")
   expect_gt(nrow(markers_hs_tbl), 100000)
 })
 
-test_that("clustermole_markers() mouse input", {
+test_that("requesting mouse species returns mouse markers", {
   markers_mm_tbl <- clustermole_markers(species = "mm")
   expect_s3_class(markers_mm_tbl, "tbl_df")
   expect_gt(nrow(markers_mm_tbl), 100000)

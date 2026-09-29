@@ -1,4 +1,4 @@
-test_that("read_gmt() output", {
+test_that("remote GMT file loads as a tibble", {
   skip_on_cran()
   skip_if_offline(host = "software.broadinstitute.org")
   gmt_url <- paste0(

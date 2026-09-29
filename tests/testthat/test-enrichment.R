@@ -20,7 +20,7 @@ rownames(expr_mat) <- gene_names_hs
 rownames(cpm_mat) <- gene_names_hs
 rownames(log_cpm_mat) <- gene_names_hs
 
-test_that("clustermole_enrichment() wrong input", {
+test_that("invalid expression matrix input errors", {
   expect_error(clustermole_enrichment(
     as.data.frame(log_cpm_mat),
     species = "hs"
@@ -36,7 +36,7 @@ test_that("clustermole_enrichment() wrong input", {
 })
 
 # default (gsva)
-test_that("clustermole_enrichment() human input default method", {
+test_that("default method returns human enrichment results", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs"
@@ -47,7 +47,7 @@ test_that("clustermole_enrichment() human input default method", {
 })
 
 # gsva
-test_that("clustermole_enrichment() human input gsva method", {
+test_that("gsva method returns human enrichment results", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -59,7 +59,7 @@ test_that("clustermole_enrichment() human input gsva method", {
 })
 
 # ssgsea
-test_that("clustermole_enrichment() human input ssgsea method", {
+test_that("ssgsea method returns human enrichment results", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -71,7 +71,7 @@ test_that("clustermole_enrichment() human input ssgsea method", {
 })
 
 # singscore
-test_that("clustermole_enrichment() human input singscore method", {
+test_that("singscore method returns human enrichment results", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -83,7 +83,7 @@ test_that("clustermole_enrichment() human input singscore method", {
 })
 
 # combined
-test_that("clustermole_enrichment() human input all combined method", {
+test_that("combined methods return human enrichment results", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -101,7 +101,7 @@ rownames(expr_mat) <- gene_names_mm
 rownames(cpm_mat) <- gene_names_mm
 rownames(log_cpm_mat) <- gene_names_mm
 
-test_that("clustermole_enrichment() mouse input", {
+test_that("mouse expression matrix returns enrichment results", {
   enrich_mm_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "mm"
