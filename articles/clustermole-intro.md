@@ -40,21 +40,22 @@ cell type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 417,251 × 8
-#>    celltype_full         db    species organ celltype n_genes gene_origi…¹ gene 
-#>    <chr>                 <chr> <chr>   <chr> <chr>      <int> <chr>        <chr>
-#>  1 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ACCSL        ACCSL
-#>  2 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ACVR1B       ACVR…
-#>  3 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 ASF1B        ASF1B
-#>  4 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 BCL2L10      BCL2…
-#>  5 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 BLCAP        BLCAP
-#>  6 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CASC3        CASC3
-#>  7 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CLEC10A      CLEC…
-#>  8 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 CNOT11       CNOT…
-#>  9 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 DCLK2        DCLK2
-#> 10 1-cell stage cell (B… Cell… Human   Embr… 1-cell …      32 DHCR7        DHCR7
-#> # ℹ 417,241 more rows
-#> # ℹ abbreviated name: ¹​gene_original
+#> # A tibble: 527,097 × 9
+#>    celltype_full  db    species_or…¹ species organ celltype n_genes gene_origi…²
+#>    <chr>          <chr> <chr>        <chr>   <chr> <chr>      <int> <chr>       
+#>  1 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 ADAMTS2     
+#>  2 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 FN1         
+#>  3 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 KLHL1       
+#>  4 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 LIPM        
+#>  5 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 NPSR1       
+#>  6 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 NTS         
+#>  7 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 RAB38       
+#>  8 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 RXFP1       
+#>  9 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 STAC        
+#> 10 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 TLE4        
+#> # ℹ 527,087 more rows
+#> # ℹ abbreviated names: ¹​species_original, ²​gene_original
+#> # ℹ 1 more variable: gene <chr>
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`

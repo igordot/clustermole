@@ -29,13 +29,14 @@ A data frame of enrichment results with hypergeometric test p-values.
 my_genes <- c("CD2", "CD3D", "CD3E", "CD3G", "TRAC", "TRBC2", "LTB")
 my_overlaps <- clustermole_overlaps(genes = my_genes, species = "hs")
 head(my_overlaps)
-#> # A tibble: 6 × 9
-#>   celltype_full   db    species organ celltype n_genes overlap  p_value      fdr
-#>   <chr>           <chr> <chr>   <chr> <chr>      <int>   <dbl>    <dbl>    <dbl>
-#> 1 DURANTE_ADULT_… MSig… Human   ""    DURANTE…      22       6 4.36e-18 1.33e-14
-#> 2 T memory cells… Pang… Human   "Imm… T memor…      38       6 1.61e-16 2.45e-13
-#> 3 T memory cells… Pang… Mouse   "Imm… T memor…      40       6 3.57e-16 3.61e-13
-#> 4 T cells | Immu… Pang… Human   "Imm… T cells       70       6 7.67e-15 5.55e-12
-#> 5 T cells | Immu… Pang… Mouse   "Imm… T cells       69       6 9.14e-15 5.55e-12
-#> 6 AIZARANI_LIVER… MSig… Human   ""    AIZARAN…     120       6 2.14e-13 1.08e-10
+#> # A tibble: 6 × 10
+#>   celltype_full    db    species_original species organ celltype n_genes overlap
+#>   <chr>            <chr> <chr>            <chr>   <chr> <chr>      <int>   <dbl>
+#> 1 CD4+ T cell (Ga… Cell… "Human"          "HS"    Stom… CD4+ T …      23       7
+#> 2 Effector CD4+ T… ScTy… ""               ""      Immu… Effecto…      28       7
+#> 3 Naive CD4+ T ce… ScTy… ""               ""      Immu… Naive C…      28       7
+#> 4 Memory CD4+ T c… ScTy… ""               ""      Immu… Memory …      29       7
+#> 5 Effector CD8+ T… ScTy… ""               ""      Immu… Effecto…      31       7
+#> 6 Naive CD8+ T ce… ScTy… ""               ""      Immu… Naive C…      31       7
+#> # ℹ 2 more variables: p_value <dbl>, fdr <dbl>
 ```

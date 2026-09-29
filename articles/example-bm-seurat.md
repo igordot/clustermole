@@ -130,26 +130,27 @@ markers.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 9
-#>    celltype_full                                                    db        
-#>    <chr>                                                            <chr>     
-#>  1 follicular_B-cells | SaVanT                                      SaVanT    
-#>  2 B cell (Renal Cell Carcinoma) | Kidney | Human | CellMarker      CellMarker
-#>  3 DURANTE_ADULT_OLFACTORY_NEUROEPITHELIUM_B_CELLS | Human | MSigDB MSigDB    
-#>  4 IMGN_B_Fo_MLN | Mouse | SaVanT                                   SaVanT    
-#>  5 B cells | Immune system | Human | PanglaoDB                      PanglaoDB 
-#>  6 AIZARANI_LIVER_C34_MHC_II_POS_B_CELLS | Human | MSigDB           MSigDB    
-#>  7 B cells naive | Immune system | Human | PanglaoDB                PanglaoDB 
-#>  8 IMGN_B_Fo_LN | Mouse | SaVanT                                    SaVanT    
-#>  9 IMGN_B_FrE_BM | Mouse | SaVanT                                   SaVanT    
-#> 10 IMGN_B_T3_Sp | Mouse | SaVanT                                    SaVanT    
-#> 11 spleen | SaVanT                                                  SaVanT    
-#> 12 B cell | Kidney | Human | CellMarker                             CellMarker
-#> 13 FAN_EMBRYONIC_CTX_BRAIN_B_CELL | Human | MSigDB                  MSigDB    
-#> 14 B cell | Kidney | Mouse | CellMarker                             CellMarker
-#> 15 IMGN_B1a_Sp | Mouse | SaVanT                                     SaVanT    
-#> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
-#> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
+#> # A tibble: 15 × 10
+#>    celltype_full                                                           
+#>    <chr>                                                                   
+#>  1 follicular_B-cells | SaVanT                                             
+#>  2 B cell (Alzheimer's disease) [PMID:34103079] | Brain | MM | CellMarker  
+#>  3 B Cell (Renal Cell Carcinoma) | Kidney | HS | CellMatch                 
+#>  4 B cell (Renal cell carcinoma) [PMID:30093597] | Kidney | HS | CellMarker
+#>  5 B cells | Immune system | MM | PanglaoDB                                
+#>  6 IMGN_B_Fo_LN | SaVanT                                                   
+#>  7 IMGN_B_Fo_MLN | SaVanT                                                  
+#>  8 IMGN_B_T1_Sp | SaVanT                                                   
+#>  9 FAN_EMBRYONIC_CTX_BRAIN_B_CELL | HS | MSigDB                            
+#> 10 IMGN_B_Fo_PC | SaVanT                                                   
+#> 11 IMGN_B_Fo_Sp | SaVanT                                                   
+#> 12 IMGN_B_FrE_BM | SaVanT                                                  
+#> 13 IMGN_B_FrF_BM | SaVanT                                                  
+#> 14 IMGN_B_MZ_Sp | SaVanT                                                   
+#> 15 IMGN_B_T2_Sp | SaVanT                                                   
+#> # ℹ 9 more variables: db <chr>, species_original <chr>, species <chr>,
+#> #   organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>, p_value <dbl>,
+#> #   fdr <dbl>
 ```
 
 As would be expected for a well-defined population, the top results are
@@ -187,26 +188,10 @@ Check the top scoring cell types for the Adipo-CAR cluster.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 9
-#>    celltype_full                                                  db        
-#>    <chr>                                                          <chr>     
-#>  1 IMGN_FRC_MLN | Mouse | SaVanT                                  SaVanT    
-#>  2 OMENTUM | ARCHS4                                               ARCHS4    
-#>  3 HAY_BONE_MARROW_STROMAL | Human | MSigDB                       MSigDB    
-#>  4 GASTRIC TISSUE (BULK) | ARCHS4                                 ARCHS4    
-#>  5 Schwalie et al.Nature.G3 | Adipose tissue | Mouse | CellMarker CellMarker
-#>  6 LUNG (BULK TISSUE) | ARCHS4                                    ARCHS4    
-#>  7 Schwalie et al.Nature.P3 | Adipose tissue | Mouse | CellMarker CellMarker
-#>  8 HBA_Adipocyte | Human | SaVanT                                 SaVanT    
-#>  9 HPCA_Adipocytes | Human | SaVanT                               SaVanT    
-#> 10 IMGN_FRC_SLN | Mouse | SaVanT                                  SaVanT    
-#> 11 SUBCUTANEOUS ADIPOSE TISSUE | ARCHS4                           ARCHS4    
-#> 12 ADIPOSE (BULK TISSUE) | ARCHS4                                 ARCHS4    
-#> 13 BREAST (BULK TISSUE) | ARCHS4                                  ARCHS4    
-#> 14 ASTROCYTE | ARCHS4                                             ARCHS4    
-#> 15 Medullary cell | Kidney | Mouse | CellMarker                   CellMarker
-#> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
-#> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
+#> # A tibble: 15 × 10
+#> # ℹ 10 more variables: celltype_full <chr>, db <chr>, species_original <chr>,
+#> #   species <chr>, organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>,
+#> #   p_value <dbl>, fdr <dbl>
 ```
 
 The top results are more diverse than for B-cells, but related
@@ -242,26 +227,10 @@ Check the top scoring cell types for the Osteoblasts cluster.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 9
-#>    celltype_full                                                   db        
-#>    <chr>                                                           <chr>     
-#>  1 DCLK1+ progenitor cell | Large intestine | Human | CellMarker   CellMarker
-#>  2 GAO_LARGE_INTESTINE_24W_C1_DCLK1POS_PROGENITOR | Human | MSigDB MSigDB    
-#>  3 VALVE | ARCHS4                                                  ARCHS4    
-#>  4 OSTEOBLAST | ARCHS4                                             ARCHS4    
-#>  5 Cartilage | Human | TISSUES                                     TISSUES   
-#>  6 GASTRIC TISSUE (BULK) | ARCHS4                                  ARCHS4    
-#>  7 HAY_BONE_MARROW_PLASMA_CELL | Human | MSigDB                    MSigDB    
-#>  8 Chondrogenic cell | Adipose tissue | Mouse | CellMarker         CellMarker
-#>  9 BREAST (BULK TISSUE) | ARCHS4                                   ARCHS4    
-#> 10 LUNG (BULK TISSUE) | ARCHS4                                     ARCHS4    
-#> 11 Intestine | Mouse | TISSUES                                     TISSUES   
-#> 12 MANNO_MIDBRAIN_NEUROTYPES_HSERT | Human | MSigDB                MSigDB    
-#> 13 RENAL CORTEX | ARCHS4                                           ARCHS4    
-#> 14 HAIR FOLLICLE | ARCHS4                                          ARCHS4    
-#> 15 Cancer stem cell (Glioblastoma) | Brain | Human | CellMarker    CellMarker
-#> # ℹ 7 more variables: species <chr>, organ <chr>, celltype <chr>,
-#> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
+#> # A tibble: 15 × 10
+#> # ℹ 10 more variables: celltype_full <chr>, db <chr>, species_original <chr>,
+#> #   species <chr>, organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>,
+#> #   p_value <dbl>, fdr <dbl>
 ```
 
 The top results are noisier than for B-cells, but the appropriate
@@ -317,26 +286,27 @@ Check the most enriched cell types for the B-cell cluster.
 enrich_tbl |>
   filter(cluster == "B-cell") |>
   head(15)
-#> # A tibble: 15 × 9
-#>    cluster celltype_full                                                   
-#>    <chr>   <chr>                                                           
-#>  1 B-cell  naive B-cells_BLUEPRINT_1 | Human | xCell                       
-#>  2 B-cell  naive B-cells_BLUEPRINT_3 | Human | xCell                       
-#>  3 B-cell  Follicular B cell | Lymphoid tissue | Mouse | CellMarker        
-#>  4 B-cell  B-cells_HPCA_3 | Human | xCell                                  
-#>  5 B-cell  Memory B cell | Lymphoid tissue | Mouse | CellMarker            
-#>  6 B-cell  Class-switched memory B-cells_NOVERSHTERN_1 | Human | xCell     
-#>  7 B-cell  Class-switched memory B-cells_NOVERSHTERN_2 | Human | xCell     
-#>  8 B-cell  Class-switched memory B-cells_NOVERSHTERN_3 | Human | xCell     
-#>  9 B-cell  DURANTE_ADULT_OLFACTORY_NEUROEPITHELIUM_B_CELLS | Human | MSigDB
-#> 10 B-cell  Memory B-cells_HPCA_2 | Human | xCell                           
-#> 11 B-cell  M1 macrophage | Lung | Mouse | CellMarker                       
-#> 12 B-cell  Leukocyte | Blood | Human | CellMarker                          
-#> 13 B-cell  IMGN_B_T2_Sp | Mouse | SaVanT                                   
-#> 14 B-cell  follicular_B-cells | SaVanT                                     
-#> 15 B-cell  Leukocyte | Human | CellMarker                                  
-#> # ℹ 7 more variables: score <dbl>, score_rank <int>, db <chr>, species <chr>,
-#> #   organ <chr>, celltype <chr>, n_genes <int>
+#> # A tibble: 15 × 10
+#>    cluster
+#>    <chr>  
+#>  1 B-cell 
+#>  2 B-cell 
+#>  3 B-cell 
+#>  4 B-cell 
+#>  5 B-cell 
+#>  6 B-cell 
+#>  7 B-cell 
+#>  8 B-cell 
+#>  9 B-cell 
+#> 10 B-cell 
+#> 11 B-cell 
+#> 12 B-cell 
+#> 13 B-cell 
+#> 14 B-cell 
+#> 15 B-cell 
+#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
+#> #   celltype <chr>, n_genes <int>
 ```
 
 As with the previous analysis, the top results are various B-cell
@@ -351,26 +321,27 @@ Check the most enriched cell types for the Adipo-CAR cluster.
 enrich_tbl |>
   filter(cluster == "Adipo-CAR") |>
   head(15)
-#> # A tibble: 15 × 9
-#>    cluster   celltype_full                                                  
-#>    <chr>     <chr>                                                          
-#>  1 Adipo-CAR Colorectal stem cell | Colorectum | Human | CellMarker         
-#>  2 Adipo-CAR Fibroblast | Mouse | CellMarker                                
-#>  3 Adipo-CAR Cardiac progenitor cell | Heart | Human | CellMarker           
-#>  4 Adipo-CAR Rheaume et al.Nat Commun.16 | Retina | Mouse | CellMarker      
-#>  5 Adipo-CAR Erythroid cell | Human | TISSUES                               
-#>  6 Adipo-CAR IMGN_Fi_MTS15+_Th | Mouse | SaVanT                             
-#>  7 Adipo-CAR IMGN_FRC_MLN | Mouse | SaVanT                                  
-#>  8 Adipo-CAR Intestinal stem cell | Intestine | Mouse | CellMarker          
-#>  9 Adipo-CAR IMGN_FRC_SLN | Mouse | SaVanT                                  
-#> 10 Adipo-CAR Interneuron-selective cell | Brain | Mouse | CellMarker        
-#> 11 Adipo-CAR Smooth muscle cell | Brain | Mouse | CellMarker                
-#> 12 Adipo-CAR Glutaminergic neurons | Brain | Human | PanglaoDB              
-#> 13 Adipo-CAR Glutaminergic neurons | Brain | Mouse | PanglaoDB              
-#> 14 Adipo-CAR CUI_DEVELOPING_HEART_LEFT_ATRIAL_CARDIOMYOCYTE | Human | MSigDB
-#> 15 Adipo-CAR HPCA_Fibroblasts | Human | SaVanT                              
-#> # ℹ 7 more variables: score <dbl>, score_rank <int>, db <chr>, species <chr>,
-#> #   organ <chr>, celltype <chr>, n_genes <int>
+#> # A tibble: 15 × 10
+#>    cluster  
+#>    <chr>    
+#>  1 Adipo-CAR
+#>  2 Adipo-CAR
+#>  3 Adipo-CAR
+#>  4 Adipo-CAR
+#>  5 Adipo-CAR
+#>  6 Adipo-CAR
+#>  7 Adipo-CAR
+#>  8 Adipo-CAR
+#>  9 Adipo-CAR
+#> 10 Adipo-CAR
+#> 11 Adipo-CAR
+#> 12 Adipo-CAR
+#> 13 Adipo-CAR
+#> 14 Adipo-CAR
+#> 15 Adipo-CAR
+#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
+#> #   celltype <chr>, n_genes <int>
 ```
 
 ### Osteoblasts
@@ -382,24 +353,25 @@ Check the most enriched cell types for the Osteoblasts cluster.
 enrich_tbl |>
   filter(cluster == "Osteoblasts") |>
   head(15)
-#> # A tibble: 15 × 9
-#>    cluster     celltype_full                                                
-#>    <chr>       <chr>                                                        
-#>  1 Osteoblasts Ito cell (hepatic stellate cell) | Liver | Human | CellMarker
-#>  2 Osteoblasts Intestinal stem cell | Intestine | Mouse | CellMarker        
-#>  3 Osteoblasts Rheaume et al.Nat Commun.37 | Retina | Mouse | CellMarker    
-#>  4 Osteoblasts Osteocyte | Bone | Human | CellMarker                        
-#>  5 Osteoblasts Cornea | Human | TISSUES                                     
-#>  6 Osteoblasts Keratinocytes_ENCODE_1 | Human | xCell                       
-#>  7 Osteoblasts Radial glial cell | Human | CellMarker                       
-#>  8 Osteoblasts Rheaume et al.Nat Commun.34 | Retina | Mouse | CellMarker    
-#>  9 Osteoblasts Sebocytes_FANTOM_2 | Human | xCell                           
-#> 10 Osteoblasts Melanocytes_ENCODE_2 | Human | xCell                         
-#> 11 Osteoblasts Rheaume et al.Nat Commun.4 | Retina | Mouse | CellMarker     
-#> 12 Osteoblasts Follicular cells | Thyroid | Human | PanglaoDB               
-#> 13 Osteoblasts Follicular cells | Thyroid | Mouse | PanglaoDB               
-#> 14 Osteoblasts osteoblast_day14 | SaVanT                                    
-#> 15 Osteoblasts Lee et al.Cell.E | Lung | Mouse | CellMarker                 
-#> # ℹ 7 more variables: score <dbl>, score_rank <int>, db <chr>, species <chr>,
-#> #   organ <chr>, celltype <chr>, n_genes <int>
+#> # A tibble: 15 × 10
+#>    cluster    
+#>    <chr>      
+#>  1 Osteoblasts
+#>  2 Osteoblasts
+#>  3 Osteoblasts
+#>  4 Osteoblasts
+#>  5 Osteoblasts
+#>  6 Osteoblasts
+#>  7 Osteoblasts
+#>  8 Osteoblasts
+#>  9 Osteoblasts
+#> 10 Osteoblasts
+#> 11 Osteoblasts
+#> 12 Osteoblasts
+#> 13 Osteoblasts
+#> 14 Osteoblasts
+#> 15 Osteoblasts
+#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
+#> #   celltype <chr>, n_genes <int>
 ```
