@@ -7,8 +7,8 @@
 clustermole_enrichment(expr_mat, species, method = "gsva")
 }
 \arguments{
-\item{expr_mat}{Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes
-as rows and clusters/populations/samples as columns.}
+\item{expr_mat}{Numeric matrix or data frame of logCPMs or logTPMs.
+Must contain at least 5,000 gene rows and five cluster/population columns.}
 
 \item{species}{Gene symbol species: \code{hs} for human or \code{mm} for mouse.}
 

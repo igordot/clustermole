@@ -17,6 +17,7 @@ importFrom(GSVA,
 )
 importFrom(dplyr,
   add_count,
+  all_of,
   arrange,
   desc,
   distinct,

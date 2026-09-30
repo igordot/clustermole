@@ -2,8 +2,9 @@
 #'
 #' Score cell type signatures using the full gene expression matrix.
 #'
-#' @param expr_mat Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes
-#'   as rows and clusters/populations/samples as columns.
+#' @param expr_mat Numeric matrix or data frame of logCPMs or logTPMs.
+#'   Must contain at least 5,000 gene rows and five cluster/population columns.
+
 #' @inheritParams clustermole_markers species
 #' @param method Enrichment method: `gsva` (default), `ssgsea`, `singscore`, or
 #'   `all` to combine ranks from all three methods. See references below.
@@ -43,8 +44,11 @@
 #' # )
 clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
   # check that the expression matrix seems reasonable
-  if (!is(expr_mat, "matrix")) {
-    stop("expression matrix is not a matrix")
+  if (is.data.frame(expr_mat)) {
+    expr_mat <- as.matrix(expr_mat)
+  }
+  if (!is(expr_mat, "matrix") || !is.numeric(expr_mat)) {
+    stop("expression data must be a numeric matrix or data frame")
   }
   if (nrow(expr_mat) < 5000) {
     stop("expression matrix does not appear to be complete (too few rows)")

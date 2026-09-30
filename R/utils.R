@@ -6,6 +6,7 @@
 #'
 #' @return A data frame with gene sets and genes, one gene per row.
 #'
+#' @importFrom dplyr all_of
 #' @importFrom tibble enframe
 #' @importFrom tidyr unnest
 #' @export
