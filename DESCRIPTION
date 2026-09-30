@@ -15,7 +15,7 @@ BugReports: https://github.com/igordot/clustermole/issues
 Depends: 
     R (>= 4.3)
 Imports: 
-    dplyr,
+    dplyr (>= 1.1.0),
     GSEABase,
     GSVA (>= 1.50.0),
     methods,
