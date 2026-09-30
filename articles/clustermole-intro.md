@@ -40,22 +40,21 @@ cell type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 522,188 × 9
-#>    celltype_full  db    species_or…¹ species organ celltype n_genes gene_origi…²
-#>    <chr>          <chr> <chr>        <chr>   <chr> <chr>      <int> <chr>       
-#>  1 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 ADAMTS2     
-#>  2 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 FN1         
-#>  3 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 KLHL1       
-#>  4 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 LIPM        
-#>  5 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 NPSR1       
-#>  6 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 NTS         
-#>  7 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 RAB38       
-#>  8 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 RXFP1       
-#>  9 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 STAC        
-#> 10 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 TLE4        
-#> # ℹ 522,178 more rows
-#> # ℹ abbreviated names: ¹​species_original, ²​gene_original
-#> # ℹ 1 more variable: gene <chr>
+#> # A tibble: 521,558 × 8
+#>    celltype_full         db    species organ celltype gene_origi…¹ gene  n_genes
+#>    <chr>                 <chr> <chr>   <chr> <chr>    <chr>        <chr>   <int>
+#>  1 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … ADAMTS2      ADAM…      10
+#>  2 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … FN1          FN1        10
+#>  3 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … KLHL1        KLHL1      10
+#>  4 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … LIPM         LIPM       10
+#>  5 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … NPSR1        NPSR1      10
+#>  6 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … NTS          NTS        10
+#>  7 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … RAB38        RAB38      10
+#>  8 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … RXFP1        RXFP1      10
+#>  9 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … STAC         STAC       10
+#> 10 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … TLE4         TLE4       10
+#> # ℹ 521,548 more rows
+#> # ℹ abbreviated name: ¹​gene_original
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`

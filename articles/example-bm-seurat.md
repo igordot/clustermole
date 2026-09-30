@@ -130,7 +130,7 @@ markers.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 10
+#> # A tibble: 15 × 9
 #>    celltype_full                                                           
 #>    <chr>                                                                   
 #>  1 follicular_B-cells | SaVanT                                             
@@ -148,9 +148,8 @@ head(overlaps_tbl, 15)
 #> 13 IMGN_B_FrE_BM | SaVanT                                                  
 #> 14 IMGN_B_FrF_BM | SaVanT                                                  
 #> 15 IMGN_B_MZ_Sp | SaVanT                                                   
-#> # ℹ 9 more variables: db <chr>, species_original <chr>, species <chr>,
-#> #   organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>, p_value <dbl>,
-#> #   fdr <dbl>
+#> # ℹ 8 more variables: db <chr>, species <chr>, organ <chr>, celltype <chr>,
+#> #   n_genes <int>, overlap <dbl>, p_value <dbl>, fdr <dbl>
 ```
 
 As would be expected for a well-defined population, the top results are
@@ -188,10 +187,10 @@ Check the top scoring cell types for the Adipo-CAR cluster.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 10
-#> # ℹ 10 more variables: celltype_full <chr>, db <chr>, species_original <chr>,
-#> #   species <chr>, organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>,
-#> #   p_value <dbl>, fdr <dbl>
+#> # A tibble: 15 × 9
+#> # ℹ 9 more variables: celltype_full <chr>, db <chr>, species <chr>,
+#> #   organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>, p_value <dbl>,
+#> #   fdr <dbl>
 ```
 
 The top results are more diverse than for B-cells, but related
@@ -227,10 +226,10 @@ Check the top scoring cell types for the Osteoblasts cluster.
 ``` r
 
 head(overlaps_tbl, 15)
-#> # A tibble: 15 × 10
-#> # ℹ 10 more variables: celltype_full <chr>, db <chr>, species_original <chr>,
-#> #   species <chr>, organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>,
-#> #   p_value <dbl>, fdr <dbl>
+#> # A tibble: 15 × 9
+#> # ℹ 9 more variables: celltype_full <chr>, db <chr>, species <chr>,
+#> #   organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>, p_value <dbl>,
+#> #   fdr <dbl>
 ```
 
 The top results are noisier than for B-cells, but the appropriate
@@ -286,7 +285,7 @@ Check the most enriched cell types for the B-cell cluster.
 enrich_tbl |>
   filter(cluster == "B-cell") |>
   head(15)
-#> # A tibble: 15 × 10
+#> # A tibble: 15 × 9
 #>    cluster
 #>    <chr>  
 #>  1 B-cell 
@@ -304,9 +303,8 @@ enrich_tbl |>
 #> 13 B-cell 
 #> 14 B-cell 
 #> 15 B-cell 
-#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
-#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
-#> #   celltype <chr>, n_genes <int>
+#> # ℹ 8 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species <chr>, organ <chr>, celltype <chr>, n_genes <int>
 ```
 
 As with the previous analysis, the top results are various B-cell
@@ -321,7 +319,7 @@ Check the most enriched cell types for the Adipo-CAR cluster.
 enrich_tbl |>
   filter(cluster == "Adipo-CAR") |>
   head(15)
-#> # A tibble: 15 × 10
+#> # A tibble: 15 × 9
 #>    cluster  
 #>    <chr>    
 #>  1 Adipo-CAR
@@ -339,9 +337,8 @@ enrich_tbl |>
 #> 13 Adipo-CAR
 #> 14 Adipo-CAR
 #> 15 Adipo-CAR
-#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
-#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
-#> #   celltype <chr>, n_genes <int>
+#> # ℹ 8 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species <chr>, organ <chr>, celltype <chr>, n_genes <int>
 ```
 
 ### Osteoblasts
@@ -353,7 +350,7 @@ Check the most enriched cell types for the Osteoblasts cluster.
 enrich_tbl |>
   filter(cluster == "Osteoblasts") |>
   head(15)
-#> # A tibble: 15 × 10
+#> # A tibble: 15 × 9
 #>    cluster    
 #>    <chr>      
 #>  1 Osteoblasts
@@ -371,7 +368,6 @@ enrich_tbl |>
 #> 13 Osteoblasts
 #> 14 Osteoblasts
 #> 15 Osteoblasts
-#> # ℹ 9 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
-#> #   db <chr>, species_original <chr>, species <chr>, organ <chr>,
-#> #   celltype <chr>, n_genes <int>
+#> # ℹ 8 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
+#> #   db <chr>, species <chr>, organ <chr>, celltype <chr>, n_genes <int>
 ```
