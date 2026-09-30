@@ -142,12 +142,12 @@ head(overlaps_tbl, 15)
 #>  7 IMGN_B_Fo_MLN | SaVanT                                                  
 #>  8 IMGN_B_T1_Sp | SaVanT                                                   
 #>  9 FAN_EMBRYONIC_CTX_BRAIN_B_CELL | HS | MSigDB                            
-#> 10 IMGN_B_Fo_PC | SaVanT                                                   
-#> 11 IMGN_B_Fo_Sp | SaVanT                                                   
-#> 12 IMGN_B_FrE_BM | SaVanT                                                  
-#> 13 IMGN_B_FrF_BM | SaVanT                                                  
-#> 14 IMGN_B_MZ_Sp | SaVanT                                                   
-#> 15 IMGN_B_T2_Sp | SaVanT                                                   
+#> 10 spleen | SaVanT                                                         
+#> 11 IMGN_B_Fo_PC | SaVanT                                                   
+#> 12 IMGN_B_Fo_Sp | SaVanT                                                   
+#> 13 IMGN_B_FrE_BM | SaVanT                                                  
+#> 14 IMGN_B_FrF_BM | SaVanT                                                  
+#> 15 IMGN_B_MZ_Sp | SaVanT                                                   
 #> # ℹ 9 more variables: db <chr>, species_original <chr>, species <chr>,
 #> #   organ <chr>, celltype <chr>, n_genes <int>, overlap <dbl>, p_value <dbl>,
 #> #   fdr <dbl>

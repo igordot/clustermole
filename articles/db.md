@@ -16,7 +16,7 @@ type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 527,097 × 9
+#> # A tibble: 522,188 × 9
 #>    celltype_full           db    species_original species organ celltype n_genes
 #>    <chr>                   <chr> <chr>            <chr>   <chr> <chr>      <int>
 #>  1 (Pro-) Subiculum | Hip… ScTy… ""               ""      Hipp… (Pro-) …      10
@@ -29,7 +29,7 @@ markers
 #>  8 (Pro-) Subiculum | Hip… ScTy… ""               ""      Hipp… (Pro-) …      10
 #>  9 (Pro-) Subiculum | Hip… ScTy… ""               ""      Hipp… (Pro-) …      10
 #> 10 (Pro-) Subiculum | Hip… ScTy… ""               ""      Hipp… (Pro-) …      10
-#> # ℹ 527,087 more rows
+#> # ℹ 522,178 more rows
 #> # ℹ 2 more variables: gene_original <chr>, gene <chr>
 ```
 
@@ -46,7 +46,7 @@ Check the total number of available cell types.
 ``` r
 
 length(unique(markers$celltype_full))
-#> [1] 13351
+#> [1] 13350
 ```
 
 ## Cell types by source database
@@ -61,7 +61,7 @@ distinct(markers, celltype_full, db) |> count(db)
 #>    <chr>        <int>
 #>  1 CellMarker    8097
 #>  2 CellMatch      836
-#>  3 CellTaxonomy   668
+#>  3 CellTaxonomy   667
 #>  4 DISCO          388
 #>  5 HPA             70
 #>  6 MSigDB        1084
@@ -85,7 +85,7 @@ distinct(markers, celltype_full, species) |> count(species)
 #>   <chr>   <int>
 #> 1 ""       1262
 #> 2 "HS"     8951
-#> 3 "MM"     3138
+#> 3 "MM"     3137
 ```
 
 ## Cell types by organ

@@ -40,7 +40,7 @@ cell type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 527,097 × 9
+#> # A tibble: 522,188 × 9
 #>    celltype_full  db    species_or…¹ species organ celltype n_genes gene_origi…²
 #>    <chr>          <chr> <chr>        <chr>   <chr> <chr>      <int> <chr>       
 #>  1 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 ADAMTS2     
@@ -53,7 +53,7 @@ markers
 #>  8 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 RXFP1       
 #>  9 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 STAC        
 #> 10 (Pro-) Subicu… ScTy… ""           ""      Hipp… (Pro-) …      10 TLE4        
-#> # ℹ 527,087 more rows
+#> # ℹ 522,178 more rows
 #> # ℹ abbreviated names: ¹​species_original, ²​gene_original
 #> # ℹ 1 more variable: gene <chr>
 ```
