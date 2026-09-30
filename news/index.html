@@ -32,18 +32,40 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="clustermole-development-version">clustermole (development version)<a class="anchor" aria-label="anchor" href="#clustermole-development-version"></a></h2>
+<ul><li>Adds HPA, ScType, CellTaxonomy, CellMatch, and DISCO marker databases (11 total).</li>
+<li>Updates CellMarker to version 3.0.</li>
+<li>Converts known gene aliases to their canonical symbol in the source databases.</li>
+<li>
+<code><a href="../reference/clustermole_enrichment.html">clustermole_enrichment()</a></code> accepts data frames and converts them to matrices automatically.</li>
+<li>
+<code><a href="../reference/clustermole_enrichment.html">clustermole_enrichment()</a></code> removes duplicate markers before analysis.</li>
+<li>
+<code><a href="../reference/clustermole_markers.html">clustermole_markers()</a></code> computes species-specific signature gene counts.</li>
+<li>
+<code><a href="../reference/clustermole_markers.html">clustermole_markers()</a></code> excludes genes without a symbol for the requested species.</li>
+<li>
+<code><a href="../reference/clustermole_markers.html">clustermole_markers()</a></code> removes duplicate rows caused by tied ortholog mappings.</li>
+<li>
+<code><a href="../reference/clustermole_overlaps.html">clustermole_overlaps()</a></code> now uses a proportional threshold for its species-mismatch check.</li>
+<li>
+<code><a href="../reference/clustermole_overlaps.html">clustermole_overlaps()</a></code> removes duplicate markers before analysis.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.1" id="clustermole-111">clustermole 1.1.1<a class="anchor" aria-label="anchor" href="#clustermole-111"></a></h2><p class="text-muted">CRAN release: 2024-01-08</p>
-<ul><li>Updated internal GSVA and tidyselect function calls.</li>
+<ul><li>Fixes internal GSVA and tidyselect function calls.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="clustermole-110">clustermole 1.1.0<a class="anchor" aria-label="anchor" href="#clustermole-110"></a></h2><p class="text-muted">CRAN release: 2021-01-26</p>
-<ul><li>Added singscore enrichment method.</li>
-<li>Added combined enrichment method.</li>
-<li>Updated cell type markers.</li>
+<ul><li>
+<code><a href="../reference/clustermole_enrichment.html">clustermole_enrichment()</a></code> gains a <code>singscore</code> method.</li>
+<li>
+<code><a href="../reference/clustermole_enrichment.html">clustermole_enrichment()</a></code> gains a combined enrichment method.</li>
+<li>Updates cell type markers.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.1" id="clustermole-101">clustermole 1.0.1<a class="anchor" aria-label="anchor" href="#clustermole-101"></a></h2><p class="text-muted">CRAN release: 2020-01-27</p>
-<ul><li>Updated documentation.</li>
+<ul><li>Updates the documentation.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="clustermole-100">clustermole 1.0.0<a class="anchor" aria-label="anchor" href="#clustermole-100"></a></h2><p class="text-muted">CRAN release: 2020-01-20</p>
