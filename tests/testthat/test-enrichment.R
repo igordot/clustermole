@@ -22,9 +22,10 @@ rownames(log_cpm_mat) <- gene_names_hs
 
 test_that("invalid expression matrix input errors", {
   expect_error(clustermole_enrichment(
-    as.data.frame(log_cpm_mat),
+    transform(as.data.frame(log_cpm_mat), C1 = "invalid"),
     species = "hs"
   ))
+  expect_error(clustermole_enrichment(as.list(log_cpm_mat), species = "hs"))
   expect_error(clustermole_enrichment(log_cpm_mat[1:100, ], species = "hs"))
   expect_error(clustermole_enrichment(log_cpm_mat[, 1:3], species = "hs"))
   expect_error(clustermole_enrichment(cpm_mat, species = "hs"))
@@ -36,7 +37,7 @@ test_that("invalid expression matrix input errors", {
 })
 
 # default (gsva)
-test_that("default method returns human enrichment results", {
+test_that("matrix and data frame inputs give the same enrichment", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs"
@@ -44,6 +45,10 @@ test_that("default method returns human enrichment results", {
   expect_s3_class(enrich_hs_tbl, "tbl_df")
   expect_gt(nrow(enrich_hs_tbl), 100)
   expect_equal(length(unique(enrich_hs_tbl$cluster)), 5)
+  expect_equal(
+    clustermole_enrichment(as.data.frame(log_cpm_mat), species = "hs"),
+    enrich_hs_tbl
+  )
 })
 
 # gsva

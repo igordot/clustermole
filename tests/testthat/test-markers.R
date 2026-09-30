@@ -53,6 +53,27 @@ test_that("species-specific marker table excludes unmapped genes", {
   expect_equal(sum(is.na(clustermole_markers("mm")$gene)), 0)
 })
 
+test_that("every signature keeps at least 5 genes per species", {
+  hs_sizes <- dplyr::distinct(clustermole_markers("hs"), celltype_full, n_genes)
+  mm_sizes <- dplyr::distinct(clustermole_markers("mm"), celltype_full, n_genes)
+  expect_gte(min(hs_sizes$n_genes), 5)
+  expect_gte(min(mm_sizes$n_genes), 5)
+})
+
+test_that("n_genes counts unique genes, not rows", {
+  markers_mm <- clustermole_markers("mm")
+  reported_sizes <-
+    markers_mm |>
+    dplyr::distinct(celltype_full, n_genes) |>
+    dplyr::arrange(celltype_full)
+  actual_sizes <-
+    markers_mm |>
+    dplyr::distinct(celltype_full, gene) |>
+    dplyr::count(celltype_full, name = "n_genes") |>
+    dplyr::arrange(celltype_full)
+  expect_equal(reported_sizes, actual_sizes)
+})
+
 test_that("known human markers preserve native symbols without orthologs", {
   genes <- c("CEACAM6", "FCGR2C", "SIGLEC7")
   markers <- dplyr::filter(
