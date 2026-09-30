@@ -12,8 +12,8 @@ clustermole_enrichment(expr_mat, species, method = "gsva")
 
 - expr_mat:
 
-  Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes as rows
-  and clusters/populations/samples as columns.
+  Numeric matrix or data frame of logCPMs or logTPMs. Must contain at
+  least 5,000 gene rows and five cluster/population columns.
 
 - species:
 
