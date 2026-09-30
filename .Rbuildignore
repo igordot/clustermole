@@ -17,3 +17,6 @@
 ^vignettes/example-bm-seurat\.Rmd$
 ^[.]?air[.]toml$
 ^\.vscode$
+^\.claude$
+^\.remember$
+^CLAUDE\.md$

@@ -4,7 +4,6 @@ export(clustermole_enrichment)
 export(clustermole_markers)
 export(clustermole_overlaps)
 export(read_gmt)
-import(dplyr)
 import(methods)
 import(utils)
 importFrom(GSEABase,
@@ -15,6 +14,22 @@ importFrom(GSVA,
   gsva,
   gsvaParam,
   ssgseaParam
+)
+importFrom(dplyr,
+  add_count,
+  arrange,
+  desc,
+  distinct,
+  filter,
+  full_join,
+  group_by,
+  inner_join,
+  mutate,
+  n_distinct,
+  rename,
+  select,
+  starts_with,
+  ungroup
 )
 importFrom(rlang,.data)
 importFrom(singscore,
@@ -31,6 +46,7 @@ importFrom(tibble,
   enframe
 )
 importFrom(tidyr,
+  drop_na,
   gather,
   unnest
 )

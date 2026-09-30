@@ -7,13 +7,23 @@
 clustermole_markers(species = c("hs", "mm"))
 }
 \arguments{
-\item{species}{Species: \code{hs} for human or \code{mm} for mouse.}
+\item{species}{Gene symbol species: \code{hs} for human or \code{mm} for mouse.}
 }
 \value{
-A data frame of cell type markers (one gene per row).
+A data frame of cell type markers with these columns:
+\itemize{
+\item \code{gene}: Canonical gene symbol for the requested species.
+\item \code{gene_original}: Original source gene symbol.
+\item \code{celltype_full}: Full cell type signature identifier.
+\item \code{db}: Source database.
+\item \code{celltype}: Cell type label.
+\item \code{organ}: Organ label.
+\item \code{species}: Source signature species, if known.
+\item \code{n_genes}: Gene count per signature.
+}
 }
 \description{
-Retrieve the full list of cell type markers in the \code{clustermole} database.
+Retrieve cell type markers from the \code{clustermole} database.
 }
 \examples{
 markers <- clustermole_markers()

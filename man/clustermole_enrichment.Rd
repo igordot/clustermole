@@ -7,25 +7,47 @@
 clustermole_enrichment(expr_mat, species, method = "gsva")
 }
 \arguments{
-\item{expr_mat}{Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes as rows and clusters/populations/samples as columns.}
+\item{expr_mat}{Expression matrix (logCPMs, logFPKMs, or logTPMs) with genes
+as rows and clusters/populations/samples as columns.}
 
-\item{species}{Species: \code{hs} for human or \code{mm} for mouse.}
+\item{species}{Gene symbol species: \code{hs} for human or \code{mm} for mouse.}
 
-\item{method}{Enrichment method: \code{ssgsea}, \code{gsva}, \code{singscore}, or \code{all}. The method to use for the estimation of gene set enrichment scores. The options are ssGSEA (Barbie et al, 2009), GSVA (Hänzelmann et al, 2013), singscore (Foroutan et al, 2018), or a combination of all three methods.}
+\item{method}{Enrichment method: \code{gsva} (default), \code{ssgsea}, \code{singscore}, or
+\code{all} to combine ranks from all three methods. See references below.}
 }
 \value{
-A data frame of enrichment results.
+A data frame with one row per returned signature and input column:
+\itemize{
+\item \code{cluster}: Input column name.
+\item \code{score}: Enrichment score (higher means greater enrichment).
+\item \code{score_rank}: Signature rank (lower means greater enrichment).
+\item Signature metadata (see \code{\link[=clustermole_markers]{clustermole_markers()}}).
+}
+
+With \code{method = "all"}, these columns replace \code{score}:
+\itemize{
+\item \verb{score_rank_\{method\}}: The ranks from each method.
+\item \verb{score_ranks_\{stat\}}: Minimum, mean, and median ranks across methods.
+}
 }
 \description{
-Perform enrichment of cell type signatures based on the full gene expression matrix.
+Score cell type signatures using the full gene expression matrix.
 }
 \examples{
-# my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+# my_enrichment <- clustermole_enrichment(
+#   expr_mat = my_expr_mat, species = "hs"
+# )
 }
 \references{
-Barbie, D., Tamayo, P., Boehm, J. et al. Systematic RNA interference reveals that oncogenic KRAS-driven cancers require TBK1. \emph{Nature} 462, 108–112 (2009). \doi{10.1038/nature08460}
+Barbie, D., Tamayo, P., Boehm, J. et al. Systematic RNA interference reveals
+that oncogenic KRAS-driven cancers require TBK1. \emph{Nature} 462, 108–112
+(2009). \doi{10.1038/nature08460}
 
-Hänzelmann, S., Castelo, R. & Guinney, J. GSVA: Gene set variation analysis for microarray and RNA-Seq data. \emph{BMC Bioinformatics} 14, 7 (2013). \doi{10.1186/1471-2105-14-7}
+Hänzelmann, S., Castelo, R. & Guinney, J. GSVA: Gene set variation analysis
+for microarray and RNA-Seq data. \emph{BMC Bioinformatics} 14, 7 (2013).
+\doi{10.1186/1471-2105-14-7}
 
-Foroutan, M., Bhuva, D.D., Lyu, R. et al. Single sample scoring of molecular phenotypes. \emph{BMC Bioinformatics} 19, 404 (2018). \doi{10.1186/s12859-018-2435-4}
+Foroutan, M., Bhuva, D.D., Lyu, R. et al. Single sample scoring of molecular
+phenotypes. \emph{BMC Bioinformatics} 19, 404 (2018).
+\doi{10.1186/s12859-018-2435-4}
 }

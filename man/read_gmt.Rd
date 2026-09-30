@@ -7,14 +7,14 @@
 read_gmt(file, geneset_label = "celltype", gene_label = "gene")
 }
 \arguments{
-\item{file}{A connection object or a character string (can be a URL).}
+\item{file}{A file path, URL, or connection.}
 
-\item{geneset_label}{Column name for gene sets (first column of the GMT file) in the output data frame.}
+\item{geneset_label}{Output column name for gene sets (GMT column 1).}
 
-\item{gene_label}{Column name for genes (variable columns of the GMT file) in the output data frame.}
+\item{gene_label}{Output column name for genes (GMT columns 3 onward).}
 }
 \value{
-A data frame with gene sets as the first column and genes as the second column (one gene per row).
+A data frame with gene sets and genes, one gene per row.
 }
 \description{
 Read a GMT file into a data frame
