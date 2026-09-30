@@ -16,7 +16,7 @@ type markers.
 
 markers <- clustermole_markers(species = "hs")
 markers
-#> # A tibble: 521,558 × 8
+#> # A tibble: 521,262 × 8
 #>    celltype_full        db    species organ celltype gene_original gene  n_genes
 #>    <chr>                <chr> <chr>   <chr> <chr>    <chr>         <chr>   <int>
 #>  1 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … ADAMTS2       ADAM…      10
@@ -29,7 +29,7 @@ markers
 #>  8 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … RXFP1         RXFP1      10
 #>  9 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … STAC          STAC       10
 #> 10 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … TLE4          TLE4       10
-#> # ℹ 521,548 more rows
+#> # ℹ 521,252 more rows
 ```
 
 Each row contains a gene and a cell type associated with it. The `gene`
@@ -45,7 +45,7 @@ Check the total number of available cell types.
 ``` r
 
 length(unique(markers$celltype_full))
-#> [1] 13186
+#> [1] 13130
 ```
 
 ## Cell types by source database
@@ -58,9 +58,9 @@ distinct(markers, celltype_full, db) |> count(db)
 #> # A tibble: 11 × 2
 #>    db               n
 #>    <chr>        <int>
-#>  1 CellMarker    7975
-#>  2 CellMatch      820
-#>  3 CellTaxonomy   648
+#>  1 CellMarker    7922
+#>  2 CellMatch      818
+#>  3 CellTaxonomy   647
 #>  4 DISCO          388
 #>  5 HPA             70
 #>  6 MSigDB        1082
@@ -82,9 +82,9 @@ distinct(markers, celltype_full, species) |> count(species)
 #> # A tibble: 3 × 2
 #>   species     n
 #>   <chr>   <int>
-#> 1 ""       1239
-#> 2 "HS"     8950
-#> 3 "MM"     2997
+#> 1 ""       1216
+#> 2 "HS"     8946
+#> 3 "MM"     2968
 ```
 
 ## Cell types by organ
@@ -95,20 +95,20 @@ all cell types).
 ``` r
 
 distinct(markers, celltype_full, organ) |> count(organ, sort = TRUE)
-#> # A tibble: 386 × 2
+#> # A tibble: 383 × 2
 #>    organ                  n
 #>    <chr>              <int>
-#>  1 ""                  3687
-#>  2 "Brain"              799
-#>  3 "Lung"               664
-#>  4 "Liver"              538
+#>  1 ""                  3686
+#>  2 "Brain"              798
+#>  3 "Lung"               659
+#>  4 "Liver"              534
 #>  5 "Peripheral blood"   521
-#>  6 "Skin"               498
-#>  7 "Bone marrow"        428
-#>  8 "Kidney"             428
+#>  6 "Skin"               497
+#>  7 "Kidney"             428
+#>  8 "Bone marrow"        427
 #>  9 "Pancreas"           315
-#> 10 "Breast"             294
-#> # ℹ 376 more rows
+#> 10 "Breast"             292
+#> # ℹ 373 more rows
 ```
 
 ## Package version

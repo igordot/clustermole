@@ -12,22 +12,19 @@ read_gmt(file, geneset_label = "celltype", gene_label = "gene")
 
 - file:
 
-  A connection object or a character string (can be a URL).
+  A file path, URL, or connection.
 
 - geneset_label:
 
-  Column name for gene sets (first column of the GMT file) in the output
-  data frame.
+  Output column name for gene sets (GMT column 1).
 
 - gene_label:
 
-  Column name for genes (variable columns of the GMT file) in the output
-  data frame.
+  Output column name for genes (GMT columns 3 onward).
 
 ## Value
 
-A data frame with gene sets as the first column and genes as the second
-column (one gene per row).
+A data frame with gene sets and genes, one gene per row.
 
 ## Examples
 

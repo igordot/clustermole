@@ -1,7 +1,6 @@
 # Cell types based on the expression of all genes
 
-Perform enrichment of cell type signatures based on the full gene
-expression matrix.
+Score cell type signatures using the full gene expression matrix.
 
 ## Usage
 
@@ -18,19 +17,31 @@ clustermole_enrichment(expr_mat, species, method = "gsva")
 
 - species:
 
-  Species: `hs` for human or `mm` for mouse.
+  Gene symbol species: `hs` for human or `mm` for mouse.
 
 - method:
 
-  Enrichment method: `ssgsea`, `gsva`, `singscore`, or `all`. The method
-  to use for the estimation of gene set enrichment scores. The options
-  are ssGSEA (Barbie et al, 2009), GSVA (Hänzelmann et al, 2013),
-  singscore (Foroutan et al, 2018), or a combination of all three
-  methods.
+  Enrichment method: `gsva` (default), `ssgsea`, `singscore`, or `all`
+  to combine ranks from all three methods. See references below.
 
 ## Value
 
-A data frame of enrichment results.
+A data frame with one row per returned signature and input column:
+
+- `cluster`: Input column name.
+
+- `score`: Enrichment score (higher means greater enrichment).
+
+- `score_rank`: Signature rank (lower means greater enrichment).
+
+- Signature metadata (see
+  [`clustermole_markers()`](https://igordot.github.io/clustermole/reference/clustermole_markers.md)).
+
+With `method = "all"`, these columns replace `score`:
+
+- `score_rank_{method}`: The ranks from each method.
+
+- `score_ranks_{stat}`: Minimum, mean, and median ranks across methods.
 
 ## References
 
@@ -51,5 +62,7 @@ molecular phenotypes. *BMC Bioinformatics* 19, 404 (2018).
 ## Examples
 
 ``` r
-# my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+# my_enrichment <- clustermole_enrichment(
+#   expr_mat = my_expr_mat, species = "hs"
+# )
 ```

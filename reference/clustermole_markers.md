@@ -1,7 +1,6 @@
 # Available cell type markers
 
-Retrieve the full list of cell type markers in the `clustermole`
-database.
+Retrieve cell type markers from the `clustermole` database.
 
 ## Usage
 
@@ -13,11 +12,27 @@ clustermole_markers(species = c("hs", "mm"))
 
 - species:
 
-  Species: `hs` for human or `mm` for mouse.
+  Gene symbol species: `hs` for human or `mm` for mouse.
 
 ## Value
 
-A data frame of cell type markers (one gene per row).
+A data frame of cell type markers with these columns:
+
+- `gene`: Canonical gene symbol for the requested species.
+
+- `gene_original`: Original source gene symbol.
+
+- `celltype_full`: Full cell type signature identifier.
+
+- `db`: Source database.
+
+- `celltype`: Cell type label.
+
+- `organ`: Organ label.
+
+- `species`: Source signature species, if known.
+
+- `n_genes`: Gene count per signature.
 
 ## Examples
 
