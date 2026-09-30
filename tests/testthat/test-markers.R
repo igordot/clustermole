@@ -1,10 +1,13 @@
 test_that("default call returns expected table shape", {
   markers_tbl <- clustermole_markers()
   expect_s3_class(markers_tbl, "tbl_df")
-  expect_equal(ncol(markers_tbl), 9)
-  expect_gt(nrow(markers_tbl), 100000)
+  expect_equal(ncol(markers_tbl), 8)
+  expect_equal(dplyr::n_distinct(markers_tbl$db), 11)
+  expect_gt(nrow(markers_tbl), 500000)
+  expect_gt(dplyr::n_distinct(markers_tbl$celltype_full), 13000)
+  expect_gt(dplyr::n_distinct(markers_tbl$gene), 20000)
+  expect_gt(dplyr::n_distinct(markers_tbl$organ), 300)
   expect_equal(sum(is.na(markers_tbl$species)), 0)
-  expect_equal(sum(is.na(markers_tbl$species_original)), 0)
 })
 
 test_that("invalid species input errors", {
@@ -32,13 +35,15 @@ test_that("multiple or missing species default to human", {
 test_that("requesting human species returns human markers", {
   markers_hs_tbl <- clustermole_markers(species = "hs")
   expect_s3_class(markers_hs_tbl, "tbl_df")
-  expect_gt(nrow(markers_hs_tbl), 100000)
+  expect_gt(nrow(markers_hs_tbl), 500000)
+  expect_gt(dplyr::n_distinct(markers_hs_tbl$gene), 20000)
 })
 
 test_that("requesting mouse species returns mouse markers", {
   markers_mm_tbl <- clustermole_markers(species = "mm")
   expect_s3_class(markers_mm_tbl, "tbl_df")
-  expect_gt(nrow(markers_mm_tbl), 100000)
+  expect_gt(nrow(markers_mm_tbl), 500000)
+  expect_gt(dplyr::n_distinct(markers_mm_tbl$gene), 17000)
 })
 
 test_that("species-specific marker table excludes unmapped genes", {

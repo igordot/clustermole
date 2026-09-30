@@ -827,6 +827,7 @@ markers |>
 # Clean up cell type names and create a unique cell type identifier
 markers <-
   markers |>
+  mutate(celltype = str_squish(celltype), organ = str_squish(organ)) |>
   unite(
     celltype_full,
     celltype,
@@ -949,22 +950,26 @@ markers_unk <-
   rename(gene_mm = symbol) |>
   mutate(gene_mm = coalesce(gene_mm, gene))
 
+# Combine the three marker sets
 nrow(markers)
 markers <- bind_rows(markers_hs, markers_mm, markers_unk)
-markers <- rename(markers, gene_original = gene)
 nrow(markers)
-# 547688
+n_distinct(markers$celltype_full)
+# 547688 rows, 13351 cell types
 
 # Confirm this step kept every cell type
 stopifnot(n_distinct(markers$celltype_full) == n_celltypes_full)
 
+# Prepare the final table
+# species_original was kept for troubleshooting
+markers <- select(markers, !species_original)
+# clustermole_markers() will compute species-specific n_genes
+markers <- select(markers, !n_genes)
+markers <- rename(markers, gene_original = gene)
+markers <- arrange(markers, celltype_full, gene_hs, gene_mm, gene_original)
+
 # Check stats
 distinct(markers, db, species, celltype_full) |> count(db, species)
-markers |>
-  distinct(celltype_full, n_genes) |>
-  pull(n_genes) |>
-  quantile(seq(0, 1, 0.1))
-count(markers, celltype_full, n_genes, sort = TRUE)
 
 # Prepare package -----
 

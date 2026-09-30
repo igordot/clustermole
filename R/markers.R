@@ -21,7 +21,10 @@ clustermole_markers <- function(species = c("hs", "mm")) {
     m_tbl <- dplyr::rename(m_tbl, gene = "gene_mm")
     m_tbl <- dplyr::select(m_tbl, !"gene_hs")
   }
-  m_tbl <- tidyr::drop_na(m_tbl, gene)
+  m_tbl <- tidyr::drop_na(m_tbl, "gene")
   # a tied ortholog can repeat a row
-  dplyr::distinct(m_tbl)
+  m_tbl <- dplyr::distinct(m_tbl)
+  # n_genes reflects the mapped gene count for the requested species
+  m_tbl <- dplyr::add_count(m_tbl, .data$celltype_full, name = "n_genes")
+  dplyr::filter(m_tbl, .data$n_genes >= 5)
 }
