@@ -28,6 +28,8 @@ Sources differ in their studies, tissues, curation methods, and selection criter
 A marker may identify a broad cell class, a subtype, or a cell state.
 Comparing results across sources can reveal both recurring candidates and alternative labels worth investigating that a single source may miss.
 
+For examples of published applications across human, mouse, rat, cattle, and other species, see [publications using clustermole](pubs.html).
+
 ## Setup
 
 clustermole is available from [CRAN](https://cran.r-project.org/package=clustermole) and you can use the standard `install.packages()` to install it.

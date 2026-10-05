@@ -16,6 +16,7 @@
 ^vignettes/clustermole-intro\.Rmd$
 ^vignettes/db\.Rmd$
 ^vignettes/example-bm-seurat\.Rmd$
+^vignettes/pubs\.Rmd$
 ^[.]?air[.]toml$
 ^\.vscode$
 ^\.claude$

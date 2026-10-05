@@ -15,11 +15,12 @@ navbar:
   # zephyr navbar is blue by default
   bg: light
   structure:
-    left: [home, intro, example, db, reference]
+    left: [home, intro, example, db, reference, news]
     right: []
   components:
     home: ~
     articles: ~
+    news: ~
     intro:
       text: Get Started
       href: articles/clustermole-intro.html
