@@ -12,7 +12,7 @@ using clustermole, starting with a Seurat object.
 The dataset used in this example contains hematopoietic and stromal bone
 marrow populations ([Baccin et
 al.](https://doi.org/10.1038/s41556-019-0439-6)). This experiment was
-selected because it includes both well-known as well as rare cell types.
+selected because it includes both well-known and rare cell types.
 
 ## Load data
 
@@ -28,7 +28,8 @@ library(clustermole)
 ```
 
 Download the dataset, which is stored as a Seurat object. It was subset
-for this tutorial to reduce the size and speed up processing.
+for this tutorial to reduce the total number of cells and speed up
+processing.
 
 ``` r
 
@@ -84,15 +85,13 @@ levels(Idents(so))
 
 ## Marker gene overlaps
 
-One type of analysis facilitated by clustermole is based on comparison
-of marker genes.
-
-We can start with the B-cells, which is a well-defined population used
-in many studies.
+One type of analysis facilitated by clustermole is based on the
+comparison of marker genes.
 
 ### B-cells
 
-Find markers for the B-cell cluster.
+We can start with the B-cells, which are a well-defined population used
+in many studies. Find markers for the B-cell cluster.
 
 ``` r
 
@@ -194,7 +193,8 @@ head(overlaps_tbl, 15)
 ```
 
 The top results are more diverse than for B-cells, but related
-populations are among the top candidates.
+populations (adipocytes and mesenchymal cells) are among the top
+candidates.
 
 ### Osteoblasts
 
@@ -232,23 +232,28 @@ head(overlaps_tbl, 15)
 #> #   fdr <dbl>
 ```
 
-The top results are noisier than for B-cells, but the appropriate
-populations are listed.
+As would be expected, osteoblasts and bone cells are among the top
+candidates.
 
 ## Enrichment of markers
 
-Rather than comparing marker genes, it’s also possible to run enrichment
-of cell type signatures across all genes. This avoids having to define
-an optimal set of markers.
+Rather than comparing marker genes, it is also possible to run
+enrichment of cell type signatures across all genes. This avoids having
+to define an optimal set of markers.
 
-Calculate the average expression levels for each cell type.
+The input is a table of expression values. Calculate the average
+expression levels for each cell type.
 
 ``` r
 
 avg_exp_mat <- AverageExpression(so)
 ```
 
-Convert to a regular matrix and log-transform.
+Convert to a regular matrix and log-transform. By default,
+[`AverageExpression()`](https://satijalab.org/seurat/reference/AverageExpression.html)
+returns values on a linear scale. The averages should be log-transformed
+for
+[`clustermole_enrichment()`](https://igordot.github.io/clustermole/reference/clustermole_enrichment.md).
 
 ``` r
 
@@ -341,6 +346,8 @@ enrich_tbl |>
 #> #   db <chr>, species <chr>, organ <chr>, celltype <chr>, n_genes <int>
 ```
 
+Adipocytes are among the top hits.
+
 ### Osteoblasts
 
 Check the most enriched cell types for the Osteoblasts cluster.
@@ -371,3 +378,5 @@ enrich_tbl |>
 #> # ℹ 8 more variables: celltype_full <chr>, score <dbl>, score_rank <int>,
 #> #   db <chr>, species <chr>, organ <chr>, celltype <chr>, n_genes <int>
 ```
+
+Osteoblasts are among the top hits.

@@ -1,7 +1,49 @@
 # Database details
 
-We will load clustermole along with dplyr to help with summarizing the
-data.
+The clustermole meta-database collects gene signatures from public
+marker databases and cell atlases. The same cell type can have several
+signatures that can differ by organ, species, and study.
+
+The database includes data from the following sources:
+
+- CellMarker - Hu et al. *Nucleic Acids Research* (2023)
+  [10.1093/nar/gkac947](https://doi.org/10.1093/nar/gkac947)
+- CellMatch - Shao et al. *iScience* (2020)
+  [10.1016/j.isci.2020.100882](https://doi.org/10.1016/j.isci.2020.100882)
+- CellTaxonomy - Jiang et al. *Nucleic Acids Research* (2023)
+  [10.1093/nar/gkac816](https://doi.org/10.1093/nar/gkac816)
+- DISCO - Li et al. *Nucleic Acids Research* (2022)
+  [10.1093/nar/gkab1020](https://doi.org/10.1093/nar/gkab1020)
+- HPA - Karlsson et al. *Science Advances* (2021)
+  [10.1126/sciadv.abh2169](https://doi.org/10.1126/sciadv.abh2169)
+- MSigDB - Liberzon et al. *Bioinformatics* (2011)
+  [10.1093/bioinformatics/btr260](https://doi.org/10.1093/bioinformatics/btr260)
+- PanglaoDB - Franzen et al. *Database* (2019)
+  [10.1093/database/baz046](https://doi.org/10.1093/database/baz046)
+- SaVanT - Lopez et al. *BMC Genomics* (2017)
+  [10.1186/s12864-017-4167-7](https://doi.org/10.1186/s12864-017-4167-7)
+- ScType - Ianevski et al. *Nature Communications* (2022)
+  [10.1038/s41467-022-28803-w](https://doi.org/10.1038/s41467-022-28803-w)
+- TISSUES - Palasca et al. *Database* (2018)
+  [10.1093/database/bay003](https://doi.org/10.1093/database/bay003)
+- xCell - Aran et al. *Genome Biology* (2017)
+  [10.1186/s13059-017-1349-1](https://doi.org/10.1186/s13059-017-1349-1)
+
+Many of these are static, but some are updated periodically.
+
+The raw source data is processed to make the structure and content
+consistent across databases. Database preparation steps include:
+
+- Converting recognized human and mouse gene aliases to canonical
+  symbols.
+- Checking that the species labels are supported by the provided genes.
+- Removing signatures with fewer than five or more than 1,000 genes.
+- Mapping genes to orthologs in the other species.
+
+## Database contents
+
+The summaries below describe the database based on the actual package
+contents.
 
 ``` r
 
@@ -9,38 +51,39 @@ library(clustermole)
 library(dplyr)
 ```
 
-You can use clustermole as a simple database and get a table of all cell
-type markers.
+Retrieve a data frame of all cell type markers in the database. The
+`species` argument selects the appropriate gene symbols and does not
+restrict signatures to the selected species.
 
 ``` r
 
 markers <- clustermole_markers(species = "hs")
 markers
 #> # A tibble: 521,262 × 8
-#>    celltype_full        db    species organ celltype gene_original gene  n_genes
-#>    <chr>                <chr> <chr>   <chr> <chr>    <chr>         <chr>   <int>
-#>  1 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … ADAMTS2       ADAM…      10
-#>  2 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … FN1           FN1        10
-#>  3 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … KLHL1         KLHL1      10
-#>  4 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … LIPM          LIPM       10
-#>  5 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … NPSR1         NPSR1      10
-#>  6 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … NTS           NTS        10
-#>  7 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … RAB38         RAB38      10
-#>  8 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … RXFP1         RXFP1      10
-#>  9 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … STAC          STAC       10
-#> 10 (Pro-) Subiculum | … ScTy… ""      Hipp… (Pro-) … TLE4          TLE4       10
+#>    celltype_full         db    species organ celltype gene_origi…¹ gene  n_genes
+#>    <chr>                 <chr> <chr>   <chr> <chr>    <chr>        <chr>   <int>
+#>  1 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … ADAMTS2      ADAM…      10
+#>  2 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … FN1          FN1        10
+#>  3 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … KLHL1        KLHL1      10
+#>  4 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … LIPM         LIPM       10
+#>  5 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … NPSR1        NPSR1      10
+#>  6 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … NTS          NTS        10
+#>  7 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … RAB38        RAB38      10
+#>  8 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … RXFP1        RXFP1      10
+#>  9 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … STAC         STAC       10
+#> 10 (Pro-) Subiculum | H… ScTy… ""      Hipp… (Pro-) … TLE4         TLE4       10
 #> # ℹ 521,252 more rows
+#> # ℹ abbreviated name: ¹​gene_original
 ```
 
-Each row contains a gene and a cell type associated with it. The `gene`
-column is the gene symbol (human or mouse), the `gene_original` column
-is the gene symbol from the source database, and the `celltype_full`
-column contains the detailed cell type string including the species and
-the original database.
+The output data frame is in an R-friendly tidy/long format with one
+gene-to-signature mapping per row.
 
-## Cell types
+## Cell type signatures
 
-Check the total number of available cell types.
+Check the total number of available cell type signatures. Each
+`celltype_full` value uniquely identifies a signature (cell type,
+organ/tissue, species, and source).
 
 ``` r
 
@@ -48,13 +91,13 @@ length(unique(markers$celltype_full))
 #> [1] 13130
 ```
 
-## Cell types by source database
+## Cell type signatures by source database
 
-Check the source databases and the number of cell types from each.
+Check the number of cell type signatures from each source database.
 
 ``` r
 
-distinct(markers, celltype_full, db) |> count(db)
+distinct(markers, db, celltype_full) |> count(db)
 #> # A tibble: 11 × 2
 #>    db               n
 #>    <chr>        <int>
@@ -71,14 +114,15 @@ distinct(markers, celltype_full, db) |> count(db)
 #> 11 xCell          489
 ```
 
-## Cell types by species
+## Cell type signatures by species
 
-Check the number of cell types per species (not available for all cell
-types).
+Check the number of cell type signatures per original source species.
+Not all sources provide information about the species, so it can be
+unknown or blank.
 
 ``` r
 
-distinct(markers, celltype_full, species) |> count(species)
+distinct(markers, species, celltype_full) |> count(species)
 #> # A tibble: 3 × 2
 #>   species     n
 #>   <chr>   <int>
@@ -87,10 +131,10 @@ distinct(markers, celltype_full, species) |> count(species)
 #> 3 "MM"     2968
 ```
 
-## Cell types by organ
+## Cell type signatures by organ
 
-Check the number of available cell types per organ (not available for
-all cell types).
+Check the number of available cell type signatures per organ or tissue.
+This label is not standardized and is not always available.
 
 ``` r
 
@@ -113,7 +157,7 @@ distinct(markers, celltype_full, organ) |> count(organ, sort = TRUE)
 
 ## Package version
 
-Check the package version since the database contents may change.
+Check the package version since the database contents can change.
 
 ``` r
 

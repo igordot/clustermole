@@ -56,51 +56,96 @@
 
     
     
-<p>We will load clustermole along with dplyr to help with summarizing
-the data.</p>
+<p>The clustermole meta-database collects gene signatures from public
+marker databases and cell atlases. The same cell type can have several
+signatures that can differ by organ, species, and study.</p>
+<p>The database includes data from the following sources:</p>
+<ul>
+<li>CellMarker - Hu et al. <em>Nucleic Acids Research</em> (2023) <a href="https://doi.org/10.1093/nar/gkac947" class="external-link">10.1093/nar/gkac947</a>
+</li>
+<li>CellMatch - Shao et al. <em>iScience</em> (2020) <a href="https://doi.org/10.1016/j.isci.2020.100882" class="external-link">10.1016/j.isci.2020.100882</a>
+</li>
+<li>CellTaxonomy - Jiang et al. <em>Nucleic Acids Research</em> (2023)
+<a href="https://doi.org/10.1093/nar/gkac816" class="external-link">10.1093/nar/gkac816</a>
+</li>
+<li>DISCO - Li et al. <em>Nucleic Acids Research</em> (2022) <a href="https://doi.org/10.1093/nar/gkab1020" class="external-link">10.1093/nar/gkab1020</a>
+</li>
+<li>HPA - Karlsson et al. <em>Science Advances</em> (2021) <a href="https://doi.org/10.1126/sciadv.abh2169" class="external-link">10.1126/sciadv.abh2169</a>
+</li>
+<li>MSigDB - Liberzon et al. <em>Bioinformatics</em> (2011) <a href="https://doi.org/10.1093/bioinformatics/btr260" class="external-link">10.1093/bioinformatics/btr260</a>
+</li>
+<li>PanglaoDB - Franzen et al. <em>Database</em> (2019) <a href="https://doi.org/10.1093/database/baz046" class="external-link">10.1093/database/baz046</a>
+</li>
+<li>SaVanT - Lopez et al. <em>BMC Genomics</em> (2017) <a href="https://doi.org/10.1186/s12864-017-4167-7" class="external-link">10.1186/s12864-017-4167-7</a>
+</li>
+<li>ScType - Ianevski et al. <em>Nature Communications</em> (2022) <a href="https://doi.org/10.1038/s41467-022-28803-w" class="external-link">10.1038/s41467-022-28803-w</a>
+</li>
+<li>TISSUES - Palasca et al. <em>Database</em> (2018) <a href="https://doi.org/10.1093/database/bay003" class="external-link">10.1093/database/bay003</a>
+</li>
+<li>xCell - Aran et al. <em>Genome Biology</em> (2017) <a href="https://doi.org/10.1186/s13059-017-1349-1" class="external-link">10.1186/s13059-017-1349-1</a>
+</li>
+</ul>
+<p>Many of these are static, but some are updated periodically.</p>
+<p>The raw source data is processed to make the structure and content
+consistent across databases. Database preparation steps include:</p>
+<ul>
+<li>Converting recognized human and mouse gene aliases to canonical
+symbols.</li>
+<li>Checking that the species labels are supported by the provided
+genes.</li>
+<li>Removing signatures with fewer than five or more than 1,000
+genes.</li>
+<li>Mapping genes to orthologs in the other species.</li>
+</ul>
+<div class="section level2">
+<h2 id="database-contents">Database contents<a class="anchor" aria-label="anchor" href="#database-contents"></a>
+</h2>
+<p>The summaries below describe the database based on the actual package
+contents.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<p>You can use clustermole as a simple database and get a table of all
-cell type markers.</p>
+<p>Retrieve a data frame of all cell type markers in the database. The
+<code>species</code> argument selects the appropriate gene symbols and
+does not restrict signatures to the selected species.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clustermole_markers.html">clustermole_markers</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"hs"</span><span class="op">)</span></span>
 <span><span class="va">markers</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 521,262 × 8</span></span></span>
-<span><span class="co">#&gt;    celltype_full        db    species organ celltype gene_original gene  n_genes</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … ADAMTS2       ADAM…      10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … FN1           FN1        10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … KLHL1         KLHL1      10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … LIPM          LIPM       10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … NPSR1         NPSR1      10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … NTS           NTS        10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … RAB38         RAB38      10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … RXFP1         RXFP1      10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … STAC          STAC       10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> (Pro-) Subiculum | … ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … TLE4          TLE4       10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 521,252 more rows</span></span></span></code></pre></div>
-<p>Each row contains a gene and a cell type associated with it. The
-<code>gene</code> column is the gene symbol (human or mouse), the
-<code>gene_original</code> column is the gene symbol from the source
-database, and the <code>celltype_full</code> column contains the
-detailed cell type string including the species and the original
-database.</p>
+<span><span class="co">#&gt;    celltype_full         db    species organ celltype gene_origi…¹ gene  n_genes</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … ADAMTS2      ADAM…      10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … FN1          FN1        10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … KLHL1        KLHL1      10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … LIPM         LIPM       10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … NPSR1        NPSR1      10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … NTS          NTS        10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … RAB38        RAB38      10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … RXFP1        RXFP1      10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … STAC         STAC       10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> (Pro-) Subiculum | H… ScTy… <span style="color: #949494;">""</span>      Hipp… (Pro-) … TLE4         TLE4       10</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 521,252 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ abbreviated name: ¹​gene_original</span></span></span></code></pre></div>
+<p>The output data frame is in an R-friendly tidy/long format with one
+gene-to-signature mapping per row.</p>
+</div>
 <div class="section level2">
-<h2 id="cell-types">Cell types<a class="anchor" aria-label="anchor" href="#cell-types"></a>
+<h2 id="cell-type-signatures">Cell type signatures<a class="anchor" aria-label="anchor" href="#cell-type-signatures"></a>
 </h2>
-<p>Check the total number of available cell types.</p>
+<p>Check the total number of available cell type signatures. Each
+<code>celltype_full</code> value uniquely identifies a signature (cell
+type, organ/tissue, species, and source).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">celltype_full</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 13130</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="cell-types-by-source-database">Cell types by source database<a class="anchor" aria-label="anchor" href="#cell-types-by-source-database"></a>
+<h2 id="cell-type-signatures-by-source-database">Cell type signatures by source database<a class="anchor" aria-label="anchor" href="#cell-type-signatures-by-source-database"></a>
 </h2>
-<p>Check the source databases and the number of cell types from
-each.</p>
+<p>Check the number of cell type signatures from each source
+database.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">celltype_full</span>, <span class="va">db</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">db</span>, <span class="va">celltype_full</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">db</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 2</span></span></span>
 <span><span class="co">#&gt;    db               n</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -117,12 +162,13 @@ each.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> xCell          489</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="cell-types-by-species">Cell types by species<a class="anchor" aria-label="anchor" href="#cell-types-by-species"></a>
+<h2 id="cell-type-signatures-by-species">Cell type signatures by species<a class="anchor" aria-label="anchor" href="#cell-type-signatures-by-species"></a>
 </h2>
-<p>Check the number of cell types per species (not available for all
-cell types).</p>
+<p>Check the number of cell type signatures per original source species.
+Not all sources provide information about the species, so it can be
+unknown or blank.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">celltype_full</span>, <span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">species</span>, <span class="va">celltype_full</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
 <span><span class="co">#&gt;   species     n</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -131,10 +177,10 @@ cell types).</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>MM<span style="color: #949494;">"</span>     <span style="text-decoration: underline;">2</span>968</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="cell-types-by-organ">Cell types by organ<a class="anchor" aria-label="anchor" href="#cell-types-by-organ"></a>
+<h2 id="cell-type-signatures-by-organ">Cell type signatures by organ<a class="anchor" aria-label="anchor" href="#cell-type-signatures-by-organ"></a>
 </h2>
-<p>Check the number of available cell types per organ (not available for
-all cell types).</p>
+<p>Check the number of available cell type signatures per organ or
+tissue. This label is not standardized and is not always available.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">celltype_full</span>, <span class="va">organ</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">organ</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 383 × 2</span></span></span>
@@ -155,7 +201,7 @@ all cell types).</p>
 <div class="section level2">
 <h2 id="package-version">Package version<a class="anchor" aria-label="anchor" href="#package-version"></a>
 </h2>
-<p>Check the package version since the database contents may change.</p>
+<p>Check the package version since the database contents can change.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"clustermole"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] '1.1.1.9000'</span></span></code></pre></div>

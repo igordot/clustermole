@@ -67,8 +67,8 @@ captured cells. This is an example of exploratory cell type analysis
 using clustermole, starting with a Seurat object.</p>
 <p>The dataset used in this example contains hematopoietic and stromal
 bone marrow populations (<a href="https://doi.org/10.1038/s41556-019-0439-6" class="external-link">Baccin et al.</a>).
-This experiment was selected because it includes both well-known as well
-as rare cell types.</p>
+This experiment was selected because it includes both well-known and
+rare cell types.</p>
 </div>
 <div class="section level2">
 <h2 id="load-data">Load data<a class="anchor" aria-label="anchor" href="#load-data"></a>
@@ -81,7 +81,8 @@ as rare cell types.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nanx.me/ggsci/" class="external-link">ggsci</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/clustermole/">clustermole</a></span><span class="op">)</span></span></code></pre></div>
 <p>Download the dataset, which is stored as a Seurat object. It was
-subset for this tutorial to reduce the size and speed up processing.</p>
+subset for this tutorial to reduce the total number of cells and speed
+up processing.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">so</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></span><span class="op">(</span><span class="st">"https://osf.io/cvnqb/download"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">so</span></span>
@@ -121,14 +122,13 @@ labels for the next steps.</p>
 <div class="section level2">
 <h2 id="marker-gene-overlaps">Marker gene overlaps<a class="anchor" aria-label="anchor" href="#marker-gene-overlaps"></a>
 </h2>
-<p>One type of analysis facilitated by clustermole is based on
+<p>One type of analysis facilitated by clustermole is based on the
 comparison of marker genes.</p>
-<p>We can start with the B-cells, which is a well-defined population
-used in many studies.</p>
 <div class="section level3">
 <h3 id="b-cells">B-cells<a class="anchor" aria-label="anchor" href="#b-cells"></a>
 </h3>
-<p>Find markers for the B-cell cluster.</p>
+<p>We can start with the B-cells, which are a well-defined population
+used in many studies. Find markers for the B-cell cluster.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b_markers_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindMarkers.html" class="external-link">FindMarkers</a></span><span class="op">(</span><span class="va">so</span>, ident.1 <span class="op">=</span> <span class="st">"B-cell"</span>, min.pct <span class="op">=</span> <span class="fl">0.2</span>, only.pos <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">b_markers_df</span><span class="op">)</span></span>
@@ -204,7 +204,8 @@ signatures.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fdr &lt;dbl&gt;</span></span></span></code></pre></div>
 <p>The top results are more diverse than for B-cells, but related
-populations are among the top candidates.</p>
+populations (adipocytes and mesenchymal cells) are among the top
+candidates.</p>
 </div>
 <div class="section level3">
 <h3 id="osteoblasts">Osteoblasts<a class="anchor" aria-label="anchor" href="#osteoblasts"></a>
@@ -232,20 +233,24 @@ signatures.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: celltype_full &lt;chr&gt;, db &lt;chr&gt;, species &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;, overlap &lt;dbl&gt;, p_value &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fdr &lt;dbl&gt;</span></span></span></code></pre></div>
-<p>The top results are noisier than for B-cells, but the appropriate
-populations are listed.</p>
+<p>As would be expected, osteoblasts and bone cells are among the top
+candidates.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="enrichment-of-markers">Enrichment of markers<a class="anchor" aria-label="anchor" href="#enrichment-of-markers"></a>
 </h2>
-<p>Rather than comparing marker genes, it’s also possible to run
+<p>Rather than comparing marker genes, it is also possible to run
 enrichment of cell type signatures across all genes. This avoids having
 to define an optimal set of markers.</p>
-<p>Calculate the average expression levels for each cell type.</p>
+<p>The input is a table of expression values. Calculate the average
+expression levels for each cell type.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/AverageExpression.html" class="external-link">AverageExpression</a></span><span class="op">(</span><span class="va">so</span><span class="op">)</span></span></code></pre></div>
-<p>Convert to a regular matrix and log-transform.</p>
+<p>Convert to a regular matrix and log-transform. By default,
+<code><a href="https://satijalab.org/seurat/reference/AverageExpression.html" class="external-link">AverageExpression()</a></code> returns values on a linear scale. The
+averages should be log-transformed for
+<code><a href="../reference/clustermole_enrichment.html">clustermole_enrichment()</a></code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">$</span><span class="va">RNA</span><span class="op">)</span></span>
 <span><span class="va">avg_exp_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log1p</a></span><span class="op">(</span><span class="va">avg_exp_mat</span><span class="op">)</span></span></code></pre></div>
@@ -320,6 +325,7 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Adipo-CAR</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: celltype_full &lt;chr&gt;, score &lt;dbl&gt;, score_rank &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   db &lt;chr&gt;, species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
+<p>Adipocytes are among the top hits.</p>
 </div>
 <div class="section level3">
 <h3 id="osteoblasts-1">Osteoblasts<a class="anchor" aria-label="anchor" href="#osteoblasts-1"></a>
@@ -349,6 +355,7 @@ populations.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> Osteoblasts</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: celltype_full &lt;chr&gt;, score &lt;dbl&gt;, score_rank &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   db &lt;chr&gt;, species &lt;chr&gt;, organ &lt;chr&gt;, celltype &lt;chr&gt;, n_genes &lt;int&gt;</span></span></span></code></pre></div>
+<p>Osteoblasts are among the top hits.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
