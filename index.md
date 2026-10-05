@@ -3,12 +3,14 @@
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/clustermole)](https://cran.r-project.org/package=clustermole)
 [![R-CMD-check](https://github.com/igordot/clustermole/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/igordot/clustermole/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/igordot/clustermole/graph/badge.svg)](https://codecov.io/gh/igordot/clustermole)
+[![codecov](https://codecov.io/gh/igordot/clustermole/graph/badge.svg)](https://app.codecov.io/gh/igordot/clustermole)
 <!-- badges: end -->
 
 Assignment of cell type labels to single-cell RNA sequencing (scRNA-seq) clusters is often a time-consuming process that involves manual inspection of the cluster marker genes complemented with a detailed literature search.
 This can be especially challenging when unexpected or poorly described populations are present.
-The clustermole R package provides methods to query cell identity markers sourced from PanglaoDB, CellMarker, SaVanT, MSigDB, xCell, ARCHS4, and TISSUES.
+The clustermole R package provides methods to query cell identity markers from manually curated and computationally derived databases, including CellMarker, PanglaoDB, ScType, MSigDB, and xCell.
+Using several sources offers a broader view as the curation methods and selection criteria can differ.
+Comparing databases helps in discovering recurring candidates and markers that a single source may not cover.
 
 To learn more about clustermole, check an [overview of the features](articles/clustermole-intro.html) and an
 [example workflow starting with a Seurat object](articles/example-bm-seurat.html).
