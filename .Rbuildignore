@@ -13,6 +13,7 @@
 ^docs$
 ^pkgdown$
 ^index\.md$
+^vignettes/clustermole-intro\.Rmd$
 ^vignettes/db\.Rmd$
 ^vignettes/example-bm-seurat\.Rmd$
 ^[.]?air[.]toml$

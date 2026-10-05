@@ -31,8 +31,6 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat
-VignetteBuilder: 
-    knitr
 biocViews:
 Config/roxygen2/version: 8.1.0
 Encoding: UTF-8
