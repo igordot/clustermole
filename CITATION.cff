@@ -8,7 +8,6 @@ message: 'To cite package "clustermole" in publications use:'
 type: software
 license: MIT
 title: 'clustermole: Cell Type Marker Database for Single-Cell RNA-Seq Data'
-doi: 10.32614/CRAN.package.clustermole
 abstract: Provides a meta-database of thousands of human and mouse cell identity markers
   curated from multiple sources, along with methods for cell type prediction based
   on marker gene overlaps or gene set enrichment.
@@ -20,9 +19,4 @@ authors:
 repository: https://CRAN.R-project.org/package=clustermole
 repository-code: https://github.com/igordot/clustermole
 url: https://igordot.github.io/clustermole/
-contact:
-- family-names: Dolgalev
-  given-names: Igor
-  email: igor.dolgalev@nyumc.org
-  orcid: https://orcid.org/0000-0003-4451-126X
-
+doi: 10.32614/CRAN.package.clustermole
