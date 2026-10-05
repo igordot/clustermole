@@ -8,3 +8,5 @@
   details](https://igordot.github.io/clustermole/articles/db.md):
 - [Cell type annotation
   example](https://igordot.github.io/clustermole/articles/example-bm-seurat.md):
+- [Published
+  applications](https://igordot.github.io/clustermole/articles/pubs.md):
