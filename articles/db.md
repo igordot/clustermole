@@ -10,7 +10,7 @@ The database includes data from the following sources:
   [10.1093/nar/gkac947](https://doi.org/10.1093/nar/gkac947)
 - CellMatch - Shao et al. *iScience* (2020)
   [10.1016/j.isci.2020.100882](https://doi.org/10.1016/j.isci.2020.100882)
-- CellTaxonomy - Jiang et al. *Nucleic Acids Research* (2023)
+- Cell Taxonomy - Jiang et al. *Nucleic Acids Research* (2023)
   [10.1093/nar/gkac816](https://doi.org/10.1093/nar/gkac816)
 - DISCO - Li et al. *Nucleic Acids Research* (2022)
   [10.1093/nar/gkab1020](https://doi.org/10.1093/nar/gkab1020)
@@ -40,7 +40,7 @@ consistent across databases. Database preparation steps include:
 - Removing signatures with fewer than five or more than 1,000 genes.
 - Mapping genes to orthologs in the other species.
 
-## Database contents
+## Database data frame
 
 The summaries below describe the database based on the actual package
 contents.
@@ -79,7 +79,7 @@ markers
 The output data frame is in an R-friendly tidy/long format with one
 gene-to-signature mapping per row.
 
-## Cell type signatures
+## Total cell types
 
 Check the total number of available cell type signatures. Each
 `celltype_full` value uniquely identifies a signature (cell type,
@@ -91,7 +91,7 @@ length(unique(markers$celltype_full))
 #> [1] 13130
 ```
 
-## Cell type signatures by source database
+## Cell types per source
 
 Check the number of cell type signatures from each source database.
 
@@ -114,7 +114,7 @@ distinct(markers, db, celltype_full) |> count(db)
 #> 11 xCell          489
 ```
 
-## Cell type signatures by species
+## Cell types per species
 
 Check the number of cell type signatures per original source species.
 Not all sources provide information about the species, so it can be
@@ -131,7 +131,7 @@ distinct(markers, species, celltype_full) |> count(species)
 #> 3 "MM"     2968
 ```
 
-## Cell type signatures by organ
+## Cell types per organ
 
 Check the number of available cell type signatures per organ or tissue.
 This label is not standardized and is not always available.
