@@ -41,7 +41,7 @@ type signatures.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clustermole_overlaps</span><span class="op">(</span><span class="va">genes</span>, <span class="va">species</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clustermole_overlaps</span><span class="op">(</span><span class="va">genes</span>, <span class="va">species</span>, max_p <span class="op">=</span> <span class="fl">0.05</span>, max_fdr <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -54,6 +54,14 @@ type signatures.</p>
 
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
 <dd><p>Gene symbol species: <code>hs</code> for human or <code>mm</code> for mouse.</p></dd>
+
+
+<dt id="arg-max-p">max_p<a class="anchor" aria-label="anchor" href="#arg-max-p"></a></dt>
+<dd><p>Maximum p-value to return. Defaults to <code>0.05</code>.</p></dd>
+
+
+<dt id="arg-max-fdr">max_fdr<a class="anchor" aria-label="anchor" href="#arg-max-fdr"></a></dt>
+<dd><p>Maximum FDR to return. Defaults to <code>1</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

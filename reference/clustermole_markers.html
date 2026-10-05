@@ -33,7 +33,7 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>Retrieve cell type markers from the <code>clustermole</code> database.</p>
+    <p>Retrieve cell type markers from the clustermole database.</p>
     </div>
 
     <div class="section level2">
@@ -60,6 +60,17 @@
 <li><p><code>species</code>: Source signature species, if known.</p></li>
 <li><p><code>n_genes</code>: Gene count per signature.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The <code>gene</code> column uses the official NCBI symbols for the requested species.
+The package maps the aliases in each source database to these symbols. The
+<code>gene_original</code> column preserves the symbol from the source. The source
+databases include both human and mouse cell type markers. The package maps
+them across species with ortholog data from the Alliance of Genome Resources
+and keeps only reciprocal best matches. The output does not include genes
+that have no ortholog in the requested species and does not include
+signatures with fewer than five genes.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

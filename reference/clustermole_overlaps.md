@@ -6,7 +6,7 @@ cell type signatures.
 ## Usage
 
 ``` r
-clustermole_overlaps(genes, species)
+clustermole_overlaps(genes, species, max_p = 0.05, max_fdr = 1)
 ```
 
 ## Arguments
@@ -18,6 +18,14 @@ clustermole_overlaps(genes, species)
 - species:
 
   Gene symbol species: `hs` for human or `mm` for mouse.
+
+- max_p:
+
+  Maximum p-value to return. Defaults to `0.05`.
+
+- max_fdr:
+
+  Maximum FDR to return. Defaults to `1`.
 
 ## Value
 

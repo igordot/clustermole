@@ -5,7 +5,7 @@ Score cell type signatures using the full gene expression matrix.
 ## Usage
 
 ``` r
-clustermole_enrichment(expr_mat, species, method = "gsva")
+clustermole_enrichment(expr_mat, species, method = "gsva", max_rank = 100)
 ```
 
 ## Arguments
@@ -13,7 +13,8 @@ clustermole_enrichment(expr_mat, species, method = "gsva")
 - expr_mat:
 
   Numeric matrix or data frame of logCPMs or logTPMs. Must contain at
-  least 5,000 gene rows and five cluster/population columns.
+  least 5,000 gene rows and five cluster/population columns. Row names
+  must be unique.
 
 - species:
 
@@ -24,6 +25,10 @@ clustermole_enrichment(expr_mat, species, method = "gsva")
   Enrichment method: `gsva` (default), `ssgsea`, `singscore`, or `all`
   to combine ranks from all three methods. See references below.
 
+- max_rank:
+
+  Maximum signature rank to return. Defaults to `100`.
+
 ## Value
 
 A data frame with one row per returned signature and input column:
@@ -32,7 +37,8 @@ A data frame with one row per returned signature and input column:
 
 - `score`: Enrichment score (higher means greater enrichment).
 
-- `score_rank`: Signature rank (lower means greater enrichment).
+- `score_rank`: Signature rank (lower means greater enrichment). With
+  `method = "all"`, this is the average rank across methods.
 
 - Signature metadata (see
   [`clustermole_markers()`](https://igordot.github.io/clustermole/reference/clustermole_markers.md)).
