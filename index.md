@@ -5,8 +5,12 @@ clusters is often a time-consuming process that involves manual
 inspection of the cluster marker genes complemented with a detailed
 literature search. This can be especially challenging when unexpected or
 poorly described populations are present. The clustermole R package
-provides methods to query cell identity markers sourced from PanglaoDB,
-CellMarker, SaVanT, MSigDB, xCell, ARCHS4, and TISSUES.
+provides methods to query cell identity markers from manually curated
+and computationally derived databases, including CellMarker, PanglaoDB,
+ScType, MSigDB, and xCell. Using several sources offers a broader view
+as the curation methods and selection criteria can differ. Comparing
+databases helps in discovering recurring candidates and markers that a
+single source may not cover.
 
 To learn more about clustermole, check an [overview of the
 features](https://igordot.github.io/clustermole/articles/clustermole-intro.md)
