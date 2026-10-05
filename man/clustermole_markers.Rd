@@ -23,7 +23,17 @@ A data frame of cell type markers with these columns:
 }
 }
 \description{
-Retrieve cell type markers from the \code{clustermole} database.
+Retrieve cell type markers from the clustermole database.
+}
+\details{
+The \code{gene} column uses the official NCBI symbols for the requested species.
+The package maps the aliases in each source database to these symbols. The
+\code{gene_original} column preserves the symbol from the source. The source
+databases include both human and mouse cell type markers. The package maps
+them across species with ortholog data from the Alliance of Genome Resources
+and keeps only reciprocal best matches. The output does not include genes
+that have no ortholog in the requested species and does not include
+signatures with fewer than five genes.
 }
 \examples{
 markers <- clustermole_markers()

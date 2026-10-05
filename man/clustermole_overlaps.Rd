@@ -4,12 +4,16 @@
 \alias{clustermole_overlaps}
 \title{Cell types based on overlap of marker genes}
 \usage{
-clustermole_overlaps(genes, species)
+clustermole_overlaps(genes, species, max_p = 0.05, max_fdr = 1)
 }
 \arguments{
 \item{genes}{A character vector of gene symbols.}
 
 \item{species}{Gene symbol species: \code{hs} for human or \code{mm} for mouse.}
+
+\item{max_p}{Maximum p-value to return. Defaults to \code{0.05}.}
+
+\item{max_fdr}{Maximum FDR to return. Defaults to \code{1}.}
 }
 \value{
 A data frame with one row per returned signature:

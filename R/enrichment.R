@@ -4,16 +4,19 @@
 #'
 #' @param expr_mat Numeric matrix or data frame of logCPMs or logTPMs.
 #'   Must contain at least 5,000 gene rows and five cluster/population columns.
+#'   Row names must be unique.
 
 #' @inheritParams clustermole_markers species
 #' @param method Enrichment method: `gsva` (default), `ssgsea`, `singscore`, or
 #'   `all` to combine ranks from all three methods. See references below.
+#' @param max_rank Maximum signature rank to return. Defaults to `100`.
 #'
 #' @return A data frame with one row per returned signature and input column:
 #'
 #'   - `cluster`: Input column name.
 #'   - `score`: Enrichment score (higher means greater enrichment).
-#'   - `score_rank`: Signature rank (lower means greater enrichment).
+#'   - `score_rank`: Signature rank (lower means greater enrichment). With
+#'     `method = "all"`, this is the average rank across methods.
 #'   - Signature metadata (see [clustermole_markers()]).
 #'
 #'   With `method = "all"`, these columns replace `score`:
@@ -42,13 +45,28 @@
 #' # my_enrichment <- clustermole_enrichment(
 #' #   expr_mat = my_expr_mat, species = "hs"
 #' # )
-clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
+clustermole_enrichment <- function(
+  expr_mat,
+  species,
+  method = "gsva",
+  max_rank = 100
+) {
+  if (!is.numeric(max_rank)) {
+    stop("`max_rank` is not numeric")
+  }
+  if (is.na(max_rank) || max_rank < 1) {
+    stop("`max_rank` must be a number greater than or equal to 1")
+  }
+
   # check that the expression matrix seems reasonable
   if (is.data.frame(expr_mat)) {
     expr_mat <- as.matrix(expr_mat)
   }
   if (!is(expr_mat, "matrix") || !is.numeric(expr_mat)) {
     stop("expression data must be a numeric matrix or data frame")
+  }
+  if (anyDuplicated(rownames(expr_mat))) {
+    stop("expression matrix row names must be unique")
   }
   if (nrow(expr_mat) < 5000) {
     stop("expression matrix does not appear to be complete (too few rows)")
@@ -89,7 +107,7 @@ clustermole_enrichment <- function(expr_mat, species, method = "gsva") {
     method = method
   )
 
-  scores_tbl <- filter(scores_tbl, .data$score_rank <= 100)
+  scores_tbl <- filter(scores_tbl, .data$score_rank <= max_rank)
   scores_tbl <- inner_join(scores_tbl, celltypes_tbl, by = "celltype_full")
   scores_tbl <- arrange(scores_tbl, .data$cluster, .data$score_rank)
   scores_tbl

@@ -1,6 +1,16 @@
 #' Available cell type markers
 #'
-#' Retrieve cell type markers from the `clustermole` database.
+#' Retrieve cell type markers from the clustermole database.
+#'
+#' @details
+#' The `gene` column uses the official NCBI symbols for the requested species.
+#' The package maps the aliases in each source database to these symbols. The
+#' `gene_original` column preserves the symbol from the source. The source
+#' databases include both human and mouse cell type markers. The package maps
+#' them across species with ortholog data from the Alliance of Genome Resources
+#' and keeps only reciprocal best matches. The output does not include genes
+#' that have no ortholog in the requested species and does not include
+#' signatures with fewer than five genes.
 #'
 #' @param species Gene symbol species: `hs` for human or `mm` for mouse.
 #'

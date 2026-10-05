@@ -5,6 +5,8 @@
 #'
 #' @param genes A character vector of gene symbols.
 #' @inheritParams clustermole_markers species
+#' @param max_p Maximum p-value to return. Defaults to `0.05`.
+#' @param max_fdr Maximum FDR to return. Defaults to `1`.
 #'
 #' @return A data frame with one row per returned signature:
 #'
@@ -23,7 +25,25 @@
 #' my_genes <- c("CD2", "CD3D", "CD3E", "CD3G", "TRAC", "TRBC2", "LTB")
 #' my_overlaps <- clustermole_overlaps(genes = my_genes, species = "hs")
 #' head(my_overlaps)
-clustermole_overlaps <- function(genes, species) {
+clustermole_overlaps <- function(
+  genes,
+  species,
+  max_p = 0.05,
+  max_fdr = 1
+) {
+  if (!is.numeric(max_p)) {
+    stop("`max_p` is not numeric")
+  }
+  if (is.na(max_p) || max_p < 0 || max_p > 1) {
+    stop("`max_p` must be a number between 0 and 1")
+  }
+  if (!is.numeric(max_fdr)) {
+    stop("`max_fdr` is not numeric")
+  }
+  if (is.na(max_fdr) || max_fdr < 0 || max_fdr > 1) {
+    stop("`max_fdr` must be a number between 0 and 1")
+  }
+
   # check that the genes vector seems reasonable
   if (!is(genes, "character")) {
     stop("`genes` is not a character vector")
@@ -78,7 +98,11 @@ clustermole_overlaps <- function(genes, species) {
 
   # clean up the enrichment table
   overlaps_tbl <- as_tibble(overlaps_mat, rownames = "celltype_full")
-  overlaps_tbl <- filter(overlaps_tbl, .data$p_value < 0.05)
+  overlaps_tbl <- filter(
+    overlaps_tbl,
+    .data$p_value <= max_p,
+    .data$fdr <= max_fdr
+  )
   overlaps_tbl <- inner_join(celltypes_tbl, overlaps_tbl, by = "celltype_full")
   overlaps_tbl <- arrange(
     overlaps_tbl,

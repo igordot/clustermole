@@ -4,23 +4,27 @@
 \alias{clustermole_enrichment}
 \title{Cell types based on the expression of all genes}
 \usage{
-clustermole_enrichment(expr_mat, species, method = "gsva")
+clustermole_enrichment(expr_mat, species, method = "gsva", max_rank = 100)
 }
 \arguments{
 \item{expr_mat}{Numeric matrix or data frame of logCPMs or logTPMs.
-Must contain at least 5,000 gene rows and five cluster/population columns.}
+Must contain at least 5,000 gene rows and five cluster/population columns.
+Row names must be unique.}
 
 \item{species}{Gene symbol species: \code{hs} for human or \code{mm} for mouse.}
 
 \item{method}{Enrichment method: \code{gsva} (default), \code{ssgsea}, \code{singscore}, or
 \code{all} to combine ranks from all three methods. See references below.}
+
+\item{max_rank}{Maximum signature rank to return. Defaults to \code{100}.}
 }
 \value{
 A data frame with one row per returned signature and input column:
 \itemize{
 \item \code{cluster}: Input column name.
 \item \code{score}: Enrichment score (higher means greater enrichment).
-\item \code{score_rank}: Signature rank (lower means greater enrichment).
+\item \code{score_rank}: Signature rank (lower means greater enrichment). With
+\code{method = "all"}, this is the average rank across methods.
 \item Signature metadata (see \code{\link[=clustermole_markers]{clustermole_markers()}}).
 }
 

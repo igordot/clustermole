@@ -36,6 +36,38 @@ test_that("invalid expression matrix input errors", {
   ))
 })
 
+test_that("duplicate expression row names error for every method", {
+  expr_mat <- matrix(seq_len(25000) %% 10, nrow = 5000, ncol = 5)
+  rownames(expr_mat) <- c("CD3D", "CD3D", paste0("gene", seq_len(4998)))
+
+  for (method in c("gsva", "ssgsea", "singscore", "all")) {
+    expect_error(
+      clustermole_enrichment(expr_mat, species = "hs", method = method),
+      "^expression matrix row names must be unique$"
+    )
+  }
+})
+
+test_that("non-numeric rank cutoffs error", {
+  for (max_rank in list(NULL, "100", TRUE, 1i)) {
+    expect_error(
+      clustermole_enrichment(log_cpm_mat, species = "hs", max_rank = max_rank),
+      "`max_rank` is not numeric",
+      fixed = TRUE
+    )
+  }
+})
+
+test_that("invalid numeric rank cutoffs error", {
+  for (max_rank in list(NA_real_, 0)) {
+    expect_error(
+      clustermole_enrichment(log_cpm_mat, species = "hs", max_rank = max_rank),
+      "`max_rank` must be a number greater than or equal to 1",
+      fixed = TRUE
+    )
+  }
+})
+
 # default (gsva)
 test_that("matrix and data frame inputs give the same enrichment", {
   enrich_hs_tbl <- clustermole_enrichment(
@@ -52,7 +84,7 @@ test_that("matrix and data frame inputs give the same enrichment", {
 })
 
 # gsva
-test_that("gsva method returns human enrichment results", {
+test_that("rank cutoffs filter each cluster without changing scores", {
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -61,6 +93,14 @@ test_that("gsva method returns human enrichment results", {
   expect_s3_class(enrich_hs_tbl, "tbl_df")
   expect_gt(nrow(enrich_hs_tbl), 100)
   expect_equal(length(unique(enrich_hs_tbl$cluster)), 5)
+
+  all_scores <- clustermole_enrichment(log_cpm_mat, "hs", max_rank = Inf)
+  expect_gt(max(all_scores$score_rank), 100)
+  expect_equal(enrich_hs_tbl, all_scores[all_scores$score_rank <= 100, ])
+
+  top_scores <- clustermole_enrichment(log_cpm_mat, "hs", max_rank = 2)
+  expect_equal(top_scores, all_scores[all_scores$score_rank <= 2, ])
+  expect_equal(as.integer(table(top_scores$cluster)), rep(2L, 5))
 })
 
 # ssgsea
@@ -97,6 +137,16 @@ test_that("combined methods return human enrichment results", {
   expect_s3_class(enrich_hs_tbl, "tbl_df")
   expect_gt(nrow(enrich_hs_tbl), 100)
   expect_equal(length(unique(enrich_hs_tbl$cluster)), 5)
+  expect_equal(enrich_hs_tbl$score_rank, enrich_hs_tbl$score_ranks_mean)
+
+  all_scores <- clustermole_enrichment(
+    log_cpm_mat,
+    "hs",
+    method = "all",
+    max_rank = Inf
+  )
+  expect_gt(max(all_scores$score_rank), 100)
+  expect_equal(enrich_hs_tbl, all_scores[all_scores$score_ranks_mean <= 100, ])
 })
 
 # add mouse gene names to the expression matrix
