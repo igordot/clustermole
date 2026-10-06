@@ -20,7 +20,6 @@ navbar:
   components:
     home: ~
     articles: ~
-    news: ~
     intro:
       text: Get Started
       href: articles/clustermole-intro.html

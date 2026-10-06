@@ -16,17 +16,17 @@ The same cell type can have several signatures that can differ by organ, species
 
 The database includes data from the following sources:
 
-- CellMarker - Hu et al. *Nucleic Acids Research* (2023) [10.1093/nar/gkac947](https://doi.org/10.1093/nar/gkac947)
-- CellMatch - Shao et al. *iScience* (2020) [10.1016/j.isci.2020.100882](https://doi.org/10.1016/j.isci.2020.100882)
-- Cell Taxonomy - Jiang et al. *Nucleic Acids Research* (2023) [10.1093/nar/gkac816](https://doi.org/10.1093/nar/gkac816)
-- DISCO - Li et al. *Nucleic Acids Research* (2022) [10.1093/nar/gkab1020](https://doi.org/10.1093/nar/gkab1020)
-- HPA - Karlsson et al. *Science Advances* (2021) [10.1126/sciadv.abh2169](https://doi.org/10.1126/sciadv.abh2169)
-- MSigDB - Liberzon et al. *Bioinformatics* (2011) [10.1093/bioinformatics/btr260](https://doi.org/10.1093/bioinformatics/btr260)
-- PanglaoDB - Franzen et al. *Database* (2019) [10.1093/database/baz046](https://doi.org/10.1093/database/baz046)
-- SaVanT - Lopez et al. *BMC Genomics* (2017) [10.1186/s12864-017-4167-7](https://doi.org/10.1186/s12864-017-4167-7)
-- ScType - Ianevski et al. *Nature Communications* (2022) [10.1038/s41467-022-28803-w](https://doi.org/10.1038/s41467-022-28803-w)
-- TISSUES - Palasca et al. *Database* (2018) [10.1093/database/bay003](https://doi.org/10.1093/database/bay003)
-- xCell - Aran et al. *Genome Biology* (2017) [10.1186/s13059-017-1349-1](https://doi.org/10.1186/s13059-017-1349-1)
+- CellMarker (Hu et al. *Nucleic Acids Research* (2023) [10.1093/nar/gkac947](https://doi.org/10.1093/nar/gkac947))
+- CellMatch (Shao et al. *iScience* (2020) [10.1016/j.isci.2020.100882](https://doi.org/10.1016/j.isci.2020.100882))
+- Cell Taxonomy (Jiang et al. *Nucleic Acids Research* (2023) [10.1093/nar/gkac816](https://doi.org/10.1093/nar/gkac816))
+- DISCO (Li et al. *Nucleic Acids Research* (2022) [10.1093/nar/gkab1020](https://doi.org/10.1093/nar/gkab1020))
+- HPA (Karlsson et al. *Science Advances* (2021) [10.1126/sciadv.abh2169](https://doi.org/10.1126/sciadv.abh2169))
+- MSigDB (Liberzon et al. *Bioinformatics* (2011) [10.1093/bioinformatics/btr260](https://doi.org/10.1093/bioinformatics/btr260))
+- PanglaoDB (Franzen et al. *Database* (2019) [10.1093/database/baz046](https://doi.org/10.1093/database/baz046))
+- SaVanT (Lopez et al. *BMC Genomics* (2017) [10.1186/s12864-017-4167-7](https://doi.org/10.1186/s12864-017-4167-7))
+- ScType (Ianevski et al. *Nature Communications* (2022) [10.1038/s41467-022-28803-w](https://doi.org/10.1038/s41467-022-28803-w))
+- TISSUES (Palasca et al. *Database* (2018) [10.1093/database/bay003](https://doi.org/10.1093/database/bay003))
+- xCell (Aran et al. *Genome Biology* (2017) [10.1186/s13059-017-1349-1](https://doi.org/10.1186/s13059-017-1349-1))
 
 Many of these are static, but some are updated periodically.
 
