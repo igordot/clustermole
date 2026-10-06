@@ -27,8 +27,8 @@ Comparing results across sources can reveal both recurring candidates
 and alternative labels worth investigating that a single source may
 miss.
 
-For examples of published applications across human, mouse, rat, cattle,
-and other species, see [publications using
+For examples of applications across species, tissues, and technologies,
+see [publications using
 clustermole](https://igordot.github.io/clustermole/articles/pubs.md).
 
 ## Setup
