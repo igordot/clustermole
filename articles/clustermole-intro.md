@@ -34,15 +34,11 @@ clustermole](https://igordot.github.io/clustermole/articles/pubs.md).
 ## Setup
 
 clustermole is available from
-[CRAN](https://cran.r-project.org/package=clustermole) and you can use
-the standard
-[`install.packages()`](https://rdrr.io/r/utils/install.packages.html) to
-install it. Because some dependencies come from Bioconductor, using
-BiocManager is advised.
+[CRAN](https://cran.r-project.org/package=clustermole).
 
 ``` r
 
-BiocManager::install("clustermole")
+install.packages("clustermole")
 ```
 
 Load clustermole.
@@ -118,6 +114,15 @@ enrichment method can be changed using the `method` parameter.
 ``` r
 
 my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+```
+
+Bioconductor packages GSVA, GSEABase, and singscore need to be installed
+to use
+[`clustermole_enrichment()`](https://igordot.github.io/clustermole/reference/clustermole_enrichment.md).
+
+``` r
+
+BiocManager::install(c("GSVA", "GSEABase", "singscore"))
 ```
 
 See the [bone marrow
