@@ -162,5 +162,5 @@ Check the package version since the database contents can change.
 ``` r
 
 packageVersion("clustermole")
-#> [1] '1.1.1.9000'
+#> [1] '1.2.0'
 ```

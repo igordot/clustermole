@@ -1,6 +1,6 @@
 # Changelog
 
-## clustermole (development version)
+## clustermole 1.2.0
 
 - Known gene aliases in the source databases are converted to canonical
   gene symbols.
