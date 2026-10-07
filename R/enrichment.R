@@ -114,9 +114,6 @@ clustermole_enrichment <- function(
 }
 
 #' @importFrom dplyr full_join select starts_with
-#' @importFrom GSEABase GeneSet GeneSetCollection
-#' @importFrom GSVA gsva gsvaParam ssgseaParam
-#' @importFrom singscore multiScore rankGenes
 #' @importFrom stats median
 get_scores <- function(
   expr_mat,
@@ -126,6 +123,8 @@ get_scores <- function(
   method <- match.arg(method)
 
   if (method == "gsva" || method == "all") {
+    # the scoring packages are optional because they are slow to load
+    check_installed("GSVA", version = "1.50.0")
     gsva_param <- GSVA::gsvaParam(
       exprData = expr_mat,
       geneSets = markers_list,
@@ -142,6 +141,7 @@ get_scores <- function(
   }
 
   if (method == "ssgsea" || method == "all") {
+    check_installed("GSVA", version = "1.50.0")
     ssgsea_param <- GSVA::ssgseaParam(
       exprData = expr_mat,
       geneSets = markers_list
@@ -157,6 +157,7 @@ get_scores <- function(
   }
 
   if (method == "singscore" || method == "all") {
+    check_installed(c("GSEABase", "singscore"))
     markers_gsc <- Map(
       function(x, y) GSEABase::GeneSet(x, setName = y),
       markers_list,
@@ -164,7 +165,7 @@ get_scores <- function(
     )
     markers_gsc <- GSEABase::GeneSetCollection(markers_gsc)
     scores_mat <- singscore::multiScore(
-      rankData = rankGenes(expr_mat),
+      rankData = singscore::rankGenes(expr_mat),
       upSetColc = markers_gsc
     )
     scores_mat <- scores_mat$Scores

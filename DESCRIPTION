@@ -16,20 +16,20 @@ Depends:
     R (>= 4.3)
 Imports: 
     dplyr (>= 1.1.0),
-    GSEABase,
-    GSVA (>= 1.50.0),
     methods,
     rlang,
-    singscore,
     stats,
     tibble,
     tidyr,
     utils
 Suggests: 
     covr,
+    GSEABase,
+    GSVA (>= 1.50.0),
     knitr,
     rmarkdown,
     roxygen2,
+    singscore,
     testthat
 biocViews:
 Config/roxygen2/version: 8.1.0

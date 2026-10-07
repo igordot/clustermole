@@ -32,11 +32,10 @@ For examples of applications across species, tissues, and technologies, see [pub
 
 ## Setup
 
-clustermole is available from [CRAN](https://cran.r-project.org/package=clustermole) and you can use the standard `install.packages()` to install it.
-Because some dependencies come from Bioconductor, using BiocManager is advised.
+clustermole is available from [CRAN](https://cran.r-project.org/package=clustermole).
 
 ```{r install-package, eval=FALSE}
-BiocManager::install("clustermole")
+install.packages("clustermole")
 ```
 
 Load clustermole.
@@ -84,6 +83,12 @@ The underlying enrichment method can be changed using the `method` parameter.
 
 ```{r enrichment, eval=FALSE}
 my_enrichment <- clustermole_enrichment(expr_mat = my_expr_mat, species = "hs")
+```
+
+Bioconductor packages GSVA, GSEABase, and singscore need to be installed to use `clustermole_enrichment()`.
+
+```{r install-bioc-packages, eval=FALSE}
+BiocManager::install(c("GSVA", "GSEABase", "singscore"))
 ```
 
 See the [bone marrow tutorial](example-bm-seurat.html) for examples based on a scRNA-seq dataset.

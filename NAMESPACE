@@ -6,15 +6,6 @@ export(clustermole_overlaps)
 export(read_gmt)
 import(methods)
 import(utils)
-importFrom(GSEABase,
-  GeneSet,
-  GeneSetCollection
-)
-importFrom(GSVA,
-  gsva,
-  gsvaParam,
-  ssgseaParam
-)
 importFrom(dplyr,
   add_count,
   all_of,
@@ -32,10 +23,9 @@ importFrom(dplyr,
   starts_with,
   ungroup
 )
-importFrom(rlang,.data)
-importFrom(singscore,
-  multiScore,
-  rankGenes
+importFrom(rlang,
+  .data,
+  check_installed
 )
 importFrom(stats,
   median,
