@@ -70,6 +70,9 @@ test_that("invalid numeric rank cutoffs error", {
 
 # default (gsva)
 test_that("matrix and data frame inputs give the same enrichment", {
+  skip_if_not_installed("GSVA")
+  # skip this slow test on CRAN to keep the check under 10 minutes
+  skip_on_cran()
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs"
@@ -85,6 +88,9 @@ test_that("matrix and data frame inputs give the same enrichment", {
 
 # gsva
 test_that("rank cutoffs filter each cluster without changing scores", {
+  skip_if_not_installed("GSVA")
+  # skip this slow test on CRAN to keep the check under 10 minutes
+  skip_on_cran()
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -105,6 +111,7 @@ test_that("rank cutoffs filter each cluster without changing scores", {
 
 # ssgsea
 test_that("ssgsea method returns human enrichment results", {
+  skip_if_not_installed("GSVA")
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -117,6 +124,8 @@ test_that("ssgsea method returns human enrichment results", {
 
 # singscore
 test_that("singscore method returns human enrichment results", {
+  skip_if_not_installed("GSEABase")
+  skip_if_not_installed("singscore")
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -129,6 +138,11 @@ test_that("singscore method returns human enrichment results", {
 
 # combined
 test_that("combined methods return human enrichment results", {
+  skip_if_not_installed("GSVA")
+  skip_if_not_installed("GSEABase")
+  skip_if_not_installed("singscore")
+  # skip this slow test on CRAN to keep the check under 10 minutes
+  skip_on_cran()
   enrich_hs_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "hs",
@@ -157,6 +171,9 @@ rownames(cpm_mat) <- gene_names_mm
 rownames(log_cpm_mat) <- gene_names_mm
 
 test_that("mouse expression matrix returns enrichment results", {
+  skip_if_not_installed("GSVA")
+  # skip this slow test on CRAN to keep the check under 10 minutes
+  skip_on_cran()
   enrich_mm_tbl <- clustermole_enrichment(
     expr_mat = log_cpm_mat,
     species = "mm"
