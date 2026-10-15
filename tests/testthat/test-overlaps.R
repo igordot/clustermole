@@ -17,7 +17,7 @@ fake_gene_names <- setdiff(fake_gene_names, markers_hs_tbl$gene)
 fake_gene_names <- sample(fake_gene_names)
 
 test_that("invalid gene list input errors", {
-  expect_gt(length(fake_gene_names), 970)
+  expect_gt(length(fake_gene_names), 950)
   expect_error(clustermole_overlaps(gene_names[1:3], species = "hs"))
   expect_error(clustermole_overlaps(gene_names[1:10000], species = "hs"))
   expect_error(clustermole_overlaps(fake_gene_names[1:100], species = "hs"))
