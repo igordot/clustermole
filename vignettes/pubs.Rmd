@@ -9,102 +9,239 @@ knitr::opts_chunk$set(
 )
 ```
 
+<script src="https://embed.altmetric.com/assets/embed.js" defer></script>
+
+<style>
+.publication {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.publication > .altmetric-embed {
+  flex: 0 0 64px;
+}
+.publication > .publication-citation {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+</style>
+
 ## Studies and tools using clustermole
 
 Single-cell and spatial transcriptomics studies across several species and tissues have used clustermole for cell type annotation.
 
 ## Human
 
-- Zhang X, Jia L, Yeziya T, et al.  
-  Integrated Mendelian randomization and single-cell RNA sequencing analyses reveal lactate metabolism as a key pathway in COVID-19-induced pulmonary fibrosis.  
-  *Canadian Respiratory Journal*. 2026.  
-  [doi:10.1155/carj/1049336](https://doi.org/10.1155/carj/1049336)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1155/carj/1049336" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Wang T, Zhang L, Mei S, et al.  
-  Single-cell RNA sequencing highlights the unique tumor microenvironment of small cell neuroendocrine cervical carcinoma.  
-  *Journal of Translational Medicine*. 2025.  
-  [doi:10.1186/s12967-024-05977-z](https://doi.org/10.1186/s12967-024-05977-z)
+Zhang X, Jia L, Yeziya T, et al.  
+Integrated Mendelian randomization and single-cell RNA sequencing analyses reveal lactate metabolism as a key pathway in COVID-19-induced pulmonary fibrosis.  
+*Canadian Respiratory Journal*. 2026.  
+[doi:10.1155/carj/1049336](https://doi.org/10.1155/carj/1049336)
 
-- Zhang X, Deng X, Zhang L, et al.  
-  Single-cell RNA sequencing analysis of lung cells in COVID-19 patients with diabetes, hypertension, and comorbid diabetes-hypertension.  
-  *Frontiers in Endocrinology*. 2023.  
-  [doi:10.3389/fendo.2023.1258646](https://doi.org/10.3389/fendo.2023.1258646)
+</div>
+</div>
 
-- Chen L, Jin S, Yang M, et al.  
-  Integrated single cell and bulk RNA-seq analysis revealed immunomodulatory effects of ulinastatin in sepsis: a multicenter cohort study.  
-  *Frontiers in Immunology*. 2022.  
-  [doi:10.3389/fimmu.2022.882774](https://doi.org/10.3389/fimmu.2022.882774)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s12967-024-05977-z" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Hong Y, Chen L, Sun J, et al.  
-  Single-cell transcriptome profiling reveals heterogeneous neutrophils with prognostic values in sepsis.  
-  *iScience*. 2022.  
-  [doi:10.1016/j.isci.2022.105301](https://doi.org/10.1016/j.isci.2022.105301)
+Wang T, Zhang L, Mei S, et al.  
+Single-cell RNA sequencing highlights the unique tumor microenvironment of small cell neuroendocrine cervical carcinoma.  
+*Journal of Translational Medicine*. 2025.  
+[doi:10.1186/s12967-024-05977-z](https://doi.org/10.1186/s12967-024-05977-z)
 
-- Zhang L, Tang C, Zhang M, et al.  
-  Single cell meta-analysis of EndMT and EMT state in COVID-19.  
-  *Frontiers in Immunology*. 2022.  
-  [doi:10.3389/fimmu.2022.976512](https://doi.org/10.3389/fimmu.2022.976512)
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fendo.2023.1258646" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Zhang X, Deng X, Zhang L, et al.  
+Single-cell RNA sequencing analysis of lung cells in COVID-19 patients with diabetes, hypertension, and comorbid diabetes-hypertension.  
+*Frontiers in Endocrinology*. 2023.  
+[doi:10.3389/fendo.2023.1258646](https://doi.org/10.3389/fendo.2023.1258646)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fimmu.2022.882774" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Chen L, Jin S, Yang M, et al.  
+Integrated single cell and bulk RNA-seq analysis revealed immunomodulatory effects of ulinastatin in sepsis: a multicenter cohort study.  
+*Frontiers in Immunology*. 2022.  
+[doi:10.3389/fimmu.2022.882774](https://doi.org/10.3389/fimmu.2022.882774)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.isci.2022.105301" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Hong Y, Chen L, Sun J, et al.  
+Single-cell transcriptome profiling reveals heterogeneous neutrophils with prognostic values in sepsis.  
+*iScience*. 2022.  
+[doi:10.1016/j.isci.2022.105301](https://doi.org/10.1016/j.isci.2022.105301)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fimmu.2022.976512" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Zhang L, Tang C, Zhang M, et al.  
+Single cell meta-analysis of EndMT and EMT state in COVID-19.  
+*Frontiers in Immunology*. 2022.  
+[doi:10.3389/fimmu.2022.976512](https://doi.org/10.3389/fimmu.2022.976512)
+
+</div>
+</div>
 
 ## Mouse
 
-- Guldner IH, Wagner VP, Moran-Losada P, et al.  
-  Ageing promotes microglial accumulation of slow-degrading synaptic proteins.  
-  *Nature*. 2026.  
-  [doi:10.1038/s41586-025-09987-9](https://doi.org/10.1038/s41586-025-09987-9)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1038/s41586-025-09987-9" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Han X, Shen J, Yan J, et al.  
-  Impaired nitrogenous waste clearance promotes hepatocellular carcinoma.  
-  *Science Advances*. 2026.  
-  [doi:10.1126/sciadv.aec0766](https://doi.org/10.1126/sciadv.aec0766)
+Guldner IH, Wagner VP, Moran-Losada P, et al.  
+Ageing promotes microglial accumulation of slow-degrading synaptic proteins.  
+*Nature*. 2026.  
+[doi:10.1038/s41586-025-09987-9](https://doi.org/10.1038/s41586-025-09987-9)
 
-- Rumyantseva A, Tippetts TS, Wilhalm A, et al.  
-  Loss of the mitochondrial SAM transporter reveals a lipoylation-dependent metabolic vulnerability in the postnatal heart.  
-  *Science Advances*. 2026.  
-  [doi:10.1126/sciadv.aeg8792](https://doi.org/10.1126/sciadv.aeg8792)
+</div>
+</div>
 
-- Zheng X, Dozmorov MG, Espinoza L, et al.  
-  Inducible deletion of Ezh2 in CD4+ T cells inhibits kidney T cell infiltration and prevents interstitial nephritis in MRL/lpr lupus-prone mice.  
-  *iScience*. 2024.  
-  [doi:10.1016/j.isci.2024.111114](https://doi.org/10.1016/j.isci.2024.111114)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1126/sciadv.aec0766" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Han X, Shen J, Yan J, et al.  
+Impaired nitrogenous waste clearance promotes hepatocellular carcinoma.  
+*Science Advances*. 2026.  
+[doi:10.1126/sciadv.aec0766](https://doi.org/10.1126/sciadv.aec0766)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1126/sciadv.aeg8792" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Rumyantseva A, Tippetts TS, Wilhalm A, et al.  
+Loss of the mitochondrial SAM transporter reveals a lipoylation-dependent metabolic vulnerability in the postnatal heart.  
+*Science Advances*. 2026.  
+[doi:10.1126/sciadv.aeg8792](https://doi.org/10.1126/sciadv.aeg8792)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.isci.2024.111114" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Zheng X, Dozmorov MG, Espinoza L, et al.  
+Inducible deletion of Ezh2 in CD4+ T cells inhibits kidney T cell infiltration and prevents interstitial nephritis in MRL/lpr lupus-prone mice.  
+*iScience*. 2024.  
+[doi:10.1016/j.isci.2024.111114](https://doi.org/10.1016/j.isci.2024.111114)
+
+</div>
+</div>
 
 ## Other species
 
-- Shivanna V, Escalona RD, Chuba C, et al.  
-  Modulation of pulmonary IL-21 expression during latent TB and M. tuberculosis/SIV coinfection.  
-  *JCI Insight*. 2026.  
-  [doi:10.1172/jci.insight.199217](https://doi.org/10.1172/jci.insight.199217)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1172/jci.insight.199217" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Sharan R, Zou Y, Singh B, et al.  
-  Concurrent TB and HIV therapies control TB reactivation during co-infection but not chronic immune activation.  
-  *Nature Communications*. 2025.  
-  [doi:10.1038/s41467-025-67188-4](https://doi.org/10.1038/s41467-025-67188-4)
+Shivanna V, Escalona RD, Chuba C, et al.  
+Modulation of pulmonary IL-21 expression during latent TB and M. tuberculosis/SIV coinfection.  
+*JCI Insight*. 2026.  
+[doi:10.1172/jci.insight.199217](https://doi.org/10.1172/jci.insight.199217)
 
-- Klein B, Ciesielska A, Morán Losada P, et al.  
-  Modified human mesenchymal stromal/stem cells restore cortical excitability after focal ischemic stroke in rats.  
-  *Molecular Therapy*. 2025.  
-  [doi:10.1016/j.ymthe.2024.12.006](https://doi.org/10.1016/j.ymthe.2024.12.006)
+</div>
+</div>
 
-- Nurhidayat L, Benes V, Blom S, et al.  
-  Tokay gecko tail regeneration involves temporally collinear expression of HOXC genes and early expression of satellite cell markers.  
-  *BMC Biology*. 2025.  
-  [doi:10.1186/s12915-024-02111-9](https://doi.org/10.1186/s12915-024-02111-9)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1038/s41467-025-67188-4" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Zorc M, Dolinar M, Dovč P.  
-  A single-cell transcriptome of bovine milk somatic cells.  
-  *Genes*. 2024.  
-  [doi:10.3390/genes15030349](https://doi.org/10.3390/genes15030349)
+Sharan R, Zou Y, Singh B, et al.  
+Concurrent TB and HIV therapies control TB reactivation during co-infection but not chronic immune activation.  
+*Nature Communications*. 2025.  
+[doi:10.1038/s41467-025-67188-4](https://doi.org/10.1038/s41467-025-67188-4)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.ymthe.2024.12.006" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Klein B, Ciesielska A, Morán Losada P, et al.  
+Modified human mesenchymal stromal/stem cells restore cortical excitability after focal ischemic stroke in rats.  
+*Molecular Therapy*. 2025.  
+[doi:10.1016/j.ymthe.2024.12.006](https://doi.org/10.1016/j.ymthe.2024.12.006)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s12915-024-02111-9" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Nurhidayat L, Benes V, Blom S, et al.  
+Tokay gecko tail regeneration involves temporally collinear expression of HOXC genes and early expression of satellite cell markers.  
+*BMC Biology*. 2025.  
+[doi:10.1186/s12915-024-02111-9](https://doi.org/10.1186/s12915-024-02111-9)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3390/genes15030349" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Zorc M, Dolinar M, Dovč P.  
+A single-cell transcriptome of bovine milk somatic cells.  
+*Genes*. 2024.  
+[doi:10.3390/genes15030349](https://doi.org/10.3390/genes15030349)
+
+</div>
+</div>
 
 ## Tools and resources
 
-- Quan F, Liang X, Cheng M, et al.  
-  Annotation of cell types (ACT): a convenient web server for cell type annotation.  
-  *Genome Medicine*. 2023.  
-  [doi:10.1186/s13073-023-01249-5](https://doi.org/10.1186/s13073-023-01249-5)
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s13073-023-01249-5" data-badge-popover="right"></div>
+<div class="publication-citation">
 
-- Li R, Zhang J, Li Z.  
-  EasyCellType: marker-based cell-type annotation by automatically querying multiple databases.  
-  *Bioinformatics Advances*. 2023.  
-  [doi:10.1093/bioadv/vbad029](https://doi.org/10.1093/bioadv/vbad029)
+Quan F, Liang X, Cheng M, et al.  
+Annotation of cell types (ACT): a convenient web server for cell type annotation.  
+*Genome Medicine*. 2023.  
+[doi:10.1186/s13073-023-01249-5](https://doi.org/10.1186/s13073-023-01249-5)
+
+</div>
+</div>
+
+<div class="publication">
+<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1093/bioadv/vbad029" data-badge-popover="right"></div>
+<div class="publication-citation">
+
+Li R, Zhang J, Li Z.  
+EasyCellType: marker-based cell-type annotation by automatically querying multiple databases.  
+*Bioinformatics Advances*. 2023.  
+[doi:10.1093/bioadv/vbad029](https://doi.org/10.1093/bioadv/vbad029)
+
+</div>
+</div>
 
 ## Add your publication
 
