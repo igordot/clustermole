@@ -2,6 +2,8 @@
 
 ## clustermole 1.2.0
 
+CRAN release: 2026-10-07
+
 - Known gene aliases in the source databases are converted to canonical
   gene symbols.
 - Adds HPA, ScType, CellTaxonomy, CellMatch, and DISCO databases.
