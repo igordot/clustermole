@@ -34,7 +34,7 @@ Single-cell and spatial transcriptomics studies across several species and tissu
 ## Human
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1155/carj/1049336" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1155/carj/1049336" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Zhang X, Jia L, Yeziya T, et al.  
@@ -46,7 +46,7 @@ Integrated Mendelian randomization and single-cell RNA sequencing analyses revea
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s12967-024-05977-z" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1186/s12967-024-05977-z" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Wang T, Zhang L, Mei S, et al.  
@@ -58,7 +58,7 @@ Single-cell RNA sequencing highlights the unique tumor microenvironment of small
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fendo.2023.1258646" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.3389/fendo.2023.1258646" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Zhang X, Deng X, Zhang L, et al.  
@@ -70,7 +70,7 @@ Single-cell RNA sequencing analysis of lung cells in COVID-19 patients with diab
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fimmu.2022.882774" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.3389/fimmu.2022.882774" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Chen L, Jin S, Yang M, et al.  
@@ -82,7 +82,7 @@ Integrated single cell and bulk RNA-seq analysis revealed immunomodulatory effec
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.isci.2022.105301" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1016/j.isci.2022.105301" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Hong Y, Chen L, Sun J, et al.  
@@ -94,7 +94,7 @@ Single-cell transcriptome profiling reveals heterogeneous neutrophils with progn
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3389/fimmu.2022.976512" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.3389/fimmu.2022.976512" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Zhang L, Tang C, Zhang M, et al.  
@@ -108,7 +108,7 @@ Single cell meta-analysis of EndMT and EMT state in COVID-19.
 ## Mouse
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1038/s41586-025-09987-9" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1038/s41586-025-09987-9" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Guldner IH, Wagner VP, Moran-Losada P, et al.  
@@ -120,7 +120,7 @@ Ageing promotes microglial accumulation of slow-degrading synaptic proteins.
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1126/sciadv.aec0766" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1126/sciadv.aec0766" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Han X, Shen J, Yan J, et al.  
@@ -132,7 +132,7 @@ Impaired nitrogenous waste clearance promotes hepatocellular carcinoma.
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1126/sciadv.aeg8792" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1126/sciadv.aeg8792" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Rumyantseva A, Tippetts TS, Wilhalm A, et al.  
@@ -144,7 +144,7 @@ Loss of the mitochondrial SAM transporter reveals a lipoylation-dependent metabo
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.isci.2024.111114" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1016/j.isci.2024.111114" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Zheng X, Dozmorov MG, Espinoza L, et al.  
@@ -158,7 +158,7 @@ Inducible deletion of Ezh2 in CD4+ T cells inhibits kidney T cell infiltration a
 ## Other species
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1172/jci.insight.199217" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1172/jci.insight.199217" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Shivanna V, Escalona RD, Chuba C, et al.  
@@ -170,7 +170,7 @@ Modulation of pulmonary IL-21 expression during latent TB and M. tuberculosis/SI
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1038/s41467-025-67188-4" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1038/s41467-025-67188-4" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Sharan R, Zou Y, Singh B, et al.  
@@ -182,7 +182,7 @@ Concurrent TB and HIV therapies control TB reactivation during co-infection but 
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1016/j.ymthe.2024.12.006" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1016/j.ymthe.2024.12.006" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Klein B, Ciesielska A, Morán Losada P, et al.  
@@ -194,7 +194,7 @@ Modified human mesenchymal stromal/stem cells restore cortical excitability afte
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s12915-024-02111-9" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1186/s12915-024-02111-9" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Nurhidayat L, Benes V, Blom S, et al.  
@@ -206,7 +206,7 @@ Tokay gecko tail regeneration involves temporally collinear expression of HOXC g
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.3390/genes15030349" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.3390/genes15030349" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Zorc M, Dolinar M, Dovč P.  
@@ -220,7 +220,7 @@ A single-cell transcriptome of bovine milk somatic cells.
 ## Tools and resources
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1186/s13073-023-01249-5" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1186/s13073-023-01249-5" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Quan F, Liang X, Cheng M, et al.  
@@ -232,7 +232,7 @@ Annotation of cell types (ACT): a convenient web server for cell type annotation
 </div>
 
 <div class="publication">
-<div class="altmetric-embed" data-badge-type="medium-donut" data-doi="10.1093/bioadv/vbad029" data-badge-popover="right"></div>
+<div class="altmetric-embed" data-badge-type="donut" data-doi="10.1093/bioadv/vbad029" data-badge-popover="right"></div>
 <div class="publication-citation">
 
 Li R, Zhang J, Li Z.  
