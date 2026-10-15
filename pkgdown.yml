@@ -6,7 +6,7 @@ articles:
   db: db.html
   example-bm-seurat: example-bm-seurat.html
   pubs: pubs.html
-last_built: 2026-10-15T23:34Z
+last_built: 2026-10-15T23:41Z
 urls:
   reference: https://igordot.github.io/clustermole/reference
   article: https://igordot.github.io/clustermole/articles
